@@ -52,7 +52,7 @@ namespace MemoryLinkBackend.Users
             _abpSession = abpSession;
             _logInManager = logInManager;
         }
-
+        [AbpAllowAnonymous]
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {
             CheckCreatePermission();
