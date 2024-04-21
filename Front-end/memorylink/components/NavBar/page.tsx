@@ -30,7 +30,7 @@ const Navbar = () => {
         ))}
       </div>
       <div className={styles.middle}>
-        <img src='/assets/images/Logo.png' alt='logo' style={{width:"300px"}}/>
+        <Link href='/'><img src='/assets/images/Logo.png' alt='logo' style={{width:"300px"}}/></Link>
       </div>
       <div className={styles.right}>
         {socials.map((link,index) => (
