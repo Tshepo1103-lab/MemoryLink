@@ -1,41 +1,40 @@
-﻿using Abp.Domain.Entities.Auditing;
+﻿using Abp.Application.Services.Dto;
 using MemoryLinkBackend.Domain.enums;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MemoryLinkBackend.Domain
+namespace MemoryLinkBackend.Services.ProfileService.Dto
 {
-    public class Profile:FullAuditedEntity<int>
+    public class ProfileDto:EntityDto<int>
     {
-        public virtual RefListGender Gender { get; set; }
+        public  RefListGender Gender { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public virtual RefListAge AgeRange { get; set; }
+        public  RefListAge AgeRange { get; set; }
         ///<summary>
         ///
         /// </summary>
-        public virtual RefListHeight Height {  get; set; }
+        public  RefListHeight Height { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public virtual RefListBuild Build {  get; set; }
+        public  RefListBuild Build { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public virtual RefListEyeColor EyeColor { get; set; }
+        public  RefListEyeColor EyeColor { get; set; }
         ///<summary>
         ///
         /// </summary>
-        public virtual RefListSkinTone SkinTone { get; set; }
+        public  RefListSkinTone SkinTone { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public virtual RefListHairColor HairColor { get; set; }
+        public  RefListHairColor HairColor { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -43,10 +42,10 @@ namespace MemoryLinkBackend.Domain
         ///<summary>
         ///
         /// </summary>
-        public virtual string DistinguishingFeature { get; set; }
+        public  string DistinguishingFeature { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public virtual string MoreDetails { get; set; }
+        public  string MoreDetails { get; set; }
     }
 }
