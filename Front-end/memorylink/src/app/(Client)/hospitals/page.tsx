@@ -1,15 +1,12 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { useStyles } from './style/style'
+import React from "react";
+import { useStyles } from "./style/style";
 
 const Hospitals = () => {
+  const { styles } = useStyles();
 
-  const {styles}=useStyles();
-    
-  return (
-    <div className={styles.main}>Hospitals</div>
-  )
-}
+  return <div className={styles.main}>Hospitals</div>;
+};
 
-export default Hospitals
+export default Hospitals;

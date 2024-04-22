@@ -1,22 +1,29 @@
-import Link from 'next/link';
-import React from 'react';
-import { FacebookOutlined, LinkedinOutlined, InstagramOutlined, TwitterOutlined } from '@ant-design/icons';
-import { useStyles } from './style/style';
+import Link from "next/link";
+import React from "react";
+import {
+  FacebookFilled,
+  LinkedinFilled,
+  InstagramFilled,
+  TwitterOutlined,
+} from "@ant-design/icons";
+import { useStyles } from "./style/style";
 
 const Navbar = () => {
-
   const navLinks = [
     { name: "Hospitals", href: "/hospitals" },
     { name: "Profiles", href: "/profiles" },
-    { name: "About", href: "/about"},
+    { name: "About", href: "/about" },
   ];
 
   const socials = [
-    { href: "https://www.facebook.com/", icon: <FacebookOutlined/> },
-    { href: "https://www.linkedin.com/in/tshepo-mahlangu-592970247/", icon: <LinkedinOutlined/> },
-    { href: "https://www.instagram.com/", icon: <InstagramOutlined/> },
-    { href: "", icon: <TwitterOutlined/> }
-  ]
+    { href: "https://www.facebook.com/", icon: <FacebookFilled /> },
+    {
+      href: "https://www.linkedin.com/in/tshepo-mahlangu-592970247/",
+      icon: <LinkedinFilled />,
+    },
+    { href: "https://www.instagram.com/", icon: <InstagramFilled /> },
+    { href: "", icon: <TwitterOutlined /> },
+  ];
 
   const { styles } = useStyles();
 
@@ -30,17 +37,23 @@ const Navbar = () => {
         ))}
       </div>
       <div className={styles.middle}>
-        <Link href='/'><img src='/assets/images/Logo.png' alt='logo' style={{width:"300px"}}/></Link>
+        <Link href="/">
+          <img
+            src="/assets/images/Logo.png"
+            alt="logo"
+            style={{ width: "300px" }}
+          />
+        </Link>
       </div>
       <div className={styles.right}>
-        {socials.map((link,index) => (
+        {socials.map((link, index) => (
           <Link href={link.href} key={index}>
             <span className={styles.socialLink}>{link.icon}</span>
           </Link>
         ))}
       </div>
     </nav>
-  )
-}
+  );
+};
 
 export default Navbar;

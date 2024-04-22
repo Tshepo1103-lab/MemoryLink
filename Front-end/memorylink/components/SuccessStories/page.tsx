@@ -1,15 +1,12 @@
-'use client'
+"use client";
 
-import React from 'react';
-import { useStyles } from './style/style';
+import React from "react";
+import { useStyles } from "./style/style";
 
 const SuccessStories = () => {
+  const { styles } = useStyles();
 
-    const {styles}=useStyles(); 
-    
-  return (
-    <div className={styles.main}>SuccessStories</div>
-  )
-}
+  return <div className={styles.main}>SuccessStories</div>;
+};
 
-export default SuccessStories
+export default SuccessStories;
