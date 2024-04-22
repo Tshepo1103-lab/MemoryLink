@@ -1,15 +1,12 @@
-'use client'
+"use client";
 
-import React from 'react'
-import { useStyles } from './style/style'
+import React from "react";
+import { useStyles } from "./style/style";
 
 const About = () => {
+  const { styles } = useStyles();
 
-  const {styles}=useStyles();
+  return <div className={styles.main}>About</div>;
+};
 
-  return (
-    <div className={styles.main}>About</div>
-  )
-}
-
-export default About
+export default About;
