@@ -3,6 +3,7 @@ using Abp.Zero.EntityFrameworkCore;
 using MemoryLinkBackend.Authorization.Roles;
 using MemoryLinkBackend.Authorization.Users;
 using MemoryLinkBackend.MultiTenancy;
+using MemoryLinkBackend.Domain;
 
 namespace MemoryLinkBackend.EntityFrameworkCore
 {
@@ -14,5 +15,12 @@ namespace MemoryLinkBackend.EntityFrameworkCore
             : base(options)
         {
         }
+        public DbSet<Hospital>Hospitals { get; set; }
+        public DbSet<Lead> Leads { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet <Response> Responses { get; set; }
+        public DbSet <Testimonial> Testimonials { get; set; }
+
+        public DbSet<StoredFile> StoreFiles { get; set; }
     }
 }
