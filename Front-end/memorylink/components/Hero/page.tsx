@@ -22,20 +22,13 @@ const Hero = () => {
         showIndicators={false}
       >
         {images.map((image, index) => (
-          <div 
-          key={index}  
-          style={{
-            background: `url(${image})`, 
-            backgroundColor: 'rgba(0,0,0, 0.4)', 
-            width: '100%', 
-            height: '50vh', 
-            backgroundSize: 'cover', 
-            backgroundRepeat: 'no-repeat', 
-            backgroundPosition: 'center',
-            backdropFilter: 'blur(10px)',
-          }}
-        >
-        </div>
+          <div key={index}>
+            <img
+              src={image}
+              alt={`Slide ${index + 1}`}
+              className={styles.images}
+            />
+          </div>
         ))}
       </Carousel>
     </div>

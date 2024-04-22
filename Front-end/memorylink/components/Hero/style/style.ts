@@ -5,14 +5,9 @@ export const useStyles = createStyles({
     height: 50vh;
   `,
   images: css`
-    backdrop-filter: blur(10px);
     width: 100%;
     height: 50vh;
     object-fit: cover;
-    background-color: #cccccc;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
+    background: rgba(0, 0, 0, 0.5);
   `,
 });
