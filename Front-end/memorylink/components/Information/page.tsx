@@ -5,8 +5,9 @@ import { useStyles } from "./style/style";
 import { Card, Button } from "antd";
 import {
   PlusSquareOutlined,
-  UserOutlined,
+  FileImageOutlined,
   ProfileOutlined,
+  OpenAIOutlined
 } from "@ant-design/icons";
 
 const Information = () => {
@@ -15,41 +16,41 @@ const Information = () => {
   // Array of objects containing information for each card
   const cardsData = [
     {
-      title: "Hospitals",
+      title: "HOSPITALS",
       icon: <PlusSquareOutlined />,
       content: "filter your search",
     },
     {
-      title: "Profiles",
-      icon: <UserOutlined />,
-      content: "Content for Profiles",
-    },
-    {
-      title: "Hospitals",
-      icon: <PlusSquareOutlined />,
-      content: "Content for Hospitals",
-    },
-    {
-      title: "Profiles",
+      title: "PROFILES",
       icon: <ProfileOutlined />,
-      content: "Content for Profiles",
+      content: "browse recent reports",
+    },
+    {
+      title: "AI SEARCH",
+      icon: <OpenAIOutlined />,
+      content: "Describe the person you are looking for",
+    },
+    {
+      title: "IMAGE SEARCH",
+      icon: <FileImageOutlined />,
+      content: "Upload an image",
     },
   ];
 
   return (
     <div className={styles.main}>
-      <h1 className={styles.header}>Information Center</h1>
+      <h1 className={styles.header}>INFORMATION CENTER</h1>
       <div className={styles.container}>
         {cardsData.map((card, index) => (
-          <Card key={index} style={{ width: 300, marginBottom: 20 }}>
+          <Card key={index} className={styles.card}>
             <div style={{ marginBottom: 10 }}>
               <span style={{ fontSize: 18, fontWeight: "bold" }}>
                 {card.title}
               </span>
             </div>
-            <div style={{ marginBottom: 10 }}>{card.icon}</div>
+            <div className={styles.icon}>{card.icon}</div>
             <div style={{ marginBottom: 10 }}>{card.content}</div>
-            <Button type="primary" style={{ marginTop: 10 }}>
+            <Button type="primary" className={styles.view}>
               View
             </Button>
           </Card>
