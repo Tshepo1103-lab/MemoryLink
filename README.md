@@ -1,6 +1,6 @@
 <h1>MemoryLink - Connecting Families with Missing Loved Ones</h1>
 
-<img src="MemoryLink/assets/images/family.jpg" alt="family photo" width="1000" height="500"> 
+<img src="/assets/images/family.jpg" alt="family photo" width="1000" height="500"> 
 
 <h2>Overview:</h2>
 
