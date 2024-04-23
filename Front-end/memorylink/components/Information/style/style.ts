@@ -16,6 +16,7 @@ export const useStyles = createStyles({
   header: css`
     text-align: left;
     margin-left: 40px;
+    letter-spacing: .15em; 
   `,
   card:css`
     width: 300px;
@@ -26,6 +27,11 @@ export const useStyles = createStyles({
     width:100px;
     color:#ffffff;
     background-color:#003366;
+    &:hover{
+      background-color:#009999 !important;
+      color: #fffffff !important;
+      border:2px solid #ffffff !important;
+    }
   `,
   icon:css`
     margin-bottom: 10px;

@@ -4,5 +4,6 @@ export const useStyles = createStyles({
   main: css`
     height: 40vh;
     background-color: #fff;
+    padding:20px;
   `,
 });

@@ -15,9 +15,9 @@ export const useStyles = createStyles({
   `,
 
   footerStyle: css`
-    background-color: #003366;
+    background-color: #003366 !important;
     padding: 0;
-    height: 50px;
+    height: 50px ! important;
   `,
   contentStyle: css`
     text-align: center;
