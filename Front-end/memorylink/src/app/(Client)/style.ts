@@ -23,5 +23,6 @@ export const useStyles = createStyles({
     text-align: center;
     height: auto;
     background-color: #fff;
+    overflow:none;
   `,
 });
