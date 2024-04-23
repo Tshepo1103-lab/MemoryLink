@@ -4,6 +4,7 @@ import React, { PropsWithChildren } from "react";
 import { Layout } from "antd";
 import { useStyles } from "./style";
 import Navbar from "../../../components/NavBar/page";
+import MainFooter from "../../../components/footer/page";
 
 const { Header, Footer, Content } = Layout;
 
@@ -18,7 +19,9 @@ const ClientLayout: React.FC<PropsWithChildren> = ({ children }) => {
       <Layout>
         <Content className={styles.contentStyle}>{children}</Content>
       </Layout>
-      <Footer className={styles.footerStyle}>Footer</Footer>
+      <Footer className={styles.footerStyle}>
+        <MainFooter/>
+      </Footer>
     </Layout>
   );
 };
