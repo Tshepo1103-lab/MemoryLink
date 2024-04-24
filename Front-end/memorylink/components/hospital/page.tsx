@@ -1,9 +1,12 @@
+'use client'
+
 import { SearchOutlined } from '@ant-design/icons';
 import type { InputRef, TableColumnType, TableColumnsType } from 'antd';
 import { Button, Input, Space, Table } from 'antd';
 import type { FilterDropdownProps } from 'antd/es/table/interface';
 import React, { useRef, useState } from 'react';
 import Highlighter from 'react-highlight-words';
+import { useStyles } from './style/style';
 
 interface DataType {
   key: string;
@@ -66,6 +69,8 @@ const data: DataType[] = [
 ];
 
 const HospitalComponent= () => {
+
+  const {styles}=useStyles();
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef<InputRef>(null);
@@ -186,7 +191,16 @@ const HospitalComponent= () => {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} style={{marginTop:'50px'}}/>;
+  return (
+    <>
+    <h1 className={styles.header}>Hospitals</h1>
+      <p className={styles.paragraph}>MemoryLink supports the following hospitals</p>
+      <div className={styles.recordsContainer}>
+      <Table columns={columns} dataSource={data} style={{ width: '100%', 
+      }}  pagination={{ pageSize: 6 }}/>
+    </div>
+    </>
+  )
 };
 
 export default HospitalComponent;

@@ -26,6 +26,7 @@ export const useStyles = createStyles({
     Helvetica Neue,
     Arial,
     sans-serif;
+    letter-spacing: .14em;
     &:hover{
       color: #009999 !important;
     }
