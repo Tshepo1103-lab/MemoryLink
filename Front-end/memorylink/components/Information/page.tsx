@@ -18,12 +18,12 @@ const Information = () => {
     {
       title: "HOSPITALS",
       icon: <PlusSquareOutlined />,
-      content: "filter your search",
+      content: "Filter your search",
     },
     {
       title: "PROFILES",
       icon: <ProfileOutlined />,
-      content: "browse recent reports",
+      content: "Browse recent reports",
     },
     {
       title: "AI SEARCH",

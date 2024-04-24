@@ -15,11 +15,9 @@ export default function Home() {
     <main className={styles.main}>
       <ClientLayout>
         <Hero />
-        <div>
-          <Information />
-          <RecentReport />
-          <SuccessStories />
-        </div>
+        <Information />
+        <RecentReport />
+        <SuccessStories />
       </ClientLayout>
     </main>
   );

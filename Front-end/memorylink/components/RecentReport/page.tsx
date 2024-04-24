@@ -5,15 +5,11 @@ import { useStyles } from "./style/style";
 import recent from './style/recent.module.css';
 import { Carousel, Card, Flex, Typography, Button } from 'antd';
 
-
-
-
-
 const RecentReport = () => {
   const data = [
     { hospital: "Steve Biko", src: "/hospitals", image: "assets/images/patient1.jpg" },
     { hospital: "Tshwane", src: "/profiles", image: "assets/images/patient2.jpg" },
-    { hospital: "Kwamhlanga", src: "/about", image: "image3.jpg" },
+
   ];
 
   const { styles } = useStyles();
