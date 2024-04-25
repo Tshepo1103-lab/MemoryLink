@@ -1,4 +1,6 @@
 ﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
+using MemoryLinkBackend.Domain;
 using MemoryLinkBackend.Domain.enums;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace MemoryLinkBackend.Services.ProfileService.Dto
 {
+    [AutoMap(typeof(Profile))]
     public class ProfileDto:EntityDto<int>
     {
         public  RefListGender Gender { get; set; }
