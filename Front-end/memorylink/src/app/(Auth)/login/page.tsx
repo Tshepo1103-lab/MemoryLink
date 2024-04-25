@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
 import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
+import { useUserActions, useUserState } from "../../../../providers/AuthProvider";
+import { ILoginRequest } from "../../../../providers/AuthProvider/context";
 import { useStyles } from "./style/style";
 
 type FieldType = {
@@ -11,16 +12,26 @@ type FieldType = {
   remember?: string;
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
 
 const Login = () => {
   const { styles } = useStyles();
+  const {login}=useUserActions();
+  const status=useUserState();
+
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  
+  };
+  const onFinish = async (values:any) => {
+    const userInput: ILoginRequest = {
+      userNameOrEmailAddress: values.username,
+      password: values.password
+  }
+    if(login){
+        login (userInput);
+    }
+
+};
 
   return (
     <div
