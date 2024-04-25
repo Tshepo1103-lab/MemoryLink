@@ -1,15 +1,12 @@
-'use client'
+"use client";
 
-import React from 'react';
-import { useStyles } from './style/style';
+import React from "react";
+import { useStyles } from "./style/style";
 
 const MainFooter = () => {
+  const { styles } = useStyles();
 
-  const {styles}= useStyles();
-
-  return (
-    <div>Footer</div>
-  )
-}
+  return <div>Footer</div>;
+};
 
 export default MainFooter;

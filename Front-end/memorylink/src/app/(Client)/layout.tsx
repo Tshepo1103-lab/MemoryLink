@@ -20,7 +20,7 @@ const ClientLayout: React.FC<PropsWithChildren> = ({ children }) => {
         <Content className={styles.contentStyle}>{children}</Content>
       </Layout>
       <Footer className={styles.footerStyle}>
-        <MainFooter/>
+        <MainFooter />
       </Footer>
     </Layout>
   );

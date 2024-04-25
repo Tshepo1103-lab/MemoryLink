@@ -9,8 +9,8 @@ const Profiles = () => {
 
   return (
     <div className={styles.main}>
-      <ProfilesFC/>
+      <ProfilesFC />
     </div>
-  )
+  );
 };
 export default Profiles;

@@ -7,10 +7,11 @@ import HospitalComponent from "../../../../components/hospital/page";
 const Hospitals = () => {
   const { styles } = useStyles();
 
-  return(
+  return (
     <div className={styles.main}>
-      <HospitalComponent/>
+      <HospitalComponent />
     </div>
-  )};
+  );
+};
 
 export default Hospitals;

@@ -7,13 +7,13 @@ import {
   PlusSquareOutlined,
   FileImageOutlined,
   ProfileOutlined,
-  OpenAIOutlined
+  OpenAIOutlined,
 } from "@ant-design/icons";
 
 const Information = () => {
   const { styles } = useStyles();
 
-  // Array of objects containing information for each card
+  
   const cardsData = [
     {
       title: "HOSPITALS",

@@ -1,7 +1,7 @@
-import { createStyles,css } from "antd-style";
+import { createStyles, css } from "antd-style";
 
-export const useStyles=createStyles({
-    main:css`
-       overflow:none;
-    `
-})
+export const useStyles = createStyles({
+  main: css`
+    overflow: none;
+  `,
+});

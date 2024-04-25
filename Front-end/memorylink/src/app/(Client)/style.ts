@@ -17,12 +17,12 @@ export const useStyles = createStyles({
   footerStyle: css`
     background-color: #003366 !important;
     padding: 0;
-    height: 50px ! important;
+    height: 50px !important;
   `,
   contentStyle: css`
     text-align: center;
     height: auto;
     background-color: #fff;
-    overflow:none;
+    overflow: none;
   `,
 });

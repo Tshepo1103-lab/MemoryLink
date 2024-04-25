@@ -1,9 +1,9 @@
-'use client'
+"use client";
 
-import React from 'react';
-import type { FormProps } from 'antd';
-import { Button, Form, Input, Select } from 'antd';
-import { useStyles } from './style/style';
+import React from "react";
+import type { FormProps } from "antd";
+import { Button, Form, Input, Select } from "antd";
+import { useStyles } from "./style/style";
 
 const { Option } = Select;
 
@@ -16,12 +16,12 @@ type FieldType = {
   phoneNumber?: string;
 };
 
-const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-  console.log('Success:', values); // Here you would typically send a request to your backend to register the user
+const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
+  console.log("Success:", values); // Here you would typically send a request to your backend to register the user
 };
 
-const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-  console.log('Failed:', errorInfo);
+const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+  console.log("Failed:", errorInfo);
 };
 
 const Register = () => {
@@ -37,10 +37,18 @@ const Register = () => {
   );
 
   return (
-    <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', height: '100vh' }}>
-      <div style={{ backgroundColor: '#003366' }}> 
-      </div> 
-      <div style={{ backgroundColor: '#FFFFFF', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+    <div
+      style={{ display: "grid", gridTemplateRows: "1fr 1fr", height: "100vh" }}
+    >
+      <div style={{ backgroundColor: "#003366" }}></div>
+      <div
+        style={{
+          backgroundColor: "#FFFFFF",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <img
           src="/assets/images/Logo.png"
           alt="logo"
@@ -57,50 +65,57 @@ const Register = () => {
         >
           <Form.Item<FieldType>
             name="name"
-            rules={[{ required: true, message: 'Please input your name!' }]}
+            rules={[{ required: true, message: "Please input your name!" }]}
           >
             <Input placeholder="Name" className={styles.input} />
           </Form.Item>
           <Form.Item<FieldType>
             name="surname"
-            rules={[{ required: true, message: 'Please input your surname!' }]}
+            rules={[{ required: true, message: "Please input your surname!" }]}
           >
             <Input placeholder="Surname" className={styles.input} />
           </Form.Item>
-            <Form.Item
+          <Form.Item
             name="phone"
-            rules={[{ required: true, message: 'Please input your phone number!' }]}
+            rules={[
+              { required: true, message: "Please input your phone number!" },
+            ]}
           >
-            <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
-        </Form.Item>
+            <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
+          </Form.Item>
           <Form.Item<FieldType>
             name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input placeholder="Username" className={styles.input} />
           </Form.Item>
           <Form.Item<FieldType>
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password placeholder="Password" className={styles.input} />
           </Form.Item>
           <Form.Item<FieldType>
             name="confirmPassword"
-            dependencies={['password']}
+            dependencies={["password"]}
             rules={[
-              { required: true, message: 'Please confirm your password!' },
+              { required: true, message: "Please confirm your password!" },
               ({ getFieldValue }) => ({
                 validator(_, value) {
-                  if (!value || getFieldValue('password') === value) {
+                  if (!value || getFieldValue("password") === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('The two passwords do not match!'));
+                  return Promise.reject(
+                    new Error("The two passwords do not match!"),
+                  );
                 },
               }),
             ]}
           >
-            <Input.Password placeholder="Confirm Password" className={styles.input} />
+            <Input.Password
+              placeholder="Confirm Password"
+              className={styles.input}
+            />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className={styles.button}>

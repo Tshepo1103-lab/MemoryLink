@@ -23,11 +23,11 @@ export const useStyles = createStyles({
     font-size: 20px;
     font-weight: bold;
     font-family:
-    Helvetica Neue,
-    Arial,
-    sans-serif;
-    letter-spacing: .14em;
-    &:hover{
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    letter-spacing: 0.14em;
+    &:hover {
       color: #009999 !important;
     }
   `,
@@ -36,11 +36,23 @@ export const useStyles = createStyles({
     color: #fff;
     font-size: 25px;
     font-family:
-    Helvetica Neue,
-    Arial,
-    sans-serif;
-    &:hover{
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    &:hover {
       color: #009999 !important;
+    }
+  `,
+  authButton: css`
+    margin-left: 40px;
+    color: #009999;
+    font-size: 25px;
+    font-family:
+      Helvetica Neue,
+      Arial,
+      sans-serif;
+    &:hover {
+      color: #ffffff !important;
     }
   `,
 });

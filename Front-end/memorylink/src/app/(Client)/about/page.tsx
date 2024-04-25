@@ -9,9 +9,9 @@ const About = () => {
 
   return (
     <div className={styles.main}>
-      <AboutFC/>
+      <AboutFC />
     </div>
-  )
+  );
 };
 
 export default About;

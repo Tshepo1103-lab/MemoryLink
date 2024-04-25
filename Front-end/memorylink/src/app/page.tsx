@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Hero from "../../components/Hero/page";
 import Information from "../../components/Information/page";
@@ -8,9 +8,8 @@ import ClientLayout from "./(Client)/layout";
 import { useStyles } from "./styles";
 
 export default function Home() {
+  const { styles } = useStyles();
 
-  const {styles}=useStyles();
-  
   return (
     <main className={styles.main}>
       <ClientLayout>
