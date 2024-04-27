@@ -1,21 +1,22 @@
 "use client"
 import React, { FC, useState } from "react";
 import { useUserState } from "../providers/AuthProvider";
+import NotFound from "../components/PageNotFound/page";
 
-const WithRole=(WrappedComponent: React.FC<any>) => {
+const WithAdminRole=(WrappedComponent: React.FC<any>) => {
 
     const RoleComponent: React.FC<any> = (props) => {
         const status= useUserState();
-        if (status.UserLogin?.role) {
-            // If authenticated, render the wrapped component with props
+        if (status.UserLogin?.role=='admin') {
             return <WrappedComponent {...props} />;
         } else {
-            // If not authenticated, render a message or a redirection
-            return <h2>You are not authorized to view this page</h2>;
+            return (
+                <NotFound/>
+            )
         }
     };
 
     return RoleComponent;
 };
 
-export default WithRole;
+export default WithAdminRole;
