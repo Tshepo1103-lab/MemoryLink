@@ -1,5 +1,4 @@
 ﻿using Abp.Application.Services.Dto;
-using Abp.AutoMapper;
 using Abp.Domain.Entities;
 using MemoryLinkBackend.Authorization.Users;
 using MemoryLinkBackend.Domain;
@@ -13,7 +12,6 @@ namespace MemoryLinkBackend.Services.LeadService.Dto
 {
     public class LeadDto: EntityDto<Guid>
     {
-        [AutoMap(typeof(Lead))]
         public  string Message { get; set; }
         ///<summary>
         ///

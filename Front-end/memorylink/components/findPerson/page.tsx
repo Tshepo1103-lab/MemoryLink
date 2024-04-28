@@ -47,7 +47,7 @@ const FingerprintCapture = () => {
             <div style={{ flex: 1 }}>
                 {!fingerprintRead ? (
                     <>
-                        <div style={{ width: '50%', height: '200px', border: '2px dashed #ccc', borderRadius: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div style={{ width: '40%', height: '200px', border: '2px dashed #ccc', borderRadius: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center', margin:'30px' }}>
                             <p>Place for fingerprint capture</p>
                         </div>
                         <button onClick={handleFingerprintCapture}>Capture Fingerprint</button>
@@ -59,7 +59,7 @@ const FingerprintCapture = () => {
                 )}
             </div>
             <div style={{ flex: 1 }}>
-                <h2>User details</h2>
+                <h2>User Details</h2>
                 <Form form={form} onFinish={onFinish} layout="vertical">
                     <Form.Item label="ID" name="id">
                         <Input />
@@ -73,9 +73,12 @@ const FingerprintCapture = () => {
                     <Form.Item label="Next of Kin" name="nextOfKin">
                         <Input />
                     </Form.Item>
+                    <Form.Item label="Phone Numbers" name="phoneNumber">
+                        <Input />
+                    </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit">
-                            Save Details
+                            Save
                         </Button>
                     </Form.Item>
                 </Form>
@@ -87,6 +90,7 @@ const FingerprintCapture = () => {
                     onChange={handleUpload}
                     accept=".jpg,.jpeg,.png"
                     showUploadList={false}
+                    style={{width:'80%', margin:'30px'}}
                 >
                     <p className="ant-upload-drag-icon">
                         <InboxOutlined />

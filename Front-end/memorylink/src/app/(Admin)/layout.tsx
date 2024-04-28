@@ -6,17 +6,13 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
-  SearchOutlined,
   TransactionOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
 import Link from "next/link";
 import React, { PropsWithChildren, useState } from "react";
-<<<<<<< Updated upstream
-=======
-import WithAdminRole from "../../../HOC/withRole";
->>>>>>> Stashed changes
 import { useStyles } from "./style";
+import WithAdminRole from "../../../HOC/withRole";
 
 const { Header, Sider, Content } = Layout;
 
@@ -26,16 +22,15 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
   const navLinks = [
     { name: "Dashboard", href: "/dashboard", icon: <PieChartOutlined /> },
-    { name: "Profiles", href: "/manageprofiles", icon: <DesktopOutlined /> },
-    { name: "Admins", href: "/admins", icon: <TransactionOutlined /> },
-    { name: "Finder", href: "/find", icon: <SearchOutlined /> },
+    { name: "Profiles", href: "/ManageProfiles", icon: <DesktopOutlined /> },
+    { name: "Admins", href: "/ManageAdmins", icon: <TransactionOutlined /> },
   ];
 
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className={styles.list}>
-          <Menu mode="inline" className={styles.side} defaultSelectedKeys={['0']}>
+          <Menu mode="inline" className={styles.side}>
             {collapsed ? null : (
               <img
                 src="/assets/images/Logo.png"
@@ -59,7 +54,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
         </div>
       </Sider>
       <Layout>
-        <Header style={{ backgroundColor: "#003366", color:"#fff" }}>
+        <Header style={{ backgroundColor: "#003366" }}>
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -68,7 +63,6 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               fontSize: "16px",
               width: 64,
               height: 64,
-              color:"#fff"
             }}
           />
         </Header>
@@ -78,4 +72,4 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default AdminLayout;
+export default WithAdminRole(AdminLayout);
