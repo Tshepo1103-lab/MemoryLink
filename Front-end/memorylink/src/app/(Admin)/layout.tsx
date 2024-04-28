@@ -12,10 +12,7 @@ import {
 import { Button, Layout, Menu } from "antd";
 import Link from "next/link";
 import React, { PropsWithChildren, useState } from "react";
-<<<<<<< Updated upstream
-=======
 import WithAdminRole from "../../../HOC/withRole";
->>>>>>> Stashed changes
 import { useStyles } from "./style";
 
 const { Header, Sider, Content } = Layout;
