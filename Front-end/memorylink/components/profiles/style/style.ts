@@ -27,10 +27,11 @@ export const useStyles = createStyles({
   recordsContainer: css`
     display: flex;
     justify-content: center;
-    transform: translateX(30%);
-    margin-top: 100px;
+    transform: translateX(25%);
+    margin-top: 90px;
     border: 1px solid #003366;
-    width: 60%;
-    padding: 40px;
+    width: 70%;
+    height:51vh;
+    padding: 10px;
   `,
 });

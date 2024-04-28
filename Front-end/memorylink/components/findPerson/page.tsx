@@ -59,7 +59,7 @@ const FingerprintCapture = () => {
                 )}
             </div>
             <div style={{ flex: 1 }}>
-                <h2>User Details</h2>
+                <h2>User details</h2>
                 <Form form={form} onFinish={onFinish} layout="vertical">
                     <Form.Item label="ID" name="id">
                         <Input />

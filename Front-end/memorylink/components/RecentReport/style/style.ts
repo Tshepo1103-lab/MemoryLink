@@ -11,7 +11,7 @@ export const useStyles = createStyles({
   `,
   mother: css`
     width: 90%;
-    height: 90%;
+    height: 80%;
     background-color: #fff;
     position: relative;
     margin-bottom: 20px;

@@ -4,18 +4,19 @@ export const useStyles = createStyles({
   main: css`
     background-color: #003366;
     width: 60%;
-    height: 60vh;
+    height: 50vh;
     display: flex;
     justify-content: center;
   `,
   recordsContainer: css`
     display: flex;
     justify-content: center;
-    transform: translateX(30%);
+    transform: translateX(20%);
     margin-top: 40px;
     border: 1px solid #003366;
-    width: 60%;
-    padding: 40px;
+    width: 70%;
+    height:56vh;
+    padding: 10px;
   `,
   header: css`
     text-align: center;

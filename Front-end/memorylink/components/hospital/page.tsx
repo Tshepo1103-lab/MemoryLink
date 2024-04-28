@@ -7,6 +7,7 @@ import type { FilterDropdownProps } from "antd/es/table/interface";
 import React, { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useStyles } from "./style/style";
+import Link from "next/link";
 
 interface DataType {
   key: string;
@@ -22,7 +23,7 @@ const data: DataType[] = [
     key: "1",
     name: "Pretoria",
     age: "011 098 8765",
-    address: "New York No. 1 Lake Park",
+    address: "https://www.bing.com/maps?q=steve+biko+hospital&FORM=HDRSC7&cp=-25.729556~28.203092&lvl=14.5",
   },
   {
     key: "2",
@@ -180,6 +181,9 @@ const HospitalComponent = () => {
       ),
   });
 
+  const handleDirectionsClick =()=>{
+
+  }
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
@@ -192,13 +196,20 @@ const HospitalComponent = () => {
       title: "Contact",
       dataIndex: "age",
       key: "age",
-      width: "20%",
+      width: "30%",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      width: "20%",
+      title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+    width: '1%',
+    render: (text: string, record: DataType) => (
+      <Link href={record.address} target="_Blank">
+      <Button type="primary" style={{backgroundColor:'#003366', alignItems:'center'}} >
+        Directions
+      </Button>
+      </Link>
+    ),
     },
   ];
 
@@ -215,8 +226,8 @@ const HospitalComponent = () => {
               Table: {
                 headerBg: "#003366",
                 headerColor: "#fff",
-                rowHoverBg: "#009999",
                 borderColor: "#003366",
+                colorIcon: "#fff"
               },
             },
           }}
@@ -224,8 +235,8 @@ const HospitalComponent = () => {
           <Table
             columns={columns}
             dataSource={data}
-            style={{ width: "100%" }}
-            pagination={{ pageSize: 6 }}
+            style={{ width: "100%",height:"50vh" }}
+            pagination={{ pageSize: 5 }}
           />
         </ConfigProvider>
       </div>

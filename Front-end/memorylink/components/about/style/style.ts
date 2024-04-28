@@ -12,9 +12,10 @@ export const useStyles = createStyles({
     font-size: 50px;
   `,
   card: css`
-    width: 400px;
+    width: 450px;
     border: none;
-    height: 500px;
+    height: 430px;
+    box-shadow: 5px 15px 5px 2px rgba(0, 0, 0, 0.1);
   `,
   container: css`
     display: flex;

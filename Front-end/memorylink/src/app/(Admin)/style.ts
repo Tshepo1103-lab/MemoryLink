@@ -31,9 +31,6 @@ export const useStyles = createStyles({
     align-items: center;
     height: 60px;
     box-sizing: border-box;
-    &:hover {
-      background: #009999;
-    }
   `,
   logoutButton: css`
     transition: color 0.3s ease;
@@ -48,7 +45,6 @@ export const useStyles = createStyles({
     justify-content: center;
     width: 100%;
     bottom: 0;
-    border: 2px solid red;
     display: flex;
     flex-direction: column;
   `,
