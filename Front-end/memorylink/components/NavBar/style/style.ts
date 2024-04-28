@@ -3,7 +3,7 @@ import { createStyles, css } from "antd-style";
 export const useStyles = createStyles({
   left: css`
     position: absolute;
-    left: 50px;
+    left: 20px;
   `,
   middle: css`
     position: absolute;
@@ -14,10 +14,10 @@ export const useStyles = createStyles({
   `,
   right: css`
     position: absolute;
-    right: 50px;
+    right: 20px;
   `,
   link: css`
-    margin-right: 40px;
+    margin-right: 20px;
     color: #fff;
     text-decoration: none;
     font-size: 20px;
@@ -26,33 +26,14 @@ export const useStyles = createStyles({
       Helvetica Neue,
       Arial,
       sans-serif;
-    letter-spacing: 0.14em;
-    &:hover {
-      color: #009999 !important;
-    }
   `,
   socialLink: css`
-    margin-left: 40px;
+    margin-left: 20px;
     color: #fff;
-    font-size: 25px;
+    font-size: 20px;
     font-family:
       Helvetica Neue,
       Arial,
       sans-serif;
-    &:hover {
-      color: #009999 !important;
-    }
-  `,
-  authButton: css`
-    margin-left: 40px;
-    color: #009999;
-    font-size: 25px;
-    font-family:
-      Helvetica Neue,
-      Arial,
-      sans-serif;
-    &:hover {
-      color: #ffffff !important;
-    }
   `,
 });
