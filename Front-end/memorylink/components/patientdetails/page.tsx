@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import { useStyles } from './style/style';
 import { Button, ConfigProvider,Modal, Table, Drawer } from 'antd';
 import CommentFC from '../comment/page';
-import Paragraph from 'antd/es/skeleton/Paragraph';
 
 const PatientDetailsPage = () => {
 
