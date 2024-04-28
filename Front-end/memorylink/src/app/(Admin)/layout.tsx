@@ -31,7 +31,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider trigger={null} collapsible collapsed={collapsed} collapsedWidth={70}>
         <div className={styles.list}>
           <Menu
             mode="inline"
@@ -46,18 +46,13 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               />
             )}
             {navLinks.map((link, index) => (
-              <Menu.Item key={index} icon={link.icon}>
+              <Menu.Item key={index} icon={link.icon} style={{color:'#fff', marginLeft:'15px'}}>
                 <Link href={link.href} className={styles.items}>
                   {link.name}
                 </Link>
               </Menu.Item>
             ))}
           </Menu>
-        </div>
-        <div className={styles.ContainerButton}>
-          <Button className={styles.logoutButton}>
-            <LogoutOutlined />
-          </Button>
         </div>
       </Sider>
       <Layout>
@@ -73,6 +68,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               color: "#fff",
             }}
           />
+            <LogoutOutlined  className={styles.logoutButton}/>
         </Header>
         <Content>{children}</Content>
       </Layout>

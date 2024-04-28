@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Table, Button, Modal, Form, Input, Space } from "antd";
+import { Table, Button, Modal, Form, Input, Space, ConfigProvider } from "antd";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const ManageHospitalsTable = () => {
   const [dataSource, setDataSource] = useState([
@@ -36,8 +37,8 @@ const ManageHospitalsTable = () => {
       key: "action",
       render: (_: any, record: any) => (
         <Space size="middle">
-          <Button onClick={() => editHospital(record)}>Edit</Button>
-          <Button onClick={() => deleteHospital(record.id)}>Delete</Button>
+          <Button onClick={() => editHospital(record)}><EditOutlined /></Button>
+          <Button onClick={() => deleteHospital(record.id)}><DeleteOutlined /></Button>
         </Space>
       ),
     },
@@ -85,11 +86,25 @@ const ManageHospitalsTable = () => {
       <Button onClick={addHospital} style={{ marginBottom: 16 }}>
         Add Hospital
       </Button>
-      <Table
-        dataSource={dataSource}
-        columns={columns}
-        pagination={{ pageSize: 5 }}
-      />
+      <ConfigProvider
+          theme={{
+            components: {
+              Table: {
+                headerBg: "#003366",
+                headerColor: "#fff",
+                rowHoverBg: "#009999",
+                borderColor: "#003366",
+              },
+            },
+          }}
+        >
+          <Table
+          dataSource={dataSource}
+          columns={columns}
+          pagination={{ pageSize: 5 }}
+        />
+        </ConfigProvider>
+      
 
       <Modal
         title={selectedHospital ? "Edit Hospital" : "Add Hospital"}

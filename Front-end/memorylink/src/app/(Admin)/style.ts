@@ -25,7 +25,7 @@ export const useStyles = createStyles({
   items: css`
     letter-spacing: 0.15em;
     color: #ffffff !important;
-    font-size: 20px;
+    font-size: 18px;
     display: flex;
     justify-content: flex-start !important;
     align-items: center;
@@ -33,10 +33,13 @@ export const useStyles = createStyles({
     box-sizing: border-box;
   `,
   logoutButton: css`
-    transition: color 0.3s ease;
-    background: "transparent";
-    color: #000;
-    margin-bottom: 10px;
+    color: #fff;
+    height: 64;
+    font-size:25px;
+    right:0;
+    align-items:center;
+    margin-right:100px;
+    position:absolute;
   `,
   ContainerButton: css`
     margin-bottom: 20px;
