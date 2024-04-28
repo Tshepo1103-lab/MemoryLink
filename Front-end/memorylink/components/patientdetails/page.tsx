@@ -3,7 +3,6 @@ import { useStyles } from './style/style';
 import { Button, ConfigProvider,Modal, Table, Drawer } from 'antd';
 import CommentFC from '../comment/page';
 
-
 const PatientDetailsPage = () => {
 
   const {styles}=useStyles();

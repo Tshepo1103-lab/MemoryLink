@@ -1,12 +1,11 @@
-import { FC, PropsWithChildren, useContext, useEffect, useReducer } from 'react';
-import { loginErrorAction, loginSuccessAction, loginUserAction } from './actions';
-import { ILoginRequest, ILoginResponse, INITIAL_STATE, IUserActionContext, IUserStateContext, UserActionContext, UserStateContext } from './context';
-import { userReducer } from './reducer';
-import { instance } from '../../utils/axiosInstance/axiosInstance';
-import { getRole } from '../../utils/decoder/decoder';
-import { useRouter } from 'next/navigation';
+import { message } from 'antd';
 import axios from 'axios';
-import { routeModule } from 'next/dist/build/templates/app-page';
+import { useRouter } from 'next/navigation';
+import { useContext, useEffect, useReducer } from 'react';
+import { getRole } from '../../utils/decoder/decoder';
+import { loginErrorAction, loginSuccessAction, loginUserAction, regiserUserResponse, registerErrorAction, registerUserAction } from './actions';
+import { ILoginRequest, ILoginResponse, INITIAL_STATE, IUserActionContext, IUserRequest, IUserStateContext, UserActionContext, UserStateContext } from './context';
+import { userReducer } from './reducer';
 
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -67,7 +66,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             const response = await axios.post(endpoint,payload);
             
             if(response.data.success){
-                console.log(response)
                 const payload: ILoginResponse={
                     accessToken: response.data.result.accessToken,
                     encryptedAccessToken: response.data.result.encryptedAccessToken,
@@ -82,6 +80,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 else if(payload.role=='admin'){
                     push('/dashboard')
                 }
+                message.success('Login successful');
             }
         }
         catch(error){
@@ -89,9 +88,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             
         }
     }
+
+    const register = async (payload:IUserRequest) => {
+        dispatch(registerUserAction());
+        try{
+            const endpoint= "https://localhost:44311/api/services/app/User/Create";
+            const response = await axios.post(endpoint,payload);
+            if(response.data.success){
+                dispatch(regiserUserResponse(response.data.result))
+                message.success("User successfully created");
+                push('/login')
+            }
+        }
+        catch(error){
+            console.error(error)
+            dispatch(registerErrorAction())
+        }
+    }
     return(
         <UserStateContext.Provider value={state}>
-            <UserActionContext.Provider value={{login}}>
+            <UserActionContext.Provider value={{login, register}}>
                 {children}
             </UserActionContext.Provider>
         </UserStateContext.Provider>
