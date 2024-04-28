@@ -1,6 +1,3 @@
-"use client";
-
-import WithRole from "../../HOC/withRole";
 import Hero from "../../components/Hero/page";
 import Information from "../../components/Information/page";
 import RecentReport from "../../components/RecentReport/page";
@@ -12,6 +9,7 @@ function Home() {
 
   const { styles } = useStyles();
 
+export default function Home() {
   return (
   
     <main className={styles.main}>
