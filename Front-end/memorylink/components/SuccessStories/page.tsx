@@ -21,7 +21,7 @@ const responsive = {
   },
 };
 
-const SuccessStories = ({ }) => {
+const SuccessStories = ({}) => {
   const { styles } = useStyles();
 
   return (

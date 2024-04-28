@@ -1,12 +1,12 @@
-import React from 'react'
-import FingerprintCapture from '../../../../components/findPerson/page'
+import React from "react";
+import FingerprintCapture from "../../../../components/findPerson/page";
 
 const Find = () => {
   return (
     <div>
-        <FingerprintCapture/>
+      <FingerprintCapture />
     </div>
-  )
-}
+  );
+};
 
-export default Find
+export default Find;

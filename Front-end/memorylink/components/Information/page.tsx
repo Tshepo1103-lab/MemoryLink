@@ -13,7 +13,6 @@ import {
 const Information = () => {
   const { styles } = useStyles();
 
-  
   const cardsData = [
     {
       title: "HOSPITALS",

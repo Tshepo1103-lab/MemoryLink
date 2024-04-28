@@ -15,7 +15,7 @@ export const useStyles = createStyles({
     margin-top: 40px;
     border: 1px solid #003366;
     width: 70%;
-    height:56vh;
+    height: 56vh;
     padding: 10px;
   `,
   header: css`

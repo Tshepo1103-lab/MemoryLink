@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import { useStyles } from "./style/style";
@@ -11,13 +11,13 @@ const RecentReport = () => {
       hospital: "Steve Biko",
       src: "/hospitals",
       image: "assets/images/patient1.jpg",
-      content: 'wertyuiosdfghj'
+      content: "wertyuiosdfghj",
     },
     {
       hospital: "Tshwane",
       src: "/profiles",
       image: "assets/images/patient2.jpg",
-      content: 'wertyuiosdfghj'
+      content: "wertyuiosdfghj",
     },
   ];
 
@@ -35,13 +35,17 @@ const RecentReport = () => {
                 <Card className={styles.card}>
                   <Flex>
                     <div>
-                      <img alt="avatar" src={item.image} className={styles.image} />
+                      <img
+                        alt="avatar"
+                        src={item.image}
+                        className={styles.image}
+                      />
                     </div>
                     <div style={{ flex: 1, marginLeft: 16 }}>
                       <Typography.Title level={2} style={{ color: "#fff" }}>
                         {item.hospital}
                       </Typography.Title>
-                      <div style={{ display: 'flex', flexDirection: 'row' }}>
+                      <div style={{ display: "flex", flexDirection: "row" }}>
                         <div style={{ flex: 1 }}>
                           <p>{item.content}</p>
                           <p>{item.content}</p>
@@ -50,7 +54,11 @@ const RecentReport = () => {
                         <div style={{ flex: 1 }}>
                           <p>{item.content}</p>
                           <p>{item.content}</p>
-                          <Button type="primary" href={item.src} target="_blank">
+                          <Button
+                            type="primary"
+                            href={item.src}
+                            target="_blank"
+                          >
                             Send Lead
                           </Button>
                         </div>

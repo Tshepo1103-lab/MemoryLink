@@ -23,6 +23,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
   const navLinks = [
     { name: "Dashboard", href: "/dashboard", icon: <PieChartOutlined /> },
+    { name: "Hospitals", href: "/managehospitals", icon: <DesktopOutlined /> },
     { name: "Profiles", href: "/manageprofiles", icon: <DesktopOutlined /> },
     { name: "Admins", href: "/admins", icon: <TransactionOutlined /> },
     { name: "Finder", href: "/find", icon: <SearchOutlined /> },
@@ -32,7 +33,11 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className={styles.list}>
-          <Menu mode="inline" className={styles.side} defaultSelectedKeys={['0']}>
+          <Menu
+            mode="inline"
+            className={styles.side}
+            defaultSelectedKeys={["0"]}
+          >
             {collapsed ? null : (
               <img
                 src="/assets/images/Logo.png"
@@ -56,7 +61,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
         </div>
       </Sider>
       <Layout>
-        <Header style={{ backgroundColor: "#003366", color:"#fff" }}>
+        <Header style={{ backgroundColor: "#003366", color: "#fff" }}>
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -65,7 +70,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               fontSize: "16px",
               width: 64,
               height: 64,
-              color:"#fff"
+              color: "#fff",
             }}
           />
         </Header>

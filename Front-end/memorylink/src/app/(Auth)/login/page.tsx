@@ -2,7 +2,10 @@
 
 import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
-import { useUserActions, useUserState } from "../../../../providers/AuthProvider";
+import {
+  useUserActions,
+  useUserState,
+} from "../../../../providers/AuthProvider";
 import { ILoginRequest } from "../../../../providers/AuthProvider/context";
 import { useStyles } from "./style/style";
 
@@ -12,26 +15,25 @@ type FieldType = {
   remember?: string;
 };
 
-
 const Login = () => {
   const { styles } = useStyles();
-  const {login}=useUserActions();
-  const status=useUserState();
+  const { login } = useUserActions();
+  const status = useUserState();
 
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
+    errorInfo,
+  ) => {
     console.log("Failed:", errorInfo);
-  
   };
-  const onFinish = async (values:any) => {
+  const onFinish = async (values: any) => {
     const userInput: ILoginRequest = {
       userNameOrEmailAddress: values.username,
-      password: values.password
-  }
-    if(login){
-        login (userInput);
+      password: values.password,
+    };
+    if (login) {
+      login(userInput);
     }
-
-};
+  };
 
   return (
     <div

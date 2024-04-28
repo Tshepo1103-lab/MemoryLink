@@ -23,7 +23,8 @@ const data: DataType[] = [
     key: "1",
     name: "Pretoria",
     age: "011 098 8765",
-    address: "https://www.bing.com/maps?q=steve+biko+hospital&FORM=HDRSC7&cp=-25.729556~28.203092&lvl=14.5",
+    address:
+      "https://www.bing.com/maps?q=steve+biko+hospital&FORM=HDRSC7&cp=-25.729556~28.203092&lvl=14.5",
   },
   {
     key: "2",
@@ -181,9 +182,7 @@ const HospitalComponent = () => {
       ),
   });
 
-  const handleDirectionsClick =()=>{
-
-  }
+  const handleDirectionsClick = () => {};
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
@@ -199,17 +198,20 @@ const HospitalComponent = () => {
       width: "30%",
     },
     {
-      title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-    width: '1%',
-    render: (text: string, record: DataType) => (
-      <Link href={record.address} target="_Blank">
-      <Button type="primary" style={{backgroundColor:'#003366', alignItems:'center'}} >
-        Directions
-      </Button>
-      </Link>
-    ),
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
+      width: "1%",
+      render: (text: string, record: DataType) => (
+        <Link href={record.address} target="_Blank">
+          <Button
+            type="primary"
+            style={{ backgroundColor: "#003366", alignItems: "center" }}
+          >
+            Directions
+          </Button>
+        </Link>
+      ),
     },
   ];
 
@@ -227,7 +229,7 @@ const HospitalComponent = () => {
                 headerBg: "#003366",
                 headerColor: "#fff",
                 borderColor: "#003366",
-                colorIcon: "#fff"
+                colorIcon: "#fff",
               },
             },
           }}
@@ -235,7 +237,7 @@ const HospitalComponent = () => {
           <Table
             columns={columns}
             dataSource={data}
-            style={{ width: "100%",height:"50vh" }}
+            style={{ width: "100%", height: "50vh" }}
             pagination={{ pageSize: 5 }}
           />
         </ConfigProvider>

@@ -31,7 +31,7 @@ export const useStyles = createStyles({
     margin-top: 90px;
     border: 1px solid #003366;
     width: 70%;
-    height:51vh;
+    height: 51vh;
     padding: 10px;
   `,
 });

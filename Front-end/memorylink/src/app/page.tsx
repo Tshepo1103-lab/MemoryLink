@@ -17,10 +17,9 @@ function Home() {
         <Hero />
         <Information />
         <RecentReport />
-        
       </ClientLayout>
     </main>
   );
 }
 
-export default WithRole(Home)
+export default WithRole(Home);
