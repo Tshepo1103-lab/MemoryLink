@@ -2,6 +2,7 @@
 
 import { Inter } from "next/font/google"; // Correct the import path
 import "./globals.css";
+import { AuthProvider } from "../../providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,11 @@ export default function RootLayout({
           href="https://font.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   );
 }

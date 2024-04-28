@@ -4,23 +4,12 @@ export const INITIAL_STATE: IUserStateContext={
     isPending:false,
     isSuccess:false,
     isError:false,
-    UserLogin:undefined,
-    UserRegister:undefined
+    UserLogin:undefined
 }
 
 export interface ILoginRequest{
     userNameOrEmailAddress?: string;
     password?: string;  
-}
-
-export interface IUserRequest{
-    name: string,
-    surname: string,
-    isActive:Boolean,
-    userName: string,
-    emailAddress: string,
-    roleNames?: string[],
-    password?: string
 }
 
 export interface ILoginResponse{
@@ -32,21 +21,6 @@ export interface ILoginResponse{
     role:string;
 }
 
-export interface IUserResponse{
-
-    id: number,
-    userName: string,
-    name: string,
-    surname: string,
-    emailAddress: string,
-    isActive: boolean,
-    fullName: string,
-    lastLoginTime: string,
-    creationTime: string,
-    roleNames?: string[],
-    
-}
-
 
 export interface IUserStateContext{
 
@@ -54,14 +28,12 @@ export interface IUserStateContext{
     isSuccess?:Boolean;
     isError?:Boolean;
     UserLogin?:ILoginResponse;
-    UserRegister?:IUserResponse;
     
 }
 
 export interface IUserActionContext{
 
-    login? : (payload:ILoginRequest) => void;
-    register? :(payload:IUserRequest) => void;
+    login?:(payload:ILoginRequest) => void;
 }
 
 const UserStateContext=createContext<IUserStateContext>(INITIAL_STATE);

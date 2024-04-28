@@ -35,7 +35,7 @@ export const useStyles = createStyles({
   middle: css`
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -140%);
+    transform: translate(-50%, -110%);
     z-index: 999;
   `,
   button: css`

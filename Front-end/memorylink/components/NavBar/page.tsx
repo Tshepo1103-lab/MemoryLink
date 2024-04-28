@@ -5,6 +5,7 @@ import {
   LinkedinFilled,
   InstagramFilled,
   TwitterOutlined,
+  LoginOutlined,
 } from "@ant-design/icons";
 import { useStyles } from "./style/style";
 
@@ -51,6 +52,12 @@ const Navbar = () => {
             <span className={styles.socialLink}>{link.icon}</span>
           </Link>
         ))}
+        <Link href="/login">
+          {" "}
+          <span className={styles.authButton}>
+            <LoginOutlined />
+          </span>
+        </Link>
       </div>
     </nav>
   );

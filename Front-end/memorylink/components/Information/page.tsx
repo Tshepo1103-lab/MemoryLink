@@ -7,23 +7,23 @@ import {
   PlusSquareOutlined,
   FileImageOutlined,
   ProfileOutlined,
-  OpenAIOutlined
+  OpenAIOutlined,
 } from "@ant-design/icons";
 
 const Information = () => {
   const { styles } = useStyles();
 
-  // Array of objects containing information for each card
+  
   const cardsData = [
     {
       title: "HOSPITALS",
       icon: <PlusSquareOutlined />,
-      content: "filter your search",
+      content: "Filter your search",
     },
     {
       title: "PROFILES",
       icon: <ProfileOutlined />,
-      content: "browse recent reports",
+      content: "Browse recent reports",
     },
     {
       title: "AI SEARCH",
