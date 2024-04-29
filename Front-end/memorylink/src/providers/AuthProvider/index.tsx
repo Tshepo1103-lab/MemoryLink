@@ -1,11 +1,7 @@
 import { message } from "antd";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import {
-  useContext,
-  useEffect,
-  useReducer
-} from "react";
+import { useContext, useEffect, useReducer } from "react";
 import { getRole } from "../../utils/decoder/decoder";
 import {
   loginErrorAction,
@@ -117,33 +113,32 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         } else if (payload.role == "admin") {
           push("/dashboard");
         }
-        message.success('Login successful');
+        message.success("Login successful");
       }
     } catch (error) {
       dispatch(loginErrorAction());
     }
   };
 
-  const logout = () =>{
+  const logout = () => {
     dispatch(logoutUserAction());
-  }
+  };
 
-  const register = async (payload:IUserRequest) => {
+  const register = async (payload: IUserRequest) => {
     dispatch(registerUserAction());
-    try{
-        const endpoint= "https://localhost:44311/api/services/app/User/Create";
-        const response = await axios.post(endpoint,payload);
-        if(response.data.success){
-            dispatch(regiserUserResponse(response.data.result))
-            message.success("User successfully created");
-            push('/login')
-        }
+    try {
+      const endpoint = "https://localhost:44311/api/services/app/User/Create";
+      const response = await axios.post(endpoint, payload);
+      if (response.data.success) {
+        dispatch(regiserUserResponse(response.data.result));
+        message.success("User successfully created");
+        push("/login");
+      }
+    } catch (error) {
+      console.error(error);
+      dispatch(registerErrorAction());
     }
-    catch(error){
-        console.error(error)
-        dispatch(registerErrorAction())
-    }
-}
+  };
   return (
     <UserStateContext.Provider value={state}>
       <UserActionContext.Provider value={{ login, logout, register }}>

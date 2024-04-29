@@ -11,7 +11,7 @@ import { useStyles } from "./style/style";
 import { useUserActions } from "../../providers/AuthProvider";
 
 const Navbar = () => {
-  const {logout}=useUserActions();
+  const { logout } = useUserActions();
 
   const navLinks = [
     { name: "Hospitals", href: "/hospitals" },
@@ -58,7 +58,7 @@ const Navbar = () => {
         <Link href="/login">
           {" "}
           <span className={styles.authButton}>
-            <LoginOutlined onClick={()=> logout()}/>
+            <LoginOutlined onClick={() => logout()} />
           </span>
         </Link>
       </div>

@@ -18,5 +18,9 @@ namespace MemoryLinkBackend.Domain
         ///
         /// </summary>
         public virtual string Contact { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string Url { get; set; }
     }
 }

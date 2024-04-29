@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 
 namespace MemoryLinkBackend.Domain
 {
-    public class Lead:FullAuditedEntity<Guid>
+    public class Comment:FullAuditedEntity<Guid>
     {
         public virtual string Message { get; set; }
         ///<summary>
         ///
+        /// </summary>
+        public virtual DateTime DateSent {  get; set; }
+        /// <summary>
+        /// 
         /// </summary>
         public virtual User User { get; set; }
         ///<summary>

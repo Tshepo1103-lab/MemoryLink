@@ -12,7 +12,7 @@ import {
 import { Button, Layout, Menu } from "antd";
 import Link from "next/link";
 import React, { PropsWithChildren, useState } from "react";
-import WithAdminRole from './../../hoc/withRole'
+import WithAdminRole from "./../../hoc/withRole";
 import { useStyles } from "./style";
 
 const { Header, Sider, Content } = Layout;
@@ -31,7 +31,12 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed} collapsedWidth={70}>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        collapsedWidth={70}
+      >
         <div className={styles.list}>
           <Menu
             mode="inline"
@@ -46,7 +51,11 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               />
             )}
             {navLinks.map((link, index) => (
-              <Menu.Item key={index} icon={link.icon} style={{color:'#fff', marginLeft:'15px'}}>
+              <Menu.Item
+                key={index}
+                icon={link.icon}
+                style={{ color: "#fff", marginLeft: "15px" }}
+              >
                 <Link href={link.href} className={styles.items}>
                   {link.name}
                 </Link>
@@ -68,7 +77,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               color: "#fff",
             }}
           />
-            <LogoutOutlined  className={styles.logoutButton}/>
+          <LogoutOutlined className={styles.logoutButton} />
         </Header>
         <Content>{children}</Content>
       </Layout>

@@ -37,8 +37,12 @@ const ManageHospitalsTable = () => {
       key: "action",
       render: (_: any, record: any) => (
         <Space size="middle">
-          <Button onClick={() => editHospital(record)}><EditOutlined /></Button>
-          <Button onClick={() => deleteHospital(record.id)}><DeleteOutlined /></Button>
+          <Button onClick={() => editHospital(record)}>
+            <EditOutlined />
+          </Button>
+          <Button onClick={() => deleteHospital(record.id)}>
+            <DeleteOutlined />
+          </Button>
         </Space>
       ),
     },
@@ -87,24 +91,23 @@ const ManageHospitalsTable = () => {
         Add Hospital
       </Button>
       <ConfigProvider
-          theme={{
-            components: {
-              Table: {
-                headerBg: "#003366",
-                headerColor: "#fff",
-                rowHoverBg: "#009999",
-                borderColor: "#003366",
-              },
+        theme={{
+          components: {
+            Table: {
+              headerBg: "#003366",
+              headerColor: "#fff",
+              rowHoverBg: "#009999",
+              borderColor: "#003366",
             },
-          }}
-        >
-          <Table
+          },
+        }}
+      >
+        <Table
           dataSource={dataSource}
           columns={columns}
           pagination={{ pageSize: 5 }}
         />
-        </ConfigProvider>
-      
+      </ConfigProvider>
 
       <Modal
         title={selectedHospital ? "Edit Hospital" : "Add Hospital"}

@@ -16,7 +16,7 @@ namespace MemoryLinkBackend.EntityFrameworkCore
         {
         }
         public DbSet<Hospital>Hospitals { get; set; }
-        public DbSet<Lead> Leads { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet <Response> Responses { get; set; }
         public DbSet <Testimonial> Testimonials { get; set; }

@@ -9,19 +9,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MemoryLinkBackend.Services.LeadService.Dto
+namespace MemoryLinkBackend.Services.CommentService.Dto
 {
-    public class LeadDto: EntityDto<Guid>
+    public class CommentDto : EntityDto<Guid>
     {
-        [AutoMap(typeof(Lead))]
-        public  string Message { get; set; }
+        [AutoMap(typeof(Comment))]
+        public string Message { get; set; }
         ///<summary>
         ///
         /// </summary>
-        public  long UserId { get; set; }
+        public long UserId { get; set; }
         ///<summary>
         ///
         /// </summary>
-        public  int ProfileId { get; set; }
+        public int ProfileId { get; set; }
     }
 }

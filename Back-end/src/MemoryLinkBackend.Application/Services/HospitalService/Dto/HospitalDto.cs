@@ -21,5 +21,9 @@ namespace MemoryLinkBackend.Services.HospitalService.Dto
         ///
         /// </summary>
         public  string Contact { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Url { get; set; }
     }
 }

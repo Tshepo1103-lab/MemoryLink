@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import ManageProfilesTable from "@/components/profileFC/page";
@@ -6,9 +6,9 @@ import ManageProfilesTable from "@/components/profileFC/page";
 const Profiles = () => {
   return (
     <div>
-       <ManageProfilesTable/>
+      <ManageProfilesTable />
     </div>
-  )
+  );
 };
 
 export default Profiles;

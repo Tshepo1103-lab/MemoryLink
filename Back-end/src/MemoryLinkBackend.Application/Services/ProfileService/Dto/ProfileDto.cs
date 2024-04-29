@@ -50,5 +50,14 @@ namespace MemoryLinkBackend.Services.ProfileService.Dto
         /// 
         /// </summary>
         public  string MoreDetails { get; set; }
+        ///<summary>
+        ///
+        /// </summary>
+        public ReflistType Type { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Ward {  get; set; }
+        
     }
 }

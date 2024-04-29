@@ -48,5 +48,13 @@ namespace MemoryLinkBackend.Domain
         /// 
         /// </summary>
         public virtual string MoreDetails { get; set; }
+        ///<summary>
+        ///
+        /// </summary>
+        public virtual ReflistType Type { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual string Ward {  get; set; }
     }
 }

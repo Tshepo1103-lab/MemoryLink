@@ -35,11 +35,11 @@ export const useStyles = createStyles({
   logoutButton: css`
     color: #fff;
     height: 64;
-    font-size:25px;
-    right:0;
-    align-items:center;
-    margin-right:100px;
-    position:absolute;
+    font-size: 25px;
+    right: 0;
+    align-items: center;
+    margin-right: 100px;
+    position: absolute;
   `,
   ContainerButton: css`
     margin-bottom: 20px;
