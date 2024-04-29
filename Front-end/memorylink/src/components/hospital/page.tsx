@@ -1,81 +1,40 @@
 "use client";
 
+import { useHospitalActions, useHospitalState } from "@/providers/HospitalProvider";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnType, TableColumnsType } from "antd";
 import { Button, ConfigProvider, Input, Space, Table } from "antd";
 import type { FilterDropdownProps } from "antd/es/table/interface";
-import React, { useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useStyles } from "./style/style";
-import Link from "next/link";
 
 interface DataType {
-  key: string;
   name: string;
-  age: string;
-  address: string;
+  email: string;
+  contact: string;
+  url: string;
 }
 
 type DataIndex = keyof DataType;
 
-const data: DataType[] = [
-  {
-    key: "1",
-    name: "Pretoria",
-    age: "011 098 8765",
-    address:
-      "https://www.bing.com/maps?q=steve+biko+hospital&FORM=HDRSC7&cp=-25.729556~28.203092&lvl=14.5",
-  },
-  {
-    key: "2",
-    name: "Kwamhlanga",
-    age: "011 098 8765",
-    address: "London No. 1 Lake Park",
-  },
-  {
-    key: "3",
-    name: "Steve Biko",
-    age: "011 098 8765",
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "4",
-    name: "Tshwane ",
-    age: "011 098 8765",
-    address: "London No. 2 Lake Park",
-  },
-  {
-    key: "5",
-    name: "Steve Biko",
-    age: "011 098 8765",
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "6",
-    name: "Tshwane ",
-    age: "011 098 8765",
-    address: "London No. 2 Lake Park",
-  },
-  {
-    key: "7",
-    name: "Steve Biko",
-    age: "011 098 8765",
-    address: "Sydney No. 1 Lake Park",
-  },
-  {
-    key: "8",
-    name: "Tshwane ",
-    age: "011 098 8765",
-    address: "London No. 2 Lake Park",
-  },
-];
+
 
 const HospitalComponent = () => {
+
+  const {getallhospital} = useHospitalActions();
+  const status = useHospitalState();
   const { styles } = useStyles();
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
 
+  useEffect(()=>{
+    if(getallhospital)
+      getallhospital()
+  },[])
+  console.log(status.GetAllHospital)
   const handleSearch = (
     selectedKeys: string[],
     confirm: FilterDropdownProps["confirm"],
@@ -182,7 +141,6 @@ const HospitalComponent = () => {
       ),
   });
 
-  const handleDirectionsClick = () => {};
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
@@ -193,17 +151,16 @@ const HospitalComponent = () => {
     },
     {
       title: "Contact",
-      dataIndex: "age",
-      key: "age",
+      key: "contact",
       width: "30%",
     },
     {
       title: "Address",
-      dataIndex: "address",
-      key: "address",
+      dataIndex: "url",
+      key: "url",
       width: "1%",
       render: (text: string, record: DataType) => (
-        <Link href={record.address} target="_Blank">
+        <Link href={record.url} target="_Blank">
           <Button
             type="primary"
             style={{ backgroundColor: "#003366", alignItems: "center" }}
@@ -236,7 +193,7 @@ const HospitalComponent = () => {
         >
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={status.GetAllHospital}
             style={{ width: "100%", height: "50vh" }}
             pagination={{ pageSize: 5 }}
           />

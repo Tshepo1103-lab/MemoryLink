@@ -24,9 +24,9 @@ export const HospitalProvider = ({
     try {
       const endpoint =
         "https://localhost:44311/api/services/app/Hospital/GetAll";
-      const response = await axios.post(endpoint);
+      const response = await axios.get(endpoint);
       if (response.data.success) {
-        dispatch(getallhospitalResponse(response.data.result));
+        dispatch(getallhospitalResponse(response.data.result.items));
       }
     } catch (error) {
       console.error(error);
