@@ -4,7 +4,7 @@ import React from "react";
 import type { FormProps } from "antd";
 import { Button, Form, Input, Select } from "antd";
 import { useStyles } from "./style/style";
-import { useUserActions } from "../../../../providers/AuthProvider";
+import { useUserActions } from "@/providers/AuthProvider";
 
 const { Option } = Select;
 
@@ -16,13 +16,12 @@ type FieldType = {
   roleNames?: string[],
   password?:string,
   isActive?:Boolean
-
 };
-
 
 
 const Register = () => {
   const { styles } = useStyles();
+
   const {register} =useUserActions();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
@@ -54,7 +53,7 @@ const Register = () => {
         <img
           src="/assets/images/Logo.png"
           alt="logo"
-          style={{ width: "400px" }}
+          style={{ width: "300px" }}
           className={styles.middle}
         />
         <Form
@@ -78,7 +77,7 @@ const Register = () => {
             <Input placeholder="Surname" className={styles.input} />
           </Form.Item>
           <Form.Item<FieldType>
-            name="userName"
+             name="userName"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input placeholder="Username" className={styles.input} />
@@ -98,28 +97,7 @@ const Register = () => {
           >
             <Input.Password placeholder="Password" className={styles.input} />
           </Form.Item>
-          <Form.Item<FieldType>
-            dependencies={["password"]}
-            rules={[
-              { required: true, message: "Please confirm your password!" },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error("The two passwords do not match!"),
-                  );
-                },
-              }),
-            ]}
-          >
-            <Input.Password
-              placeholder="Confirm Password"
-              className={styles.input}
-            />
-          </Form.Item>
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className={styles.button}>
               Register
             </Button>

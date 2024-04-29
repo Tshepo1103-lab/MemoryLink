@@ -6,13 +6,14 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   PieChartOutlined,
+  SearchOutlined,
   TransactionOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
 import Link from "next/link";
 import React, { PropsWithChildren, useState } from "react";
+import WithAdminRole from './../../hoc/withRole'
 import { useStyles } from "./style";
-import WithAdminRole from "../../../HOC/withRole";
 
 const { Header, Sider, Content } = Layout;
 
@@ -22,15 +23,21 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
   const navLinks = [
     { name: "Dashboard", href: "/dashboard", icon: <PieChartOutlined /> },
-    { name: "Profiles", href: "/ManageProfiles", icon: <DesktopOutlined /> },
-    { name: "Admins", href: "/ManageAdmins", icon: <TransactionOutlined /> },
+    { name: "Hospitals", href: "/managehospitals", icon: <DesktopOutlined /> },
+    { name: "Profiles", href: "/manageprofiles", icon: <DesktopOutlined /> },
+    { name: "Admins", href: "/admins", icon: <TransactionOutlined /> },
+    { name: "Finder", href: "/find", icon: <SearchOutlined /> },
   ];
 
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider trigger={null} collapsible collapsed={collapsed} collapsedWidth={70}>
         <div className={styles.list}>
-          <Menu mode="inline" className={styles.side}>
+          <Menu
+            mode="inline"
+            className={styles.side}
+            defaultSelectedKeys={["0"]}
+          >
             {collapsed ? null : (
               <img
                 src="/assets/images/Logo.png"
@@ -39,7 +46,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               />
             )}
             {navLinks.map((link, index) => (
-              <Menu.Item key={index} icon={link.icon}>
+              <Menu.Item key={index} icon={link.icon} style={{color:'#fff', marginLeft:'15px'}}>
                 <Link href={link.href} className={styles.items}>
                   {link.name}
                 </Link>
@@ -47,14 +54,9 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
             ))}
           </Menu>
         </div>
-        <div className={styles.ContainerButton}>
-          <Button className={styles.logoutButton}>
-            <LogoutOutlined />
-          </Button>
-        </div>
       </Sider>
       <Layout>
-        <Header style={{ backgroundColor: "#003366" }}>
+        <Header style={{ backgroundColor: "#003366", color: "#fff" }}>
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -63,8 +65,10 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               fontSize: "16px",
               width: 64,
               height: 64,
+              color: "#fff",
             }}
           />
+            <LogoutOutlined  className={styles.logoutButton}/>
         </Header>
         <Content>{children}</Content>
       </Layout>
@@ -72,4 +76,4 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default WithAdminRole(AdminLayout);
+export default AdminLayout;

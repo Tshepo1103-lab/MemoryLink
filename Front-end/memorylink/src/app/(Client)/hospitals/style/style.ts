@@ -2,8 +2,7 @@ import { createStyles, css } from "antd-style";
 
 export const useStyles = createStyles({
   main: css`
-    height: 85vh;
-    background-color: #ffffff;
+    height: 100vh;
     padding: 100px;
   `,
 });
