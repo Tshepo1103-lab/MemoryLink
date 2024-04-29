@@ -4,9 +4,8 @@ import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import {
   useUserActions,
-  useUserState,
-} from "../../../../providers/AuthProvider";
-import { ILoginRequest } from "../../../../providers/AuthProvider/context";
+  useUserState} from './../../../providers/AuthProvider'
+import { ILoginRequest } from './../../../providers/AuthProvider/context'
 import { useStyles } from "./style/style";
 
 type FieldType = {

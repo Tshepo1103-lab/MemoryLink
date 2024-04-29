@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import PatientDetailsPage from "../../../../../components/patientdetails/page";
+import PatientDetailsPage from "@/components/patientdetails/page";
 import { useStyles } from "../style/style";
 
 const ProfileDetails = () => {

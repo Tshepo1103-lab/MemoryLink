@@ -4,37 +4,38 @@ import React from "react";
 import type { FormProps } from "antd";
 import { Button, Form, Input, Select } from "antd";
 import { useStyles } from "./style/style";
+import { useUserActions } from "@/providers/AuthProvider";
 
 const { Option } = Select;
 
 type FieldType = {
-  name?: string;
-  surname?: string;
-  username?: string;
-  password?: string;
-  confirmPassword?: string;
-  phoneNumber?: string;
+  name: string,
+  surname: string,
+  userName: string,
+  emailAddress: string,
+  roleNames?: string[],
+  password?:string,
+  isActive?:Boolean
 };
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values); // Here you would typically send a request to your backend to register the user
-};
-
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
 
 const Register = () => {
   const { styles } = useStyles();
 
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 70 }}>
-        <Option value="27">+27</Option>
-        <Option value="87">+87</Option>
-      </Select>
-    </Form.Item>
-  );
+  const {register} =useUserActions();
+
+  const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
+    console.log("Success:", values); 
+    const updatedValues={
+      ...values,isActive:true,roleNames:['User']
+    }
+    if(register)
+      register(updatedValues)
+  };
+  
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
 
   return (
     <div
@@ -52,7 +53,7 @@ const Register = () => {
         <img
           src="/assets/images/Logo.png"
           alt="logo"
-          style={{ width: "500px" }}
+          style={{ width: "300px" }}
           className={styles.middle}
         />
         <Form
@@ -75,49 +76,28 @@ const Register = () => {
           >
             <Input placeholder="Surname" className={styles.input} />
           </Form.Item>
-          <Form.Item
-            name="phone"
-            rules={[
-              { required: true, message: "Please input your phone number!" },
-            ]}
-          >
-            <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
-          </Form.Item>
           <Form.Item<FieldType>
-            name="username"
+             name="userName"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input placeholder="Username" className={styles.input} />
           </Form.Item>
+          <Form.Item
+                  name="emailAddress"
+                  rules={[
+                      { type: 'string', message: 'The input is not valid E-mail!' },
+                      { required: true, message: 'Please input your E-mail!' },
+                  ]}
+              >
+                  <Input placeholder="Email" className={styles.input}/>
+              </Form.Item>
           <Form.Item<FieldType>
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password placeholder="Password" className={styles.input} />
           </Form.Item>
-          <Form.Item<FieldType>
-            name="confirmPassword"
-            dependencies={["password"]}
-            rules={[
-              { required: true, message: "Please confirm your password!" },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error("The two passwords do not match!"),
-                  );
-                },
-              }),
-            ]}
-          >
-            <Input.Password
-              placeholder="Confirm Password"
-              className={styles.input}
-            />
-          </Form.Item>
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className={styles.button}>
               Register
             </Button>

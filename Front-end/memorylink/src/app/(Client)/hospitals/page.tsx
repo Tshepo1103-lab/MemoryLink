@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useStyles } from "./style/style";
-import HospitalComponent from "../../../../components/hospital/page";
+import HospitalComponent from "@/components/hospital/page";
 
 const Hospitals = () => {
   const { styles } = useStyles();

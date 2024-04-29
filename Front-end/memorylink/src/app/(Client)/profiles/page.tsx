@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useStyles } from "./style/style";
-import ProfilesFC from "../../../../components/profiles/page";
+import ProfilesFC from "@/components/profiles/page";
 
 const Profiles = () => {
   const { styles } = useStyles();

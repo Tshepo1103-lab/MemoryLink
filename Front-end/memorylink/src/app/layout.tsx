@@ -2,8 +2,7 @@
 
 import { Inter } from "next/font/google"; // Correct the import path
 import "./globals.css";
-import { AuthProvider } from "../../providers/AuthProvider";
-
+import { AuthProvider } from "@/providers/AuthProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({

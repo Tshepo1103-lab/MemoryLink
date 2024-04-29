@@ -1,6 +1,5 @@
 import React from "react";
-import FingerprintCapture from "../../../../components/findPerson/page";
-
+import FingerprintCapture from "@/components/findPerson/page";
 const Find = () => {
   return (
     <div>

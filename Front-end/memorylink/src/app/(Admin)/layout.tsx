@@ -12,7 +12,7 @@ import {
 import { Button, Layout, Menu } from "antd";
 import Link from "next/link";
 import React, { PropsWithChildren, useState } from "react";
-import WithAdminRole from "../../../HOC/withRole";
+import WithAdminRole from './../../hoc/withRole'
 import { useStyles } from "./style";
 
 const { Header, Sider, Content } = Layout;
