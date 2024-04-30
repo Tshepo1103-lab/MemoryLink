@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import ManageAdminsTable from "@/components/adminsFC/page";
+import ManageAdminsTable from "@/components/adminsFC";
 
 const Admins = () => {
   return (

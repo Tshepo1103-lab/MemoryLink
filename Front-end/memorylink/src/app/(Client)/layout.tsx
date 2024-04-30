@@ -3,8 +3,8 @@
 import React, { PropsWithChildren } from "react";
 import { Layout } from "antd";
 import { useStyles } from "./style";
-import Navbar from "@/components/NavBar/page";
-import MainFooter from "@/components/footer/page";
+import Navbar from "@/components/NavBar";
+import MainFooter from "@/components/footer";
 
 const { Header, Footer, Content } = Layout;
 
