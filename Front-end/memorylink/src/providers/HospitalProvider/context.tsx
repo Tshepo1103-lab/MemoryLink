@@ -4,24 +4,31 @@ export const INITIAL_STATE: IHospitalStateContext = {
   isPending: false,
   isSuccess: false,
   isError: false,
-  GetAllHospital: undefined,
+  hospitals: undefined,
+  hospital: undefined,
 };
 
-export interface IHospitalResponse {
+export interface IHospital {
+  id: string;
   name: string;
   email: string;
   contact: string;
   url: string;
 }
 export interface IHospitalStateContext {
-  isPending?: Boolean;
-  isSuccess?: Boolean;
-  isError?: Boolean;
-  GetAllHospital?: IHospitalResponse;
+  isPending: Boolean;
+  isSuccess: Boolean;
+  isError: Boolean;
+  hospitals?: IHospital[];
+  hospital?: IHospital;
 }
 
 export interface IHospitalActionContext {
   getallhospital?: () => void;
+  addhospital?: (payload: IHospital) => void;
+  updatehospital?: (payload: IHospital) => void;
+  deletehospital?: (id: string) => void;
+  puthospital?: (payload: IHospital) => void;
 }
 
 export const HospitalStateContext =

@@ -26,9 +26,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <AuthProvider>
-            <HospitalProvider>
-              {children}
-            </HospitalProvider>
+          <HospitalProvider>{children}</HospitalProvider>
         </AuthProvider>
       </body>
     </html>

@@ -1,36 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
-import { Table, Button, Modal, Form, Input, Space, ConfigProvider } from "antd";
+import {
+  useHospitalActions,
+  useHospitalState,
+} from "@/providers/HospitalProvider";
+import { IHospital } from "@/providers/HospitalProvider/context";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, ConfigProvider, Form, Input, Modal, Space, Table } from "antd";
+import { useEffect, useState } from "react";
 
 const ManageHospitalsTable = () => {
-  const [dataSource, setDataSource] = useState([
-    { id: 1, name: "Hospital A", Url: "url1" },
-    { id: 2, name: "Hospital B", Url: "url2" },
-    { id: 3, name: "Hospital C", Url: "url3" },
-  ]);
+  const { getallhospital, addhospital, deletehospital, updatehospital } =
+    useHospitalActions();
+  const status = useHospitalState();
+
+  const [dataSource, setDataSource] = useState(status.hospitals);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedHospital, setSelectedHospital] = useState(null);
 
   const [form] = Form.useForm();
 
+  useEffect(() => {
+    if (getallhospital) getallhospital();
+    setDataSource(status.hospitals);
+  }, []);
+
   const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-    },
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Url",
-      dataIndex: "Url",
-      key: "url",
+      title: "Contact",
+      dataIndex: "contact",
+      key: "contact",
     },
     {
       title: "Action",
@@ -54,28 +59,24 @@ const ManageHospitalsTable = () => {
     setIsModalVisible(true);
   };
 
-  const editHospital = (hospital: any) => {
+  const editHospital = (hospital: IHospital) => {
     form.setFieldsValue(hospital);
     setSelectedHospital(hospital);
     setIsModalVisible(true);
   };
 
   const deleteHospital = (id: any) => {
-    setDataSource(dataSource.filter((hospital) => hospital.id !== id));
+    if (deletehospital) deletehospital(id);
   };
 
   const handleOk = () => {
     form.validateFields().then((values) => {
       if (selectedHospital) {
-        setDataSource(
-          dataSource.map((hospital) =>
-            hospital.id === selectedHospital.id
-              ? { ...hospital, ...values }
-              : hospital,
-          ),
-        );
+        // Include the ID of the selected hospital in the values passed to updatehospital
+        if (updatehospital)
+          updatehospital({ id: selectedHospital.id, ...values });
       } else {
-        setDataSource([...dataSource, { ...values, id: Date.now() }]);
+        if (addhospital) addhospital(values);
       }
       setIsModalVisible(false);
     });
@@ -103,7 +104,7 @@ const ManageHospitalsTable = () => {
         }}
       >
         <Table
-          dataSource={dataSource}
+          dataSource={status.hospitals}
           columns={columns}
           pagination={{ pageSize: 5 }}
         />
@@ -126,7 +127,21 @@ const ManageHospitalsTable = () => {
           <Form.Item
             name="url"
             label="Url"
-            rules={[{ required: true, message: "Please enter the address" }]}
+            rules={[
+              {
+                required: true,
+                message: "Please enter the url for direcrtions",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="contact"
+            label="Contact"
+            rules={[
+              { required: true, message: "Please enter the contact details" },
+            ]}
           >
             <Input />
           </Form.Item>

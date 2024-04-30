@@ -23,10 +23,11 @@ function Home() {
           <Hero />
           <Information />
           <RecentReport />
+          <SuccessStories />
         </ClientLayout>
       )}
     </main>
   );
 }
 
-export default WithRole(Home);
+export default Home;

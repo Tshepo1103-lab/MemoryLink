@@ -1,6 +1,9 @@
 "use client";
 
-import { useHospitalActions, useHospitalState } from "@/providers/HospitalProvider";
+import {
+  useHospitalActions,
+  useHospitalState,
+} from "@/providers/HospitalProvider";
 import { SearchOutlined } from "@ant-design/icons";
 import type { InputRef, TableColumnType, TableColumnsType } from "antd";
 import { Button, ConfigProvider, Input, Space, Table } from "antd";
@@ -19,22 +22,18 @@ interface DataType {
 
 type DataIndex = keyof DataType;
 
-
-
 const HospitalComponent = () => {
-
-  const {getallhospital} = useHospitalActions();
+  const { getallhospital } = useHospitalActions();
   const status = useHospitalState();
   const { styles } = useStyles();
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef<InputRef>(null);
 
-  useEffect(()=>{
-    if(getallhospital)
-      getallhospital()
-  },[])
-  console.log(status.GetAllHospital)
+  useEffect(() => {
+    if (getallhospital) getallhospital();
+  }, []);
+  console.log(status.hospitals);
   const handleSearch = (
     selectedKeys: string[],
     confirm: FilterDropdownProps["confirm"],
@@ -152,6 +151,7 @@ const HospitalComponent = () => {
     {
       title: "Contact",
       key: "contact",
+      dataIndex: "contact",
       width: "30%",
     },
     {
@@ -187,13 +187,14 @@ const HospitalComponent = () => {
                 headerColor: "#fff",
                 borderColor: "#003366",
                 colorIcon: "#fff",
+                fontSize: 17,
               },
             },
           }}
         >
           <Table
             columns={columns}
-            dataSource={status.GetAllHospital}
+            dataSource={status.hospitals}
             style={{ width: "100%", height: "50vh" }}
             pagination={{ pageSize: 5 }}
           />
