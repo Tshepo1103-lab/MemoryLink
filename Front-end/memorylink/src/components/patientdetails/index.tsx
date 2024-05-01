@@ -200,8 +200,10 @@ const PatientDetailsPage = () => {
                 pagination={{ pageSize: 4 }}
               />
             </ConfigProvider>
-            <div>
-              <Button className={styles.button}>Directions</Button>
+            <div style={{marginTop:'25px'}}>
+              <Button className={styles.button}>
+                Directions
+                </Button>
               <Button className={styles.button} onClick={showModal}>
                 Comment
               </Button>

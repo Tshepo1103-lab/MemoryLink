@@ -9,7 +9,11 @@
 
         public const string Pages_Roles = "Pages.Roles";
 
+
+
         public const string Pages_Client = "Pages.Client";
+        
+        public const string Pages_Admin = "Pages.Admin";
         
     }
 }

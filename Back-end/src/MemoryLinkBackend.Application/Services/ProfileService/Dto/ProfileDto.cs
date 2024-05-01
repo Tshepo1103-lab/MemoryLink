@@ -58,6 +58,7 @@ namespace MemoryLinkBackend.Services.ProfileService.Dto
         /// 
         /// </summary>
         public string Ward {  get; set; }
+       
         
     }
 }

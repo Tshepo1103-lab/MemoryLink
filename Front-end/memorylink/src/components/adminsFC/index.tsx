@@ -1,36 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Button, Modal, Form, Input, Space, ConfigProvider } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useAdminActions, useAdminState } from "@/providers/AdminProviders";
 
 const ManageAdminsTable = () => {
-  const [dataSource, setDataSource] = useState([
-    {
-      id: 1,
-      name: "Admin A",
-      surname: "Surname A",
-      email: "adminA@example.com",
-      username: "adminA",
-      password: "passwordA",
-    },
-    {
-      id: 2,
-      name: "Admin B",
-      surname: "Surname B",
-      email: "adminB@example.com",
-      username: "adminB",
-      password: "passwordB",
-    },
-    {
-      id: 3,
-      name: "Admin C",
-      surname: "Surname C",
-      email: "adminC@example.com",
-      username: "adminC",
-      password: "passwordC",
-    },
-  ]);
+
+  const status=useAdminState();
+  const {getalladmins,adminregister} = useAdminActions();
+
+  useEffect(()=>{
+    if(getalladmins)
+      getalladmins()
+    console
+  },[])
+  const [dataSource, setDataSource] = useState([])
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState(null);
@@ -38,11 +23,6 @@ const ManageAdminsTable = () => {
   const [form] = Form.useForm();
 
   const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-    },
     {
       title: "Name",
       dataIndex: "name",
@@ -55,12 +35,12 @@ const ManageAdminsTable = () => {
     },
     {
       title: "Email",
-      dataIndex: "email",
+      dataIndex: "emailAddress",
       key: "email",
     },
     {
       title: "Username",
-      dataIndex: "username",
+      dataIndex: "userName",
       key: "username",
     },
     {
@@ -104,7 +84,12 @@ const ManageAdminsTable = () => {
           ),
         );
       } else {
-        setDataSource([...dataSource, { ...values, id: Date.now() }]);
+        const updatedValues = {
+          ...values,
+          isActive: true,
+          roleNames: ["admin"],
+        };
+        if (adminregister) adminregister(updatedValues);
       }
       setIsModalVisible(false);
     });
@@ -132,7 +117,7 @@ const ManageAdminsTable = () => {
         }}
       >
         <Table
-          dataSource={dataSource}
+          dataSource={status.Admins}
           columns={columns}
           pagination={{ pageSize: 5 }}
         />
@@ -160,7 +145,7 @@ const ManageAdminsTable = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            name="email"
+            name="emailAddress"
             label="Email"
             rules={[{ required: true, message: "Please enter the email" }]}
           >
@@ -172,6 +157,13 @@ const ManageAdminsTable = () => {
             rules={[{ required: true, message: "Please enter the username" }]}
           >
             <Input />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            label="password"
+            rules={[{ required: true, message: "Please input your password!" }]}
+          >
+            <Input.Password placeholder="Password"  />
           </Form.Item>
         </Form>
       </Modal>

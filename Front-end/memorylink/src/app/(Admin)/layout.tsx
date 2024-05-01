@@ -14,6 +14,7 @@ import Link from "next/link";
 import React, { PropsWithChildren, useState } from "react";
 import WithAdminRole from "./../../hoc/withRole";
 import { useStyles } from "./style";
+import WithRole from "./../../hoc/withRole";
 
 const { Header, Sider, Content } = Layout;
 
@@ -85,4 +86,4 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default AdminLayout;
+export default WithRole(AdminLayout);

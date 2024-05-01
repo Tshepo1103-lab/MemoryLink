@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
 using MemoryLinkBackend.Domain;
 using MemoryLinkBackend.Services.HospitalService.Dto;
@@ -16,5 +17,6 @@ namespace MemoryLinkBackend.Services.ProfileService
         public ProfileAppService(IRepository<Profile, int> repository) : base(repository)
         {
         }
+        
     }
 }
