@@ -2,15 +2,25 @@ import { SearchOutlined, UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload, Table, ConfigProvider } from "antd";
 import { useStyles } from "./style/style";
 import { Tabs } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
+import { useProfileActions, useProfileState } from "@/providers/ProfileProvider";
 
 const ProfilesFC = () => {
   const { styles } = useStyles();
+  const {getalldeceasedProfiles,getallAliveProfiles} = useProfileActions();
+  const status=useProfileState();
+
+
+  useEffect(()=>{
+    if(getalldeceasedProfiles)
+      getalldeceasedProfiles()
+      getallAliveProfiles()
+  },[])
 
   const columns = [
     {
       title: "Record Number",
-      dataIndex: "recordNumber",
+      dataIndex: "id",
       key: "recordNumber",
     },
     {
@@ -30,46 +40,12 @@ const ProfilesFC = () => {
     },
     {
       title: "Distinguish Feature",
-      dataIndex: "distinguishFeature",
+      dataIndex: "distinguishingFeature",
       key: "distinguishFeature",
     },
   ];
 
-  const data = [
-    {
-      key: "1",
-      recordNumber: "001",
-      gender: "Male",
-      ageRange: "25-35",
-      admissionDate: "2024-04-24",
-      distinguishFeature: "Scar on left arm",
-    },
-    {
-      key: "2",
-      recordNumber: "003",
-      gender: "Female",
-      ageRange: "40-50",
-      admissionDate: "2024-04-25",
-      distinguishFeature: "Tattoo on right wrist",
-    },
-    {
-      key: "2",
-      recordNumber: "004",
-      gender: "Female",
-      ageRange: "40-50",
-      admissionDate: "2024-04-25",
-      distinguishFeature: "Tattoo on right wrist",
-    },
-    {
-      key: "4",
-      recordNumber: "005",
-      gender: "Female",
-      ageRange: "40-50",
-      admissionDate: "2024-04-25",
-      distinguishFeature: "Tattoo on right wrist",
-    },
-  ];
-
+  
   const items = [
     {
       key: "1",
@@ -89,7 +65,7 @@ const ProfilesFC = () => {
         >
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={status.aliveprofile}
             pagination={{ pageSize: 6 }}
           />
         </ConfigProvider>
@@ -113,7 +89,7 @@ const ProfilesFC = () => {
         >
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={status.deceasedprofile}
             pagination={{ pageSize: 6 }}
           />
         </ConfigProvider>

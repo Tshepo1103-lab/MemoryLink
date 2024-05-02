@@ -1679,6 +1679,9 @@ namespace MemoryLinkBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateOnly>("AdmissionDate")
+                        .HasColumnType("date");
+
                     b.Property<int>("AgeRange")
                         .HasColumnType("int");
 

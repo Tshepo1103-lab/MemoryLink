@@ -5,6 +5,7 @@ import "./globals.css";
 import { AuthProvider } from "@/providers/AuthProvider";
 import { HospitalProvider } from "@/providers/HospitalProvider";
 import { AdminProvider } from "@/providers/AdminProviders";
+import { ProfileProvider } from "@/providers/ProfileProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -28,9 +29,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <HospitalProvider>
-            <AdminProvider>
-              {children}
-            </AdminProvider>
+            <ProfileProvider>
+              <AdminProvider>
+                {children}
+              </AdminProvider>
+            </ProfileProvider>
           </HospitalProvider>
         </AuthProvider>
       </body>

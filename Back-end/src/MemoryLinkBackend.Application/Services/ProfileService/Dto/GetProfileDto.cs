@@ -53,6 +53,10 @@ namespace MemoryLinkBackend.Services.ProfileService.Dto
             /// 
             /// </summary>
             public string MoreDetails { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            public DateOnly AdmissionDate { get; set; }
             ///<summary>
             ///
             /// </summary>
