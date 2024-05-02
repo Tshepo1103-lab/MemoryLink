@@ -29,6 +29,32 @@ export const adminReducer = handleActions<IAdminStateContext, IAdminStateContext
       ...state,
       ...action.payload,
     }),
+
+    [AdminActionEnum.deleteAdminRequest]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [AdminActionEnum.deleteAdminSuccess]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [AdminActionEnum.deleteAdminError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+
+    [AdminActionEnum.updateAdminRequest]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [AdminActionEnum.updateAdminSuccess]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [AdminActionEnum.updateAdminError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
   },
   INITIAL_STATE,
 );

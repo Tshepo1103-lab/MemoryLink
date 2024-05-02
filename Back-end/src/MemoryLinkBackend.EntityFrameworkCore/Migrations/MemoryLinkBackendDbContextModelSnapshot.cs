@@ -1712,6 +1712,12 @@ namespace MemoryLinkBackend.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("HospitalId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -1737,6 +1743,10 @@ namespace MemoryLinkBackend.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HospitalId");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Profiles");
                 });
@@ -2139,6 +2149,21 @@ namespace MemoryLinkBackend.Migrations
                     b.Navigation("Profile");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MemoryLinkBackend.Domain.Profile", b =>
+                {
+                    b.HasOne("MemoryLinkBackend.Domain.Hospital", "Hospital")
+                        .WithMany()
+                        .HasForeignKey("HospitalId");
+
+                    b.HasOne("MemoryLinkBackend.Domain.StoredFile", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Hospital");
+
+                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("MemoryLinkBackend.Domain.Response", b =>

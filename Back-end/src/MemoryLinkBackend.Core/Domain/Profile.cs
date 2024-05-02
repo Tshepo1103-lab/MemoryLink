@@ -56,5 +56,11 @@ namespace MemoryLinkBackend.Domain
         /// 
         /// </summary>
         public virtual string Ward {  get; set; }
+
+        public virtual Hospital Hospital { get; set; } 
+
+        public virtual StoredFile Image { get; set; }
+
+
     }
 }

@@ -4,7 +4,7 @@ export const INITIAL_STATE: IAdminStateContext = {
   isPending: false,
   isSuccess: false,
   isError: false,
-  AdminRegister:undefined,
+  Admin:undefined,
   Admins:undefined, 
 };
 
@@ -35,7 +35,7 @@ export interface IAdminStateContext {
   isPending: Boolean;
   isSuccess: Boolean;
   isError: Boolean;
-  AdminRegister?: IAdminResponse;
+  Admin?: IAdminResponse;
   Admins?:IAdminResponse[];
   
 }
@@ -43,6 +43,8 @@ export interface IAdminStateContext {
 export interface IAdminActionContext {
     adminregister?: (payload:IAdminRequest) => void;
     getalladmins?: () => void;
+    deleteadmin?: (id:string) => void;
+    updateadmin?: (payload:IAdminRequest) => void;
 }
 
 export const AdminStateContext =

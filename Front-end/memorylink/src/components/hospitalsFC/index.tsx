@@ -69,13 +69,14 @@ const ManageHospitalsTable = () => {
   };
 
   const deleteHospital = (id: any) => {
+   
     if (deletehospital) deletehospital(id);
+    console.log(id)
   };
 
   const handleOk = () => {
     form.validateFields().then((values) => {
       if (selectedHospital) {
-        // Include the ID of the selected hospital in the values passed to updatehospital
         if (updatehospital)
           updatehospital({ id: selectedHospital.id, ...values });
       } else {

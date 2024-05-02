@@ -2,8 +2,9 @@ import { message } from "antd";
 import { useContext, useReducer } from "react";
 import { adminReducer } from "./reducer";
 import { AdminActionContext, AdminStateContext, IAdminActionContext, IAdminRequest, IAdminStateContext, INITIAL_STATE } from "./context";
-import { getAdminsError, getAdminsRequest, getAdminsSuccess, regiserAdminResponse, registerAdminAction, registerAdminError } from "./actions";
+import { DeletAdminError, DeleteAdminSuccess, UpdateAdminRequest, UpdateAdminSuccess, getAdminsError, getAdminsRequest, getAdminsSuccess, regiserAdminResponse, registerAdminAction, registerAdminError } from "./actions";
 import { instance } from "@/utils/axiosInstance/axiosInstance";
+import { deletehospitalRequest } from "../HospitalProvider/actions";
 
 export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(adminReducer, INITIAL_STATE);
@@ -15,6 +16,7 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
       const response = await instance.post(endpoint, payload);
       if (response.data.success) {
         dispatch(regiserAdminResponse(response.data.result));
+        getalladmins();
         message.success("Admin successfully created");
         //getall
       }
@@ -31,16 +33,50 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
       const response = await instance.get(endpoint);
       if(response.data.success){
         dispatch(getAdminsSuccess(response.data.result))
-        getalladmins();
+       
       }
     }
     catch(error){
       dispatch(getAdminsError());
     }
   }
+
+  const deleteadmin = async (id:string) =>{
+    dispatch(deletehospitalRequest())
+    try{
+      const endpoint= 'api/services/app/User/Delete?Id=';
+      const response = await instance.delete(`${endpoint + id}`);
+      if(response.data.success){
+        dispatch(DeleteAdminSuccess())
+       
+        message.success("Admin successfully deleted");
+      }
+
+    }
+    catch(error){
+      dispatch(DeletAdminError())
+    }
+  }
+
+  const updateadmin = async (payload:IAdminRequest) =>{
+    dispatch(UpdateAdminRequest());
+    try{
+      const endpoint='api/services/app/User/Update';
+      const response = await instance.put(endpoint,payload);
+      if(response.data.success){
+        dispatch(UpdateAdminSuccess());
+        getalladmins();
+        message.success("Admin details successfully updated")
+      }
+
+    }
+    catch(error){
+      console.error(error)
+    }
+  }
   return (
     <AdminStateContext.Provider value={state}>
-      <AdminActionContext.Provider value={{adminregister,getalladmins }}>
+      <AdminActionContext.Provider value={{adminregister,getalladmins,deleteadmin,updateadmin}}>
         {children}
       </AdminActionContext.Provider>
     </AdminStateContext.Provider>

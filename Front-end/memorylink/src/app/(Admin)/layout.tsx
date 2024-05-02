@@ -1,5 +1,6 @@
 "use client";
 
+import { useUserActions } from "@/providers/AuthProvider";
 import {
   DesktopOutlined,
   LogoutOutlined,
@@ -10,15 +11,13 @@ import {
   TransactionOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
-import Link from "next/link";
 import React, { PropsWithChildren, useState } from "react";
-import WithAdminRole from "./../../hoc/withRole";
 import { useStyles } from "./style";
-import WithRole from "./../../hoc/withRole";
 
 const { Header, Sider, Content } = Layout;
 
 const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
+  const { logout } = useUserActions();
   const [collapsed, setCollapsed] = useState(false);
   const { styles } = useStyles();
 
@@ -42,7 +41,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
           <Menu
             mode="inline"
             className={styles.side}
-            defaultSelectedKeys={["0"]}
+            // defaultSelectedKeys={["0"]}
           >
             {collapsed ? null : (
               <img
@@ -54,19 +53,18 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
             {navLinks.map((link, index) => (
               <Menu.Item
                 key={index}
+                className={styles.items}
                 icon={link.icon}
                 style={{ color: "#fff", marginLeft: "15px" }}
               >
-                <Link href={link.href} className={styles.items}>
-                  {link.name}
-                </Link>
+                  <Button href={link.href} style={{backgroundColor:'transparent', border:'none'}}>{link.name}</Button>
               </Menu.Item>
             ))}
           </Menu>
         </div>
       </Sider>
       <Layout>
-        <Header style={{ backgroundColor: "#003366", color: "#fff" }}>
+        <Header style={{ backgroundColor: "#003366", color: "#fff",display:'flex',justifyContent:'space-between' }}>
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -78,7 +76,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               color: "#fff",
             }}
           />
-          <LogoutOutlined className={styles.logoutButton} />
+          <LogoutOutlined className={styles.logoutButton} onClick={() => logout()}/>
         </Header>
         <Content>{children}</Content>
       </Layout>
@@ -86,4 +84,4 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default WithRole(AdminLayout);
+export default AdminLayout;

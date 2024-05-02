@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import { Table, Button, Modal, Form, Input, Space, ConfigProvider } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useAdminActions, useAdminState } from "@/providers/AdminProviders";
+import { useStyles } from "./style/style";
 
 const ManageAdminsTable = () => {
 
+  const {styles} = useStyles();
   const status=useAdminState();
-  const {getalladmins,adminregister} = useAdminActions();
+  const {getalladmins,adminregister,deleteadmin,updateadmin} = useAdminActions();
 
   useEffect(()=>{
     if(getalladmins)
@@ -72,17 +74,14 @@ const ManageAdminsTable = () => {
   };
 
   const deleteAdmin = (id: any) => {
-    setDataSource(dataSource.filter((admin) => admin.id !== id));
+    if(deleteadmin) deleteadmin(id)
   };
 
   const handleOk = () => {
     form.validateFields().then((values) => {
       if (selectedAdmin) {
-        setDataSource(
-          dataSource.map((admin) =>
-            admin.id === selectedAdmin.id ? { ...admin, ...values } : admin,
-          ),
-        );
+        if (updateadmin)
+          updateadmin({ id: selectedAdmin.id, ...values });
       } else {
         const updatedValues = {
           ...values,
@@ -101,7 +100,8 @@ const ManageAdminsTable = () => {
 
   return (
     <div style={{ margin: "50px" }}>
-      <Button onClick={addAdmin} style={{ marginBottom: 16 }}>
+      <h1 className={styles.header}>Manage Admins</h1>
+      <Button onClick={addAdmin} style={{ marginBottom: 16 , backgroundColor:'#003366', color:'#fff'}}>
         Add Admin
       </Button>
       <ConfigProvider
