@@ -6,6 +6,7 @@ import { AuthProvider } from "@/providers/AuthProvider";
 import { HospitalProvider } from "@/providers/HospitalProvider";
 import { AdminProvider } from "@/providers/AdminProviders";
 import { ProfileProvider } from "@/providers/ProfileProvider";
+import { CommentProvider } from "@/providers/CommentProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -30,7 +31,9 @@ export default function RootLayout({
         <AuthProvider>
           <HospitalProvider>
             <ProfileProvider>
-              <AdminProvider>{children}</AdminProvider>
+              <AdminProvider>
+                <CommentProvider>{children}</CommentProvider>
+              </AdminProvider>
             </ProfileProvider>
           </HospitalProvider>
         </AuthProvider>

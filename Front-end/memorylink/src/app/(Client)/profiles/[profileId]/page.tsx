@@ -1,29 +1,37 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
-import { useStyles } from "./style/style";
-import { Button, ConfigProvider, Modal, Table, Drawer } from "antd";
-import CommentFC from "@/components/comment";
+import {
+  useCommentActions,
+  useCommentState,
+} from "@/providers/CommentProvider";
 import {
   useProfileActions,
   useProfileState,
 } from "@/providers/ProfileProvider";
 import { IProfileResponse } from "@/providers/ProfileProvider/context";
+import { Button, ConfigProvider, Drawer, Modal, Table } from "antd";
+import { toNumber } from "lodash";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { useStyles } from "./style/style";
 
 const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
   const { getprofile } = useProfileActions();
+  const { createcomment, getcomments } = useCommentActions();
   const status = useProfileState();
+  const state = useCommentState();
   const { styles } = useStyles();
+  const [commentText, setCommentText] = useState("");
 
-  console.log(status.profile);
   useEffect(() => {
-    if (getprofile) getprofile(params.profileId);
+    if (getprofile || getcomments) getprofile(params.profileId);
+    getcomments(toNumber(params.profileId));
   }, []);
 
   const __profile = status.profile
     ? {
         ...status.profile,
-        hospital: status.profile.hospital.name || "test",
+        hospital: status.profile.hospital.name || undefined,
+        url: status.profile.hospital.url || undefined,
       }
     : undefined;
 
@@ -86,19 +94,6 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
     },
   ];
 
-  const comments = [
-    {
-      name: "Tshepo Mahlangu",
-      paragraph: "I love this",
-      datetime: "01-01-2024",
-    },
-    {
-      name: "Polane Mahloko",
-      paragraph:
-        "Ouh yfdkkk kkkkkkkkk kkkkkkk kkkkkkk kkkkk kkkkkk kkkkkk kdfedf sdfvdv dfvsv ffvsfd erfrf ref erff rwfg thtg eretn 5eth 5et 6jn  54yi8yrfbs h5wete sss!",
-      datetime: "01-01-2024",
-    },
-  ];
   const transposedDataSource = columns.map((column) => {
     return {
       key: column.key,
@@ -123,14 +118,25 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
     },
   ];
 
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCommentText(e.target.value);
+  };
+
+  const handleCommentSubmit = () => {
+    createcomment({
+      userId: 1,
+      profileId: toNumber(params.profileId),
+      message: commentText,
+    });
+    setCommentText("");
+    setIsModalOpen(false);
+    getcomments(toNumber(params.profileId));
+  };
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
@@ -146,6 +152,7 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
   const onClose = () => {
     setOpen(false);
   };
+
   return (
     <div className={styles.main}>
       <h1 className={styles.header}>Patient Details</h1>
@@ -187,7 +194,9 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
               />
             </ConfigProvider>
             <div style={{ marginTop: "25px" }}>
-              <Button className={styles.button}>Directions</Button>
+              <Link href={`${status.profile?.hospital.url}`} target="_Blank">
+                <Button className={styles.button}>Directions</Button>
+              </Link>
               <Button className={styles.button} onClick={showModal}>
                 Comment
               </Button>
@@ -199,19 +208,25 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
               title="Add Comment"
               okText="Send"
               open={isModalOpen}
-              onOk={handleOk}
+              onOk={handleCommentSubmit}
               onCancel={handleCancel}
             >
-              <CommentFC />
+              <div className={styles.commentMain}>
+                <textarea
+                  className={styles.input}
+                  value={commentText}
+                  onChange={handleCommentChange}
+                />
+              </div>
             </Modal>
             <Drawer title="Comments" onClose={onClose} visible={open}>
-              {comments.map((item, index) => (
+              {state?.comments?.map((item, index) => (
                 <div key={index} className={styles.comment}>
-                  <h3>{item.name}</h3>
+                  <h3>{item.userId}</h3>
                   <br />
-                  <h5>{item.paragraph}</h5>
+                  <h5>{item.message}</h5>
                   <br />
-                  <h6>{item.datetime}</h6>
+                  <h6>{new Date(item.dateSent).toLocaleString()}</h6>
                 </div>
               ))}
             </Drawer>

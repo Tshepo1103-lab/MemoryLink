@@ -11,10 +11,15 @@ using System.Threading.Tasks;
 
 namespace MemoryLinkBackend.Services.CommentService.Dto
 {
+    [AutoMap(typeof(Comment))]
     public class CommentDto : EntityDto<Guid>
     {
-        [AutoMap(typeof(Comment))]
+        
         public string Message { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual DateTime DateSent { get; set; }
         ///<summary>
         ///
         /// </summary>
@@ -23,5 +28,7 @@ namespace MemoryLinkBackend.Services.CommentService.Dto
         ///
         /// </summary>
         public int ProfileId { get; set; }
+
+      
     }
 }

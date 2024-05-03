@@ -45,6 +45,7 @@ export interface IProfileResponse {
   image: string;
   hospital?: {
     name: string;
+    url: string;
   };
 }
 

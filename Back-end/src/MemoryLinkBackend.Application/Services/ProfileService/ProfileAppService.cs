@@ -153,30 +153,6 @@ namespace MemoryLinkBackend.Services.ProfileService
             return profileDto;
         }
 
-/*        [HttpGet]
-        public async Task<NewProfileDto> GetProfileByIdWHNAmeAsync(int profileId)
-        {
-            var profile = await _repository
-                 .GetAllIncluding(b => b.Hospital, x => x.Image).Where(e => e.Id == profileId).Select((h, i) =>
-                 {
-                    Gender = h.Gender;
-                 }).FirstOrDefaultAsync();
-
-            var profileDto = ObjectMapper.Map<NewProfileDto>(profile);
-
-            if (profileDto.image != null)
-            {
-                profileDto.image = await _fileAppService.GetFile((Guid)profileDto.imageId);
-            }
-
-            return profileDto;
-        }*/
-
-
-
-
-
-
 
     }
 }

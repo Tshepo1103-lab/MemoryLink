@@ -3,12 +3,14 @@ import { Button, Form, Input, Upload, Table, ConfigProvider } from "antd";
 import { useStyles } from "./style/style";
 import { Tabs } from "antd";
 import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   useProfileActions,
   useProfileState,
 } from "@/providers/ProfileProvider";
 
 const ProfilesFC = () => {
+  const { push } = useRouter();
   const { styles } = useStyles();
   const { getalldeceasedProfiles, getallAliveProfiles } = useProfileActions();
   const status = useProfileState();
@@ -18,11 +20,19 @@ const ProfilesFC = () => {
     getallAliveProfiles();
   }, []);
 
+  const handleRecordClick = (id: string) => {
+    push(`profiles/${id}`);
+  };
   const columns = [
     {
       title: "Record Number",
       dataIndex: "id",
       key: "recordNumber",
+      render: (text: string, record: any) => (
+        <Button type="link" onClick={() => handleRecordClick(record.id)}>
+          {text}
+        </Button>
+      ),
     },
     {
       title: "Gender",
@@ -57,7 +67,6 @@ const ProfilesFC = () => {
               Table: {
                 headerBg: "#003366",
                 headerColor: "#fff",
-                rowHoverBg: "#009999",
                 borderColor: "#003366",
               },
             },
@@ -81,7 +90,6 @@ const ProfilesFC = () => {
               Table: {
                 headerBg: "#003366",
                 headerColor: "#fff",
-                rowHoverBg: "#009999",
                 borderColor: "#003366",
               },
             },

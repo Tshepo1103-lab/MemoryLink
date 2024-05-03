@@ -51,4 +51,12 @@ export const useStyles = createStyles({
     padding: 10px;
     border-radius: 5px;
   `,
+  commentMain: css`
+    height: 10vh;
+    width: 100%;
+  `,
+  input: css`
+    width: 100%;
+    height: 10vh;
+  `,
 });
