@@ -15,7 +15,7 @@ const ManageHospitalsTable = () => {
     useHospitalActions();
   const status = useHospitalState();
 
-  const {styles} = useStyles();
+  const { styles } = useStyles();
 
   const [dataSource, setDataSource] = useState(status.hospitals);
 
@@ -69,9 +69,8 @@ const ManageHospitalsTable = () => {
   };
 
   const deleteHospital = (id: any) => {
-   
     if (deletehospital) deletehospital(id);
-    console.log(id)
+    console.log(id);
   };
 
   const handleOk = () => {
@@ -93,7 +92,10 @@ const ManageHospitalsTable = () => {
   return (
     <div>
       <h1 className={styles.header}>Manage Hospitals</h1>
-      <Button onClick={addHospital} style={{ marginBottom: 16 , backgroundColor:'#003366', color:'#fff'}}>
+      <Button
+        onClick={addHospital}
+        style={{ marginBottom: 16, backgroundColor: "#003366", color: "#fff" }}
+      >
         Add Hospital
       </Button>
       <ConfigProvider

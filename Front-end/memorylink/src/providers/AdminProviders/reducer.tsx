@@ -2,7 +2,10 @@ import { handleActions } from "redux-actions";
 import { IAdminStateContext, INITIAL_STATE } from "./context";
 import { AdminActionEnum } from "./actions";
 
-export const adminReducer = handleActions<IAdminStateContext, IAdminStateContext>(
+export const adminReducer = handleActions<
+  IAdminStateContext,
+  IAdminStateContext
+>(
   {
     [AdminActionEnum.regiserAdminRequest]: (state, action) => ({
       ...state,

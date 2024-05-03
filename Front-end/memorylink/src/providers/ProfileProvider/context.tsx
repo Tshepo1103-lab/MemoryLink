@@ -4,12 +4,12 @@ export const INITIAL_STATE: IProfileStateContext = {
   isPending: false,
   isSuccess: false,
   isError: false,
-  deceasedprofile:undefined,
-  aliveprofile:undefined
-   
+  deceasedprofile: undefined,
+  aliveprofile: undefined,
+  profile: undefined,
 };
 
-export interface IProfileRequest{  
+export interface IProfileRequest {
   gender: number;
   ageRange: number;
   height: number;
@@ -26,23 +26,26 @@ export interface IProfileRequest{
   file: string;
 }
 
-export interface IProfileResponse{
-    id: number;
-    gender: string;
-    ageRange: string;
-    height: string;
-    build: string;
-    eyeColor: string;
-    skinTone: string;
-    hairColor: string;
-    locationFound: string;
-    distinguishingFeature: string;
-    moreDetails: string;
-    type: string;
-    ward: string;
-    hospitalId: string;
-    imageId:string;
-    image:string;
+export interface IProfileResponse {
+  id: number;
+  gender: string;
+  ageRange: string;
+  height: string;
+  build: string;
+  eyeColor: string;
+  skinTone: string;
+  hairColor: string;
+  locationFound: string;
+  distinguishingFeature: string;
+  moreDetails: string;
+  type: string;
+  ward: string;
+  hospitalId: string;
+  imageId: string;
+  image: string;
+  hospital?: {
+    name: string;
+  };
 }
 
 export interface IProfileStateContext {
@@ -50,14 +53,14 @@ export interface IProfileStateContext {
   isSuccess: Boolean;
   isError: Boolean;
   deceasedprofile?: IProfileResponse[];
-  aliveprofile?:IProfileResponse[];
-  
+  aliveprofile?: IProfileResponse[];
+  profile?: IProfileResponse;
 }
 
 export interface IProfileActionContext {
-    getalldeceasedProfiles?: () => void;
-    getallAliveProfiles?: () => void;
-   
+  getalldeceasedProfiles?: () => void;
+  getallAliveProfiles?: () => void;
+  getprofile?: (id: string) => void;
 }
 
 export const ProfileStateContext =

@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Services;
 using Abp.Authorization;
 using Abp.Domain.Repositories;
+using MemoryLinkBackend.Authorization.Users;
 using MemoryLinkBackend.Domain;
 using MemoryLinkBackend.Roles;
 using MemoryLinkBackend.Services.HospitalService.Dto;
@@ -114,6 +115,65 @@ namespace MemoryLinkBackend.Services.ProfileService
 
             return profilesdto;
         }
+
+        [HttpGet]
+        public async Task<List<NewProfileDto>> GetAllProfileAsync()
+        {
+            var profiles = await _repository
+                .GetAllIncluding(b => b.Hospital, x => x.Image)
+                .ToListAsync();
+
+            var profilesdto = ObjectMapper.Map<List<NewProfileDto>>(profiles);
+
+            foreach (var profile in profilesdto)
+            {
+                if (profile.image != null)
+                {
+                    profile.image = await _fileAppService.GetFile((Guid)profile.imageId);
+                }
+                
+            }
+
+            return profilesdto;
+        }
+
+        [HttpGet]
+        public async Task<NewProfileDto> GetProfileByIdAsync(int profileId)
+        {
+            var profile = await _repository
+                 .GetAllIncluding(b => b.Hospital, x => x.Image).Where(e => e.Id == profileId).FirstOrDefaultAsync();
+
+            var profileDto = ObjectMapper.Map<NewProfileDto>(profile);
+
+            if (profileDto.image != null)
+            {
+                profileDto.image = await _fileAppService.GetFile((Guid)profileDto.imageId);
+            }
+
+            return profileDto;
+        }
+
+/*        [HttpGet]
+        public async Task<NewProfileDto> GetProfileByIdWHNAmeAsync(int profileId)
+        {
+            var profile = await _repository
+                 .GetAllIncluding(b => b.Hospital, x => x.Image).Where(e => e.Id == profileId).Select((h, i) =>
+                 {
+                    Gender = h.Gender;
+                 }).FirstOrDefaultAsync();
+
+            var profileDto = ObjectMapper.Map<NewProfileDto>(profile);
+
+            if (profileDto.image != null)
+            {
+                profileDto.image = await _fileAppService.GetFile((Guid)profileDto.imageId);
+            }
+
+            return profileDto;
+        }*/
+
+
+
 
 
 

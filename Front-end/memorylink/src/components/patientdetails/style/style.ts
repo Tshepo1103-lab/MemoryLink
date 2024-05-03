@@ -34,7 +34,7 @@ export const useStyles = createStyles({
   button: css`
     width: 150px;
     color: #ffffff;
-    margin-left:10px;
+    margin-left: 10px;
     background-color: #003366;
     &:hover {
       background-color: #009999 !important;

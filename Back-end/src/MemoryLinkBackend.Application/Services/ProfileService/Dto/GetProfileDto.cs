@@ -67,6 +67,8 @@ namespace MemoryLinkBackend.Services.ProfileService.Dto
             public string Ward { get; set; }
 
             public Guid HospitalId { get; set; }
+
+            public Hospital? Hospital {  get; set; }
             public string? image { get; set; }
             public Guid? imageId { get; set; }
         }

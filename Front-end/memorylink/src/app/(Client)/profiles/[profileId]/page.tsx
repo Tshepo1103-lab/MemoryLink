@@ -1,16 +1,225 @@
 "use client";
-import React from "react";
-import PatientDetailsPage from "@/components/patientdetails";
-import { useStyles } from "../style/style";
 
-const ProfileDetails = () => {
+import React, { useEffect, useState } from "react";
+import { useStyles } from "./style/style";
+import { Button, ConfigProvider, Modal, Table, Drawer } from "antd";
+import CommentFC from "@/components/comment";
+import {
+  useProfileActions,
+  useProfileState,
+} from "@/providers/ProfileProvider";
+import { IProfileResponse } from "@/providers/ProfileProvider/context";
+
+const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
+  const { getprofile } = useProfileActions();
+  const status = useProfileState();
   const { styles } = useStyles();
 
+  console.log(status.profile);
+  useEffect(() => {
+    if (getprofile) getprofile(params.profileId);
+  }, []);
+
+  const __profile = status.profile
+    ? {
+        ...status.profile,
+        hospital: status.profile.hospital.name || "test",
+      }
+    : undefined;
+
+  const columns = [
+    {
+      title: "Hospital",
+      dataIndex: "hospital",
+      key: "hospitalid",
+    },
+    {
+      title: "Ward",
+      dataIndex: "ward",
+      key: "ward",
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      key: "gender",
+    },
+    {
+      title: "Build",
+      dataIndex: "build",
+      key: "Build",
+    },
+
+    {
+      title: "Age-Range",
+      dataIndex: "ageRange",
+      key: "age",
+    },
+    {
+      title: "Eye Color",
+      dataIndex: "eyeColor",
+      key: "eyeColor",
+    },
+    {
+      title: "Hair Color",
+      dataIndex: "hairColor",
+      key: "HairColor",
+    },
+    {
+      title: "Skin Tone",
+      dataIndex: "skinTone",
+      key: "SkinTone",
+    },
+    {
+      title: "Distinguishing Feature",
+      dataIndex: "distinguishingFeature",
+      key: "distinguishingFeature",
+    },
+    {
+      title: "More Details",
+      dataIndex: "moreDetails",
+      key: "MoreDetails",
+    },
+    {
+      title: "Date Admitted",
+      dataIndex: "admissionDate",
+      key: "dateAdmitted",
+    },
+  ];
+
+  const comments = [
+    {
+      name: "Tshepo Mahlangu",
+      paragraph: "I love this",
+      datetime: "01-01-2024",
+    },
+    {
+      name: "Polane Mahloko",
+      paragraph:
+        "Ouh yfdkkk kkkkkkkkk kkkkkkk kkkkkkk kkkkk kkkkkk kkkkkk kdfedf sdfvdv dfvsv ffvsfd erfrf ref erff rwfg thtg eretn 5eth 5et 6jn  54yi8yrfbs h5wete sss!",
+      datetime: "01-01-2024",
+    },
+  ];
+  const transposedDataSource = columns.map((column) => {
+    return {
+      key: column.key,
+      attribute: column.title,
+      "Row 1": __profile
+        ? __profile[column.dataIndex as keyof IProfileResponse]
+        : "",
+    };
+  });
+  const transposedColumns = [
+    {
+      title: "Attribute",
+      dataIndex: "attribute",
+      key: "attribute",
+      width: "120px",
+    },
+    {
+      title: "Details",
+      dataIndex: "Row 1",
+      key: "Row 1",
+      width: "400px",
+    },
+  ];
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
   return (
     <div className={styles.main}>
-      <PatientDetailsPage />
+      <h1 className={styles.header}>Patient Details</h1>
+      <div className={styles.mother}>
+        <div className={styles.child}>
+          <img
+            src={`data:image/png;base64,${status.profile?.image}`}
+            alt={status.profile?.distinguishingFeature}
+            style={{ width: "50%", height: "50vh", marginLeft: "20px" }}
+          />
+          <div
+            style={{ display: "flex", flexDirection: "column", width: "90%" }}
+          >
+            <ConfigProvider
+              theme={{
+                components: {
+                  Table: {
+                    headerBg: "#003366",
+                    headerColor: "#fff",
+                    borderColor: "#003366",
+                    colorIcon: "#fff",
+                  },
+                },
+              }}
+            >
+              <Table
+                style={{
+                  width: "100%",
+                  height: "40vh",
+                  marginLeft: "20px",
+                  display: "flex",
+                  marginTop: "10px",
+                  marginBottom: "10px",
+                }}
+                dataSource={transposedDataSource}
+                columns={transposedColumns}
+                bordered
+                pagination={{ pageSize: 4 }}
+              />
+            </ConfigProvider>
+            <div style={{ marginTop: "25px" }}>
+              <Button className={styles.button}>Directions</Button>
+              <Button className={styles.button} onClick={showModal}>
+                Comment
+              </Button>
+              <Button className={styles.button} onClick={showDrawer}>
+                View Comments
+              </Button>
+            </div>
+            <Modal
+              title="Add Comment"
+              okText="Send"
+              open={isModalOpen}
+              onOk={handleOk}
+              onCancel={handleCancel}
+            >
+              <CommentFC />
+            </Modal>
+            <Drawer title="Comments" onClose={onClose} visible={open}>
+              {comments.map((item, index) => (
+                <div key={index} className={styles.comment}>
+                  <h3>{item.name}</h3>
+                  <br />
+                  <h5>{item.paragraph}</h5>
+                  <br />
+                  <h6>{item.datetime}</h6>
+                </div>
+              ))}
+            </Drawer>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ProfileDetails;
+export default PatientDetailsPage;

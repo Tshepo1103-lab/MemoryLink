@@ -7,17 +7,16 @@ import { useAdminActions, useAdminState } from "@/providers/AdminProviders";
 import { useStyles } from "./style/style";
 
 const ManageAdminsTable = () => {
+  const { styles } = useStyles();
+  const status = useAdminState();
+  const { getalladmins, adminregister, deleteadmin, updateadmin } =
+    useAdminActions();
 
-  const {styles} = useStyles();
-  const status=useAdminState();
-  const {getalladmins,adminregister,deleteadmin,updateadmin} = useAdminActions();
-
-  useEffect(()=>{
-    if(getalladmins)
-      getalladmins()
-    console
-  },[])
-  const [dataSource, setDataSource] = useState([])
+  useEffect(() => {
+    if (getalladmins) getalladmins();
+    console;
+  }, []);
+  const [dataSource, setDataSource] = useState([]);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState(null);
@@ -74,14 +73,13 @@ const ManageAdminsTable = () => {
   };
 
   const deleteAdmin = (id: any) => {
-    if(deleteadmin) deleteadmin(id)
+    if (deleteadmin) deleteadmin(id);
   };
 
   const handleOk = () => {
     form.validateFields().then((values) => {
       if (selectedAdmin) {
-        if (updateadmin)
-          updateadmin({ id: selectedAdmin.id, ...values });
+        if (updateadmin) updateadmin({ id: selectedAdmin.id, ...values });
       } else {
         const updatedValues = {
           ...values,
@@ -101,7 +99,10 @@ const ManageAdminsTable = () => {
   return (
     <div style={{ margin: "50px" }}>
       <h1 className={styles.header}>Manage Admins</h1>
-      <Button onClick={addAdmin} style={{ marginBottom: 16 , backgroundColor:'#003366', color:'#fff'}}>
+      <Button
+        onClick={addAdmin}
+        style={{ marginBottom: 16, backgroundColor: "#003366", color: "#fff" }}
+      >
         Add Admin
       </Button>
       <ConfigProvider
@@ -163,7 +164,7 @@ const ManageAdminsTable = () => {
             label="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
-            <Input.Password placeholder="Password"  />
+            <Input.Password placeholder="Password" />
           </Form.Item>
         </Form>
       </Modal>

@@ -57,14 +57,26 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
                 icon={link.icon}
                 style={{ color: "#fff", marginLeft: "15px" }}
               >
-                  <Button href={link.href} style={{backgroundColor:'transparent', border:'none'}}>{link.name}</Button>
+                <Button
+                  href={link.href}
+                  style={{ backgroundColor: "transparent", border: "none" }}
+                >
+                  {link.name}
+                </Button>
               </Menu.Item>
             ))}
           </Menu>
         </div>
       </Sider>
       <Layout>
-        <Header style={{ backgroundColor: "#003366", color: "#fff",display:'flex',justifyContent:'space-between' }}>
+        <Header
+          style={{
+            backgroundColor: "#003366",
+            color: "#fff",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -76,7 +88,10 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
               color: "#fff",
             }}
           />
-          <LogoutOutlined className={styles.logoutButton} onClick={() => logout()}/>
+          <LogoutOutlined
+            className={styles.logoutButton}
+            onClick={() => logout()}
+          />
         </Header>
         <Content>{children}</Content>
       </Layout>

@@ -7,9 +7,13 @@ import {
 
 export enum ProfileActionEnum {
   getProfileRequest = "GET_PROFILES_REQUEST",
-  getDeceasedProfileSuccess = "GET_DECEASED_PROFILE_SUCCESS",
-  getAliveProfileSuccess = "GET_ALIVE_PROFILE_SUCCESS",
-  getUserError = "GET_PROFILE_ERROR",
+  getDeceasedProfileSuccess = "GET_DECEASED_PROFILES_SUCCESS",
+  getAliveProfileSuccess = "GET_ALIVE_PROFILES_SUCCESS",
+  getUserError = "GET_PROFILES_ERROR",
+
+  getAProfileRequest = "GET_PROFILE_REQUEST",
+  getAProfileSuccess = "GET_PROFILE_SUCCESS",
+  getAProfileError = "GET_PROFILE_ERROR",
 }
 
 export const getProfilesRequest = createAction<IProfileStateContext>(
@@ -41,6 +45,22 @@ export const getProfilesError = createAction<IProfileStateContext>(
   () => ({ isPending: false, isError: true, isSuccess: false }),
 );
 
+export const getProfileRequest = createAction<IProfileStateContext>(
+  ProfileActionEnum.getAProfileRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
 
+export const getProfileSuccess = createAction<
+  IProfileStateContext,
+  IProfileResponse
+>(ProfileActionEnum.getAProfileSuccess, (profile) => ({
+  isPending: false,
+  isError: false,
+  isSuccess: true,
+  profile,
+}));
 
-
+export const getProfileError = createAction<IProfileStateContext>(
+  ProfileActionEnum.getAProfileError,
+  () => ({ isPending: false, isError: true, isSuccess: false }),
+);

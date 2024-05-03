@@ -3,19 +3,20 @@ import { Button, Form, Input, Upload, Table, ConfigProvider } from "antd";
 import { useStyles } from "./style/style";
 import { Tabs } from "antd";
 import React, { useEffect } from "react";
-import { useProfileActions, useProfileState } from "@/providers/ProfileProvider";
+import {
+  useProfileActions,
+  useProfileState,
+} from "@/providers/ProfileProvider";
 
 const ProfilesFC = () => {
   const { styles } = useStyles();
-  const {getalldeceasedProfiles,getallAliveProfiles} = useProfileActions();
-  const status=useProfileState();
+  const { getalldeceasedProfiles, getallAliveProfiles } = useProfileActions();
+  const status = useProfileState();
 
-
-  useEffect(()=>{
-    if(getalldeceasedProfiles)
-      getalldeceasedProfiles()
-      getallAliveProfiles()
-  },[])
+  useEffect(() => {
+    if (getalldeceasedProfiles) getalldeceasedProfiles();
+    getallAliveProfiles();
+  }, []);
 
   const columns = [
     {
@@ -45,7 +46,6 @@ const ProfilesFC = () => {
     },
   ];
 
-  
   const items = [
     {
       key: "1",

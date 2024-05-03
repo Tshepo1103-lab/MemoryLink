@@ -1,8 +1,26 @@
 import { message } from "antd";
 import { useContext, useReducer } from "react";
 import { adminReducer } from "./reducer";
-import { AdminActionContext, AdminStateContext, IAdminActionContext, IAdminRequest, IAdminStateContext, INITIAL_STATE } from "./context";
-import { DeletAdminError, DeleteAdminSuccess, UpdateAdminRequest, UpdateAdminSuccess, getAdminsError, getAdminsRequest, getAdminsSuccess, regiserAdminResponse, registerAdminAction, registerAdminError } from "./actions";
+import {
+  AdminActionContext,
+  AdminStateContext,
+  IAdminActionContext,
+  IAdminRequest,
+  IAdminStateContext,
+  INITIAL_STATE,
+} from "./context";
+import {
+  DeletAdminError,
+  DeleteAdminSuccess,
+  UpdateAdminRequest,
+  UpdateAdminSuccess,
+  getAdminsError,
+  getAdminsRequest,
+  getAdminsSuccess,
+  regiserAdminResponse,
+  registerAdminAction,
+  registerAdminError,
+} from "./actions";
 import { instance } from "@/utils/axiosInstance/axiosInstance";
 import { deletehospitalRequest } from "../HospitalProvider/actions";
 
@@ -26,57 +44,53 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const getalladmins = async () =>{
+  const getalladmins = async () => {
     dispatch(getAdminsRequest());
-    try{
-      const endpoint = 'api/services/app/User/GetAllAdmins';
+    try {
+      const endpoint = "api/services/app/User/GetAllAdmins";
       const response = await instance.get(endpoint);
-      if(response.data.success){
-        dispatch(getAdminsSuccess(response.data.result))
-       
+      if (response.data.success) {
+        dispatch(getAdminsSuccess(response.data.result));
       }
-    }
-    catch(error){
+    } catch (error) {
       dispatch(getAdminsError());
     }
-  }
+  };
 
-  const deleteadmin = async (id:string) =>{
-    dispatch(deletehospitalRequest())
-    try{
-      const endpoint= 'api/services/app/User/Delete?Id=';
+  const deleteadmin = async (id: string) => {
+    dispatch(deletehospitalRequest());
+    try {
+      const endpoint = "api/services/app/User/Delete?Id=";
       const response = await instance.delete(`${endpoint + id}`);
-      if(response.data.success){
-        dispatch(DeleteAdminSuccess())
-       
+      if (response.data.success) {
+        dispatch(DeleteAdminSuccess());
+
         message.success("Admin successfully deleted");
       }
-
+    } catch (error) {
+      dispatch(DeletAdminError());
     }
-    catch(error){
-      dispatch(DeletAdminError())
-    }
-  }
+  };
 
-  const updateadmin = async (payload:IAdminRequest) =>{
+  const updateadmin = async (payload: IAdminRequest) => {
     dispatch(UpdateAdminRequest());
-    try{
-      const endpoint='api/services/app/User/Update';
-      const response = await instance.put(endpoint,payload);
-      if(response.data.success){
+    try {
+      const endpoint = "api/services/app/User/Update";
+      const response = await instance.put(endpoint, payload);
+      if (response.data.success) {
         dispatch(UpdateAdminSuccess());
         getalladmins();
-        message.success("Admin details successfully updated")
+        message.success("Admin details successfully updated");
       }
-
+    } catch (error) {
+      console.error(error);
     }
-    catch(error){
-      console.error(error)
-    }
-  }
+  };
   return (
     <AdminStateContext.Provider value={state}>
-      <AdminActionContext.Provider value={{adminregister,getalladmins,deleteadmin,updateadmin}}>
+      <AdminActionContext.Provider
+        value={{ adminregister, getalladmins, deleteadmin, updateadmin }}
+      >
         {children}
       </AdminActionContext.Provider>
     </AdminStateContext.Provider>

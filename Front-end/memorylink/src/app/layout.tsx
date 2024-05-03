@@ -30,9 +30,7 @@ export default function RootLayout({
         <AuthProvider>
           <HospitalProvider>
             <ProfileProvider>
-              <AdminProvider>
-                {children}
-              </AdminProvider>
+              <AdminProvider>{children}</AdminProvider>
             </ProfileProvider>
           </HospitalProvider>
         </AuthProvider>

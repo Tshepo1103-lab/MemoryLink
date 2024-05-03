@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           role: getRole(response.data.result),
         };
         dispatch(loginSuccessAction(payload));
-        if (payload.role == "user" ) {
+        if (payload.role == "user") {
           push("/");
         } else if (payload.role == "admin" || payload.role == "NormalAdmin") {
           push("/dashboard");
