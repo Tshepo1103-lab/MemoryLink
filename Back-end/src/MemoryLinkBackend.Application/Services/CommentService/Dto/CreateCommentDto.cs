@@ -1,6 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
-using Abp.Domain.Entities;
 using MemoryLinkBackend.Authorization.Users;
 using MemoryLinkBackend.Domain;
 using System;
@@ -12,9 +11,8 @@ using System.Threading.Tasks;
 namespace MemoryLinkBackend.Services.CommentService.Dto
 {
     [AutoMap(typeof(Comment))]
-    public class CommentDto : EntityDto<Guid>
+    public class CreateCommentDto: EntityDto<Guid>
     {
-        
         public string Message { get; set; }
         /// <summary>
         /// 
@@ -28,8 +26,6 @@ namespace MemoryLinkBackend.Services.CommentService.Dto
         ///
         /// </summary>
         public int ProfileId { get; set; }
-        public User? User { get; set; }
 
-      
     }
 }

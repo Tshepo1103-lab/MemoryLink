@@ -13,6 +13,7 @@ import { toNumber } from "lodash";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useStyles } from "./style/style";
+import { getId } from "@/utils/decoder/decoder";
 
 const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
   const { getprofile } = useProfileActions();
@@ -123,14 +124,16 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
   };
 
   const handleCommentSubmit = () => {
+    const userid=getId(localStorage.getItem('accessToken'))
     createcomment({
-      userId: 1,
+      userId:toNumber(userid),
       profileId: toNumber(params.profileId),
       message: commentText,
     });
+    getcomments(toNumber(params.profileId));
     setCommentText("");
     setIsModalOpen(false);
-    getcomments(toNumber(params.profileId));
+   
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -222,7 +225,7 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
             <Drawer title="Comments" onClose={onClose} visible={open}>
               {state?.comments?.map((item, index) => (
                 <div key={index} className={styles.comment}>
-                  <h3>{item.userId}</h3>
+                  <h3>{item.user.name + item.user.name }</h3>
                   <br />
                   <h5>{item.message}</h5>
                   <br />

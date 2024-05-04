@@ -32,27 +32,13 @@ namespace MemoryLinkBackend.Services.CommentService
             _repository = repository;
             _userRepository = userRepository;
         }
-
-        [HttpGet]
-        public async Task<List<CommentDto>> GetAllCommentsByIdAsync(int profileId)
-        {
-            var comments = await _repository
-                .GetAllIncluding(b => b.Profile, x => x.User)
-                .Where(b => b.Profile.Id == profileId)
-                .ToListAsync();
-
-            var commentsDto = ObjectMapper.Map<List<CommentDto>>(comments);
-
-            return commentsDto;
-        }
-
         [HttpPost]
-       
-        public async Task<CommentDto> CreateComment(CommentDto input)
+
+        public async Task<CommentDto> CreateComment(CreateCommentDto input)
         {
             try
             {
-              
+
                 var comment = ObjectMapper.Map<Comment>(input);
                 comment.Profile = await _profileRepository.GetAsync(input.ProfileId);
                 comment.User = await _userRepository.GetAsync(input.UserId);
@@ -68,5 +54,20 @@ namespace MemoryLinkBackend.Services.CommentService
             }
         }
 
+
+        [HttpGet]
+        public async Task<List<CommentDto>> GetAllCommentsByIdAsync(int profileId)
+        {
+            var comments = await _repository
+                .GetAllIncluding(b => b.Profile, x => x.User)
+                .Where(b => b.Profile.Id == profileId)
+                .ToListAsync();
+
+            var commentsDto = ObjectMapper.Map<List<CommentDto>>(comments);
+
+            return commentsDto;
+        }
+
+        
     }
 }
