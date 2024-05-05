@@ -1,46 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Button, Modal, Form, Input, Space, ConfigProvider } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useProfileActions, useProfileState } from "@/providers/ProfileProvider";
 
 const ManageProfilesTable = () => {
-  const [dataSource, setDataSource] = useState([
-    {
-      key: "1",
-      name: "John Doe",
-      gender: "Male",
-      address: "New York",
-      ward: "4",
-      hospital: "Bara",
-      age: "30-35",
-      image: "/assets/images/profile1.png",
-      EyeColor: "Brown",
-      Build: "Slender",
-      HairColor: "Black",
-      SkinTone: "Brown",
-      DistinguishingFeature: "Tattoo on the left wrist",
-      MoreDetails: "None",
-      dateAdmitted: "01-01-2023",
-    },
-    {
-      key: "2",
-      name: "Jane Smith",
-      gender: "Female",
-      address: "Los Angeles",
-      ward: "7",
-      hospital: "General Hospital",
-      age: "25-30",
-      image: "/assets/images/profile2.png",
-      EyeColor: "Blue",
-      Build: "Athletic",
-      HairColor: "Blonde",
-      SkinTone: "Fair",
-      DistinguishingFeature: "Scar on forehead",
-      MoreDetails: "Allergic to penicillin",
-      dateAdmitted: "02-15-2023",
-    },
-  ]);
+  const status= useProfileState();
+  const {getbyhospital} = useProfileActions();
+  const [dataSource, setDataSource] = useState([]);
+useEffect(()=>{
+  if(getbyhospital)
+    getbyhospital('729e3131-3f20-4d23-28e2-08dc68f64342')
+},[])
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedProfile, setSelectedProfile] = useState(null);
@@ -49,15 +21,15 @@ const ManageProfilesTable = () => {
 
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-      width: "10%",
-    },
-    {
       title: "Gender",
       dataIndex: "gender",
       key: "gender",
+      width: "5%",
+    },
+    {
+      title: "AdmissionDate",
+      dataIndex: "admissionDate",
+      key: "ward",
       width: "5%",
     },
     {
@@ -67,15 +39,39 @@ const ManageProfilesTable = () => {
       width: "5%",
     },
     {
-      title: "Hospital",
-      dataIndex: "hospital",
-      key: "hospital",
-      width: "10%",
+      title: "Age",
+      dataIndex: "ageRange",
+      key: "age",
+      width: "5%",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "build",
+      dataIndex: "build",
+      key: "hospital",
+      width: "5%",
+    },
+    {
+      title: "eyeColor",
+      dataIndex: "eyeColor",
+      key: "hospital",
+      width: "5%",
+    },
+    {
+      title: "height",
+      dataIndex: "height",
+      key: "hospital",
+      width: "5%",
+    },
+    {
+      title: "skinTone",
+      dataIndex: "skinTone",
+      key: "hospital",
+      width: "5%",
+    },
+    {
+      title: "type",
+      dataIndex: "type",
+      key: "hospital",
       width: "5%",
     },
     {
@@ -91,7 +87,7 @@ const ManageProfilesTable = () => {
           </Button>
         </Space>
       ),
-      width: "5%",
+      width: "1%",
     },
   ];
 
@@ -153,7 +149,7 @@ const ManageProfilesTable = () => {
         }}
       >
         <Table
-          dataSource={dataSource}
+          dataSource={status?.hospitalProfiles}
           columns={columns}
           pagination={{ pageSize: 5 }}
         />

@@ -52,8 +52,12 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
       if (response.data.success) {
         dispatch(getAdminsSuccess(response.data.result));
       }
+      else {
+        throw new Error(response.data.error.message);
+      }
     } catch (error) {
       dispatch(getAdminsError());
+      console.error(error)
     }
   };
 

@@ -14,6 +14,14 @@ export enum ProfileActionEnum {
   getAProfileRequest = "GET_PROFILE_REQUEST",
   getAProfileSuccess = "GET_PROFILE_SUCCESS",
   getAProfileError = "GET_PROFILE_ERROR",
+
+  createProfileRequest = "CREATE_PROFILE_REQUEST",
+  createProfileSuccess = "CREATE_PROFILE_SUCCESS",
+  createProfileError = "CREATE_PROFILE_ERROR",
+
+  getbyHospitalProfileRequest = "HOSPITAL_PROFILE_REQUEST",
+  getbyHospitalProfileSuccess = "HOSPITAL_PROFILE_SUCCESS",
+  getbyHospitalProfileError = "HOSPITAL_PROFILE_ERROR",
 }
 
 export const getProfilesRequest = createAction<IProfileStateContext>(
@@ -64,3 +72,50 @@ export const getProfileError = createAction<IProfileStateContext>(
   ProfileActionEnum.getAProfileError,
   () => ({ isPending: false, isError: true, isSuccess: false }),
 );
+
+
+
+export const createProfileRequest = createAction<IProfileStateContext>(
+  ProfileActionEnum.createProfileRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+
+export const createProfileSuccess = createAction<
+  IProfileStateContext
+>(ProfileActionEnum.createProfileSuccess, () => ({
+  isPending: false,
+  isError: false,
+  isSuccess: true,
+}));
+
+export const createProfileError = createAction<IProfileStateContext>(
+  ProfileActionEnum.createProfileError,
+  () => ({ isPending: false, isError: true, isSuccess: false }),
+);
+
+
+
+
+
+
+
+
+export const getbyhospitalProfilesError = createAction<IProfileStateContext>(
+  ProfileActionEnum.getbyHospitalProfileError,
+  () => ({ isPending: false, isError: true, isSuccess: false }),
+);
+
+export const getbyhospitalProfileRequest = createAction<IProfileStateContext>(
+  ProfileActionEnum.getbyHospitalProfileRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+
+export const getbyhospitalProfileSuccess = createAction<
+  IProfileStateContext,
+  IProfileResponse[]
+>(ProfileActionEnum.getbyHospitalProfileSuccess, (hospitalProfiles) => ({
+  isPending: false,
+  isError: false,
+  isSuccess: true,
+  hospitalProfiles,
+}));

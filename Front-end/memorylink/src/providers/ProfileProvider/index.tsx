@@ -1,6 +1,9 @@
 import { instance } from "@/utils/axiosInstance/axiosInstance";
 import { useContext, useReducer } from "react";
 import {
+  createProfileError,
+  createProfileRequest,
+  createProfileSuccess,
   getAliveProfilesSuccess,
   getDeceasedProfilesSuccess,
   getProfileError,
@@ -8,9 +11,13 @@ import {
   getProfileSuccess,
   getProfilesError,
   getProfilesRequest,
+  getbyhospitalProfileRequest,
+  getbyhospitalProfileSuccess,
+  getbyhospitalProfilesError,
 } from "./actions";
 import {
   INITIAL_STATE,
+  IProfileRequest,
   ProfileActionContext,
   ProfileStateContext,
 } from "./context";
@@ -61,10 +68,54 @@ export const ProfileProvider = ({
     }
   };
 
+  const getbyhospital = async (id:string) =>{
+    dispatch(getbyhospitalProfileRequest())
+    try{
+      const endpoint='api/services/app/Profile/GetAllProfilesByHospital?hospitalId=';
+      const response = await instance.get(`${endpoint+id}`)
+      if(response.data.success)
+        {
+          dispatch(getbyhospitalProfileSuccess(response.data.result))
+        }
+
+    }
+    catch(error){
+      dispatch(getbyhospitalProfilesError())
+    }
+  }
+
+  const createprofile = async (payload:IProfileRequest) =>{
+    dispatch(createProfileRequest())
+    try {
+      const formData = new FormData();
+      // formData.append('categoryId',payload.categoryId)
+      // formData.append('title', payload.title);
+      // formData.append('author', payload.authors.join(', ')); 
+      // formData.append('isbn', payload.isbn);
+      // formData.append('description', payload.description);
+      // formData.append('file', payload.file);
+  
+      const jsonPayload: any = {};
+      formData.forEach((value, key) => {
+        jsonPayload[key] = value;
+      });
+    
+      const response = await instance.post(`/services/app/Book/createBook`, (jsonPayload),{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+    }
+    catch(error){
+      dispatch(createProfileError())
+    }
+  }
+
   return (
     <ProfileStateContext.Provider value={state}>
       <ProfileActionContext.Provider
-        value={{ getalldeceasedProfiles, getallAliveProfiles, getprofile }}
+        value={{ getalldeceasedProfiles, getallAliveProfiles, getprofile,getbyhospital }}
       >
         {children}
       </ProfileActionContext.Provider>

@@ -36,6 +36,35 @@ export const profileReducer = handleActions<
       ...state,
       ...action.payload,
     }),
+
+    [ProfileActionEnum.createProfileRequest]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+
+    [ProfileActionEnum.createProfileSuccess]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [ProfileActionEnum.createProfileError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    
+
+    [ProfileActionEnum.getbyHospitalProfileRequest]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+
+    [ProfileActionEnum.getbyHospitalProfileSuccess]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [ProfileActionEnum.getbyHospitalProfileError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
   },
   INITIAL_STATE,
 );
