@@ -1,7 +1,6 @@
 import { handleActions } from "redux-actions";
-import { INITIAL_STATE, ISearchStateContext} from "./context";
+import { INITIAL_STATE, ISearchStateContext } from "./context";
 import { SearchActionEnum } from "./actions";
-
 
 export const searchReducer = handleActions<
   ISearchStateContext,
@@ -20,7 +19,6 @@ export const searchReducer = handleActions<
       ...state,
       ...action.payload,
     }),
-    
   },
   INITIAL_STATE,
 );

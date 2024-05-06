@@ -110,13 +110,13 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
       title: "Attribute",
       dataIndex: "attribute",
       key: "attribute",
-      width:"300px"
+      width: "300px",
     },
     {
       title: "Details",
       dataIndex: "Row 1",
       key: "Row 1",
-      width:"400px"
+      width: "400px",
     },
   ];
 
@@ -125,16 +125,15 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
   };
 
   const handleCommentSubmit = () => {
-    const userid=getId(localStorage.getItem('accessToken'))
+    const userid = getId(localStorage.getItem("accessToken"));
     createcomment({
-      userId:toNumber(userid),
+      userId: toNumber(userid),
       profileId: toNumber(params.profileId),
       message: commentText,
     });
     getcomments(toNumber(params.profileId));
     setCommentText("");
     setIsModalOpen(false);
-   
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -143,7 +142,7 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
     setIsModalOpen(true);
   };
 
-  const handleCancel = () => { 
+  const handleCancel = () => {
     setIsModalOpen(false);
   };
 
@@ -168,7 +167,7 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
             style={{ width: "50%", height: "50vh", marginLeft: "20px" }}
           />
           <div
-            style={{ display: "flex", flexDirection: "column",width:'100%' }}
+            style={{ display: "flex", flexDirection: "column", width: "100%" }}
           >
             <ConfigProvider
               theme={{
@@ -184,7 +183,7 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
             >
               <Table
                 style={{
-                  width:'100%',
+                  width: "100%",
                   height: "40vh",
                   marginLeft: "20px",
                   display: "flex",
@@ -226,7 +225,7 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
             <Drawer title="Comments" onClose={onClose} visible={open}>
               {state?.comments?.map((item, index) => (
                 <div key={index} className={styles.comment}>
-                  <h3>{item.user.name +" "+ item.user.surname }</h3>
+                  <h3>{item.user.name + " " + item.user.surname}</h3>
                   <br />
                   <h5>{item.message}</h5>
                   <br />

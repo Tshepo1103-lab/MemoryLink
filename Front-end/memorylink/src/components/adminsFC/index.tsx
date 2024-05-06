@@ -1,20 +1,35 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Table, Button, Modal, Form, Input, Space, ConfigProvider } from "antd";
+import {
+  Table,
+  Button,
+  Modal,
+  Form,
+  Input,
+  Space,
+  ConfigProvider,
+  Select,
+} from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useAdminActions, useAdminState } from "@/providers/AdminProviders";
 import { useStyles } from "./style/style";
+import {
+  useHospitalActions,
+  useHospitalState,
+} from "@/providers/HospitalProvider";
 
 const ManageAdminsTable = () => {
   const { styles } = useStyles();
   const status = useAdminState();
+  const { getallhospital } = useHospitalActions();
+  const state = useHospitalState();
   const { getalladmins, adminregister, deleteadmin, updateadmin } =
     useAdminActions();
 
   useEffect(() => {
     if (getalladmins) getalladmins();
-    console;
+    if (getallhospital) getallhospital();
   }, []);
   const [dataSource, setDataSource] = useState([]);
 
@@ -78,6 +93,7 @@ const ManageAdminsTable = () => {
 
   const handleOk = () => {
     form.validateFields().then((values) => {
+      console.log(values);
       if (selectedAdmin) {
         if (updateadmin) updateadmin({ id: selectedAdmin.id, ...values });
       } else {
@@ -146,16 +162,22 @@ const ManageAdminsTable = () => {
             <Input />
           </Form.Item>
           <Form.Item
+            name="userName"
+            label="userName"
+            rules={[{ required: true, message: "Please select the hospital" }]}
+          >
+            <Select placeholder="Select a hospital">
+              {state.hospitals?.map((hospital) => (
+                <Select.Option key={hospital.id} value={hospital.id}>
+                  {hospital.name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item
             name="emailAddress"
             label="Email"
             rules={[{ required: true, message: "Please enter the email" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="username"
-            label="Username"
-            rules={[{ required: true, message: "Please enter the username" }]}
           >
             <Input />
           </Form.Item>

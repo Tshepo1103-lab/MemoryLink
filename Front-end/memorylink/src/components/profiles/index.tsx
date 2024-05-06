@@ -8,12 +8,15 @@ import {
   useProfileActions,
   useProfileState,
 } from "@/providers/ProfileProvider";
+import { useSearchActions, useSearchState } from "@/providers/AIsearchProvider";
 
 const ProfilesFC = () => {
   const { push } = useRouter();
   const { styles } = useStyles();
   const { getalldeceasedProfiles, getallAliveProfiles } = useProfileActions();
   const status = useProfileState();
+  const state = useSearchState();
+  const { searchProfiles } = useSearchActions();
 
   useEffect(() => {
     if (getalldeceasedProfiles) getalldeceasedProfiles();
@@ -24,6 +27,39 @@ const ProfilesFC = () => {
     push(`profiles/${id}`);
   };
   const columns = [
+    {
+      title: "Record Number",
+      dataIndex: "id",
+      key: "recordNumber",
+      render: (text: string, record: any) => (
+        <Button type="link" onClick={() => handleRecordClick(record.id)}>
+          {text}
+        </Button>
+      ),
+    },
+    {
+      title: "Gender",
+      dataIndex: "gender",
+      key: "gender",
+    },
+    {
+      title: "Age Range",
+      dataIndex: "ageRange",
+      key: "ageRange",
+    },
+    {
+      title: "Admission Date",
+      dataIndex: "admissionDate",
+      key: "admissionDate",
+    },
+    {
+      title: "Distinguish Feature",
+      dataIndex: "distinguishingFeature",
+      key: "distinguishFeature",
+    },
+  ];
+
+  const searchColumns = [
     {
       title: "Record Number",
       dataIndex: "id",
@@ -105,12 +141,16 @@ const ProfilesFC = () => {
     },
   ];
 
-  const onFinish = () => {
-    // Implement your search logic here
+  const onFinish = (values: any) => {
+    const searchText = values.value;
+    if (searchProfiles) searchProfiles(searchText);
   };
 
   const onChange = (key: string) => {
     console.log(key);
+  };
+  const handleReset = () => {
+    window.location.reload();
   };
 
   return (
@@ -133,9 +173,13 @@ const ProfilesFC = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Button htmlType="submit">
-              <SearchOutlined />
-            </Button>
+            {state.searchedProfiles ? (
+              <Button onClick={handleReset}>reset</Button>
+            ) : (
+              <Button htmlType="submit">
+                <SearchOutlined />
+              </Button>
+            )}
           </Form.Item>
           <Upload>
             <Button
@@ -154,12 +198,36 @@ const ProfilesFC = () => {
         </Form>
       </div>
       <div className={styles.recordsContainer}>
-        <Tabs
-          defaultActiveKey="1"
-          items={items}
-          onChange={onChange}
-          style={{ width: "100%" }}
-        />
+        {state.searchedProfiles ? (
+          <>
+            <br />
+            <ConfigProvider
+              theme={{
+                components: {
+                  Table: {
+                    headerBg: "#003366",
+                    headerColor: "#fff",
+                    borderColor: "#003366",
+                  },
+                },
+              }}
+            >
+              <Table
+                style={{ width: "100%" }}
+                columns={searchColumns}
+                dataSource={state?.searchedProfiles?.profiles?.profiles}
+                pagination={{ pageSize: 6 }}
+              />
+            </ConfigProvider>
+          </>
+        ) : (
+          <Tabs
+            defaultActiveKey="1"
+            items={items}
+            onChange={onChange}
+            style={{ width: "100%" }}
+          />
+        )}
       </div>
     </div>
   );

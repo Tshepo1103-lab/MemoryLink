@@ -36,9 +36,7 @@ export default function RootLayout({
               <AdminProvider>
                 <CommentProvider>
                   <AISearchProvider>
-                    <RecognitionProvider>
-                     {children}
-                    </RecognitionProvider>
+                    <RecognitionProvider>{children}</RecognitionProvider>
                   </AISearchProvider>
                 </CommentProvider>
               </AdminProvider>

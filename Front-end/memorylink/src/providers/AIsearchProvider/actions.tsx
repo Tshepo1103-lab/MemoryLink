@@ -5,7 +5,6 @@ export enum SearchActionEnum {
   searchProfileRequest = "SEARCH_PROFILES_REQUEST",
   searchProfileSuccess = "SEARCH_PROFILES_SUCCESS",
   searchProfileError = "SEARCH_PROFILES_ERROR",
-
 }
 
 export const searchProfilesRequest = createAction<ISearchStateContext>(
@@ -14,21 +13,19 @@ export const searchProfilesRequest = createAction<ISearchStateContext>(
 );
 
 export const searchProfilesSuccess = createAction<
- ISearchStateContext,
-  ISearchResponse[]
+  ISearchStateContext,
+  ISearchResponse
 >(SearchActionEnum.searchProfileSuccess, (searchedProfiles) => ({
   isPending: false,
   isError: false,
   isSuccess: true,
   searchedProfiles,
 }));
-export const searchProfilesError = createAction<
-  ISearchStateContext
->(SearchActionEnum.searchProfileError,
-    () => ({
+export const searchProfilesError = createAction<ISearchStateContext>(
+  SearchActionEnum.searchProfileError,
+  () => ({
     isPending: false,
     isError: false,
     isSuccess: true,
-  
-}));
-
+  }),
+);

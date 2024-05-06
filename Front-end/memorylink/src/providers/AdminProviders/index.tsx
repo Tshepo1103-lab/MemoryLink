@@ -1,5 +1,5 @@
 import { message } from "antd";
-import { useContext, useReducer } from "react";
+import { useContext, useMemo, useReducer } from "react";
 import { adminReducer } from "./reducer";
 import {
   AdminActionContext,
@@ -21,11 +21,22 @@ import {
   registerAdminAction,
   registerAdminError,
 } from "./actions";
-import { instance } from "@/utils/axiosInstance/axiosInstance";
+import { getAxiosInstace } from "@/utils/axiosInstance/axiosInstance";
 import { deletehospitalRequest } from "../HospitalProvider/actions";
+import { useUserState } from "../AuthProvider";
 
 export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(adminReducer, INITIAL_STATE);
+  const { UserLogin } = useUserState();
+
+  const instance = useMemo(() => {
+    const accessToken = UserLogin?.accessToken;
+    if (accessToken) {
+      return getAxiosInstace(accessToken);
+    } else {
+      return getAxiosInstace("");
+    }
+  }, [state]);
 
   const adminregister = async (payload: IAdminRequest) => {
     dispatch(registerAdminAction());
@@ -36,7 +47,6 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
         dispatch(regiserAdminResponse(response.data.result));
         getalladmins();
         message.success("Admin successfully created");
-        //getall
       }
     } catch (error) {
       console.error(error);
@@ -51,13 +61,12 @@ export const AdminProvider = ({ children }: { children: React.ReactNode }) => {
       const response = await instance.get(endpoint);
       if (response.data.success) {
         dispatch(getAdminsSuccess(response.data.result));
-      }
-      else {
+      } else {
         throw new Error(response.data.error.message);
       }
     } catch (error) {
       dispatch(getAdminsError());
-      console.error(error)
+      console.error(error);
     }
   };
 

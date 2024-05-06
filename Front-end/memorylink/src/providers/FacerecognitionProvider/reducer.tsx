@@ -2,8 +2,6 @@ import { handleActions } from "redux-actions";
 import { INITIAL_STATE, IRecognitionStateContext } from "./context";
 import { recognitionActionEnum } from "./actions";
 
-
-
 export const recognitionReducer = handleActions<
   IRecognitionStateContext,
   IRecognitionStateContext
@@ -21,7 +19,6 @@ export const recognitionReducer = handleActions<
       ...state,
       ...action.payload,
     }),
-    
   },
   INITIAL_STATE,
 );

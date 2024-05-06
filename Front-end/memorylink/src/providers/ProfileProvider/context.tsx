@@ -7,7 +7,7 @@ export const INITIAL_STATE: IProfileStateContext = {
   deceasedprofile: undefined,
   aliveprofile: undefined,
   profile: undefined,
-  hospitalProfiles:undefined,
+  hospitalProfiles: undefined,
 };
 
 export interface IProfileRequest {
@@ -57,15 +57,15 @@ export interface IProfileStateContext {
   deceasedprofile?: IProfileResponse[];
   aliveprofile?: IProfileResponse[];
   profile?: IProfileResponse;
-  hospitalProfiles?:IProfileResponse[];
+  hospitalProfiles?: IProfileResponse[];
 }
 
 export interface IProfileActionContext {
   getalldeceasedProfiles?: () => void;
   getallAliveProfiles?: () => void;
   getprofile?: (id: string) => void;
-  createprofile?:(payload:IProfileRequest) => void;
-  getbyhospital?:(id:string) => void;
+  createprofile?: (payload: IProfileRequest) => void;
+  getbyhospital?: (id: string) => void;
 }
 
 export const ProfileStateContext =

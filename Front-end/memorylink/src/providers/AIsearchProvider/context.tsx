@@ -4,43 +4,31 @@ export const INITIAL_STATE: ISearchStateContext = {
   isPending: false,
   isSuccess: false,
   isError: false,
-  searchedProfiles:undefined
+  searchedProfiles: undefined,
 };
 
+export interface IProfile {
+  id: number;
+  gender: string;
+  ageRange: string;
+  distinguishingFeature: string;
+  admissionDate: string;
+}
+
 export interface ISearchResponse {
-    results:{
-        id: number;
-        gender: string;
-        ageRange: string;
-        height: string;
-        build: string;
-        eyeColor: string;
-        skinTone: string;
-        hairColor: string;
-        locationFound: string;
-        distinguishingFeature: string;
-        moreDetails: string;
-        type: string;
-        ward: string;
-        hospitalId: string;
-        imageId: string;
-        image: string;
-        hospital?: {
-            name: string;
-            url: string;
-        }
-    }
+  answer: string;
+  profiles: { profiles: IProfile[] };
 }
 
 export interface ISearchStateContext {
   isPending: Boolean;
   isSuccess: Boolean;
   isError: Boolean;
-  searchedProfiles?: ISearchResponse[];
+  searchedProfiles?: ISearchResponse;
 }
 
 export interface ISearchActionContext {
-  searchProfiles?: (input:string) => void;
+  searchProfiles?: (input: string) => void;
 }
 
 export const SearchStateContext =

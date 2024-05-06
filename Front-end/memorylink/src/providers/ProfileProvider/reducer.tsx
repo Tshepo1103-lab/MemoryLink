@@ -50,7 +50,6 @@ export const profileReducer = handleActions<
       ...state,
       ...action.payload,
     }),
-    
 
     [ProfileActionEnum.getbyHospitalProfileRequest]: (state, action) => ({
       ...state,

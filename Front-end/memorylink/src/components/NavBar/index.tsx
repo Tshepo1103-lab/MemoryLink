@@ -56,7 +56,6 @@ const Navbar = () => {
           </Link>
         ))}
         <Link href="/login">
-          {" "}
           <span className={styles.authButton}>
             <LoginOutlined onClick={() => logout()} />
           </span>

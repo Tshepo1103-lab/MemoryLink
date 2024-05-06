@@ -1,6 +1,6 @@
-import { instance } from "@/utils/axiosInstance/axiosInstance";
+import { getAxiosInstace } from "@/utils/axiosInstance/axiosInstance";
 import { message } from "antd";
-import { useContext, useReducer } from "react";
+import { useContext, useMemo, useReducer } from "react";
 import {
   createCommentAction,
   createCommentError,
@@ -18,6 +18,7 @@ import {
   INITIAL_STATE,
 } from "./context";
 import { commentReducer } from "./reducer";
+import { useUserState } from "../AuthProvider";
 
 export const CommentProvider = ({
   children,
@@ -25,6 +26,17 @@ export const CommentProvider = ({
   children: React.ReactNode;
 }) => {
   const [state, dispatch] = useReducer(commentReducer, INITIAL_STATE);
+
+  const { UserLogin } = useUserState();
+
+  const instance = useMemo(() => {
+    const accessToken = UserLogin?.accessToken;
+    if (accessToken) {
+      return getAxiosInstace(accessToken);
+    } else {
+      return getAxiosInstace("");
+    }
+  }, [state]);
 
   const createcomment = async (payload: ICommentRequest) => {
     dispatch(createCommentAction());

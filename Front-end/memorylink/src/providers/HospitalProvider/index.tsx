@@ -1,5 +1,5 @@
-import { instance } from "@/utils/axiosInstance/axiosInstance";
-import { useContext, useReducer } from "react";
+import { getAxiosInstace } from "@/utils/axiosInstance/axiosInstance";
+import { useContext, useMemo, useReducer } from "react";
 import {
   addhospitalError,
   addhospitalRequest,
@@ -21,6 +21,7 @@ import {
   INITIAL_STATE,
 } from "./context";
 import { hospitalReducer } from "./reducer";
+import { useUserState } from "../AuthProvider";
 
 export const HospitalProvider = ({
   children,
@@ -28,6 +29,17 @@ export const HospitalProvider = ({
   children: React.ReactNode;
 }) => {
   const [state, dispatch] = useReducer(hospitalReducer, INITIAL_STATE);
+
+  const { UserLogin } = useUserState();
+
+  const instance = useMemo(() => {
+    const accessToken = UserLogin?.accessToken;
+    if (accessToken) {
+      return getAxiosInstace(accessToken);
+    } else {
+      return getAxiosInstace("");
+    }
+  }, [state]);
 
   const getallhospital = async () => {
     dispatch(getallhospitalRequest());

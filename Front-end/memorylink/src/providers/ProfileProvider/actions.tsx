@@ -73,32 +73,24 @@ export const getProfileError = createAction<IProfileStateContext>(
   () => ({ isPending: false, isError: true, isSuccess: false }),
 );
 
-
-
 export const createProfileRequest = createAction<IProfileStateContext>(
   ProfileActionEnum.createProfileRequest,
   () => ({ isPending: true, isError: false, isSuccess: false }),
 );
 
-export const createProfileSuccess = createAction<
-  IProfileStateContext
->(ProfileActionEnum.createProfileSuccess, () => ({
-  isPending: false,
-  isError: false,
-  isSuccess: true,
-}));
+export const createProfileSuccess = createAction<IProfileStateContext>(
+  ProfileActionEnum.createProfileSuccess,
+  () => ({
+    isPending: false,
+    isError: false,
+    isSuccess: true,
+  }),
+);
 
 export const createProfileError = createAction<IProfileStateContext>(
   ProfileActionEnum.createProfileError,
   () => ({ isPending: false, isError: true, isSuccess: false }),
 );
-
-
-
-
-
-
-
 
 export const getbyhospitalProfilesError = createAction<IProfileStateContext>(
   ProfileActionEnum.getbyHospitalProfileError,

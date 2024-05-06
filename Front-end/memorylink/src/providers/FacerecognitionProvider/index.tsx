@@ -1,9 +1,18 @@
-import { instance } from "@/utils/axiosInstance/axiosInstance";
-import { useContext, useReducer } from "react";
+import { getAxiosInstace } from "@/utils/axiosInstance/axiosInstance";
+import { useContext, useMemo, useReducer } from "react";
 import { recognitionReducer } from "./reducer";
-import { INITIAL_STATE, RecognitionActionContext, RecognitionStateContext } from "./context";
-import { recognitionProfilesError, recognitionProfilesRequest, recognitionProfilesSuccess } from "./actions";
+import {
+  INITIAL_STATE,
+  RecognitionActionContext,
+  RecognitionStateContext,
+} from "./context";
+import {
+  recognitionProfilesError,
+  recognitionProfilesRequest,
+  recognitionProfilesSuccess,
+} from "./actions";
 import axios from "axios";
+import { useUserState } from "../AuthProvider";
 
 export const RecognitionProvider = ({
   children,
@@ -12,12 +21,23 @@ export const RecognitionProvider = ({
 }) => {
   const [state, dispatch] = useReducer(recognitionReducer, INITIAL_STATE);
 
+  const { UserLogin } = useUserState();
+
+  const instance = useMemo(() => {
+    const accessToken = UserLogin?.accessToken;
+    if (accessToken) {
+      return getAxiosInstace(accessToken);
+    } else {
+      return getAxiosInstace("");
+    }
+  }, [state]);
+
   const recogniseProfiles = async (input: string) => {
     dispatch(recognitionProfilesRequest());
     try {
-    console.log('Get here !!!!')
+      console.log("Get here !!!!");
       const endpoint = "http://127.0.0.1:8000/facematch";
-      const response = await axios.post(endpoint,input);
+      const response = await axios.post(endpoint, input);
       if (response.data.success) {
         dispatch(recognitionProfilesSuccess(response.data.result));
       }
@@ -28,19 +48,19 @@ export const RecognitionProvider = ({
 
   return (
     <RecognitionStateContext.Provider value={state}>
-      <RecognitionActionContext.Provider value={{recogniseProfiles}}>
+      <RecognitionActionContext.Provider value={{ recogniseProfiles }}>
         {children}
       </RecognitionActionContext.Provider>
     </RecognitionStateContext.Provider>
   );
-
 };
-
 
 export const useRecognitionState = () => {
   const context = useContext(RecognitionStateContext);
   if (!context) {
-    throw new Error("useRecognitionState must be used within a RecognitionProvider");
+    throw new Error(
+      "useRecognitionState must be used within a RecognitionProvider",
+    );
   }
   return context;
 };
@@ -48,7 +68,9 @@ export const useRecognitionState = () => {
 export const useRecognitionActions = () => {
   const context = useContext(RecognitionActionContext);
   if (!context) {
-    throw new Error("useRecognitionActions must be used within a RecognitionProvider");
+    throw new Error(
+      "useRecognitionActions must be used within a RecognitionProvider",
+    );
   }
   return context;
 };

@@ -19,10 +19,10 @@ export interface ICommentResponse {
   dateSent: string;
   userId: number;
   profileId: number;
-  user:{
-    name:string;
-    surname:string;
-  }
+  user: {
+    name: string;
+    surname: string;
+  };
 }
 
 export interface ICommentStateContext {

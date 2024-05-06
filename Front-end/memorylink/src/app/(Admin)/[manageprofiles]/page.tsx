@@ -8,13 +8,19 @@ import {
   useProfileState,
 } from "@/providers/ProfileProvider";
 
-const ManageProfilesTable = ({ hospitalId }: { hospitalId: string }) => {
+const ManageProfilesTable = ({
+  params,
+}: {
+  params: { manageprofiles: string };
+}) => {
   const status = useProfileState();
-  const { getbyhospital } = useProfileActions();
+  const { getbyhospital, getallAliveProfiles } = useProfileActions();
   const [dataSource, setDataSource] = useState([]);
+
   useEffect(() => {
-    if (getbyhospital) console.log(hospitalId);
-    getbyhospital(hospitalId);
+    if (params.manageprofiles == "admin") {
+      if (getallAliveProfiles) getallAliveProfiles();
+    } else if (getbyhospital) getbyhospital(params.manageprofiles);
   }, []);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -152,7 +158,11 @@ const ManageProfilesTable = ({ hospitalId }: { hospitalId: string }) => {
         }}
       >
         <Table
-          dataSource={status?.hospitalProfiles}
+          dataSource={
+            params.manageprofiles == "admin"
+              ? status.aliveprofile
+              : status?.hospitalProfiles
+          }
           columns={columns}
           pagination={{ pageSize: 5 }}
         />
