@@ -25,11 +25,12 @@ export const useStyles = createStyles({
     color: #fff !important;
   `,
   card: css`
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-direction: column;
     background-color: #003366;
+    margin: 0 auto;
   `,
   image: css`
     flex: 1;

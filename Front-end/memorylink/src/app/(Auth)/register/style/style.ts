@@ -6,7 +6,7 @@ export const useStyles = createStyles({
     position: absolute;
     top: 60%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -45%);
     width: 400px;
     padding: 60px 20px;
     box-sizing: border-box;
@@ -35,13 +35,13 @@ export const useStyles = createStyles({
   middle: css`
     position: absolute;
     left: 50%;
-    transform: translate(-50%, -180%);
+    transform: translate(-50%, -125%);
     z-index: 999;
   `,
   button: css`
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 17px;
     font-size: 15px;
     letter-spacing: 0.15em;
     width: 350px;

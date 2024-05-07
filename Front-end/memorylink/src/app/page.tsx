@@ -23,7 +23,6 @@ function Home() {
           <Hero />
           <Information />
           <RecentReport />
-          <SuccessStories />
         </ClientLayout>
       )}
     </main>

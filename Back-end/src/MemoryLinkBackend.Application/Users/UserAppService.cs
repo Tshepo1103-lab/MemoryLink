@@ -25,7 +25,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MemoryLinkBackend.Users
 {
-    [AbpAuthorize(PermissionNames.Pages_Users)]
+    
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly IRepository<User, long> _repository;

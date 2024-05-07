@@ -18,6 +18,28 @@ type FieldType = {
   isActive?: Boolean;
 };
 
+const checkPasswordStrength = async (rule: any, value: string) => {
+  // Check if the password contains at least 8 characters
+  if (value.length < 8) {
+    throw new Error("Password must be at least 8 characters long.");
+  }
+
+  // Check if the password contains at least one lowercase letter
+  if (!/[a-z]/.test(value)) {
+    throw new Error("Password must contain at least one lowercase letter.");
+  }
+
+  // Check if the password contains at least one uppercase letter
+  if (!/[A-Z]/.test(value)) {
+    throw new Error("Password must contain at least one uppercase letter.");
+  }
+
+  // Check if the password contains at least one digit
+  if (!/\d/.test(value)) {
+    throw new Error("Password must contain at least one digit.");
+  }
+};
+
 const Register = () => {
   const { styles } = useStyles();
 
@@ -55,7 +77,7 @@ const Register = () => {
         <img
           src="/assets/images/Logo.png"
           alt="logo"
-          style={{ width: "300px" }}
+          style={{ width: "400px" }}
           className={styles.middle}
         />
         <Form
@@ -87,7 +109,7 @@ const Register = () => {
           <Form.Item
             name="emailAddress"
             rules={[
-              { type: "string", message: "The input is not valid E-mail!" },
+              { type: "email", message: "The input is not valid E-mail!" },
               { required: true, message: "Please input your E-mail!" },
             ]}
           >
@@ -95,7 +117,10 @@ const Register = () => {
           </Form.Item>
           <Form.Item<FieldType>
             name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
+            rules={[
+              { required: true, message: "Please input your password!" },
+              { validator: checkPasswordStrength },
+            ]}
           >
             <Input.Password placeholder="Password" className={styles.input} />
           </Form.Item>

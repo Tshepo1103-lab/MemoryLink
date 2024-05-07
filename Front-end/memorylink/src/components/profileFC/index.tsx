@@ -166,13 +166,6 @@ const ManageProfilesTable = ({ hospitalId }: { hospitalId: string }) => {
       >
         <Form form={form} layout="vertical" initialValues={selectedProfile}>
           <Form.Item
-            name="name"
-            label="Name"
-            rules={[{ required: true, message: "Please enter the name" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
             name="gender"
             label="Gender"
             rules={[{ required: true, message: "Please enter the gender" }]}
@@ -180,9 +173,11 @@ const ManageProfilesTable = ({ hospitalId }: { hospitalId: string }) => {
             <Input />
           </Form.Item>
           <Form.Item
-            name="address"
-            label="Address"
-            rules={[{ required: true, message: "Please enter the address" }]}
+            name="admissionDate"
+            label="Admission Date"
+            rules={[
+              { required: true, message: "Please enter the admission date" },
+            ]}
           >
             <Input />
           </Form.Item>
@@ -194,17 +189,48 @@ const ManageProfilesTable = ({ hospitalId }: { hospitalId: string }) => {
             <Input />
           </Form.Item>
           <Form.Item
-            name="hospital"
-            label="Hospital"
-            rules={[{ required: true, message: "Please enter the hospital" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
             name="age"
             label="Age"
             rules={[{ required: true, message: "Please enter the age" }]}
           >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="build"
+            label="Build"
+            rules={[{ required: true, message: "Please enter the build" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="eyeColor"
+            label="Eye color"
+            rules={[{ required: true, message: "Please enter the eye color" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="height"
+            label="Height"
+            rules={[{ required: true, message: "Please enter the height" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="skinTone"
+            label="Skin tone"
+            rules={[{ required: true, message: "Please enter the height" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="type"
+            label="Type"
+            rules={[{ required: true, message: "Please enter the height" }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item name="moreDetails" label="More details">
             <Input />
           </Form.Item>
         </Form>

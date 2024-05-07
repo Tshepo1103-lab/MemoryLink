@@ -15,6 +15,10 @@ export enum ProfileActionEnum {
   getAProfileSuccess = "GET_PROFILE_SUCCESS",
   getAProfileError = "GET_PROFILE_ERROR",
 
+  getFaceProfileRequest = "GET_FACE_PROFILE_REQUEST",
+  getFaceProfileSuccess = "GET_FACE_PROFILE_SUCCESS",
+  getFaceProfileError = "GET_FACE_PROFILE_ERROR",
+
   createProfileRequest = "CREATE_PROFILE_REQUEST",
   createProfileSuccess = "CREATE_PROFILE_SUCCESS",
   createProfileError = "CREATE_PROFILE_ERROR",
@@ -22,6 +26,10 @@ export enum ProfileActionEnum {
   getbyHospitalProfileRequest = "HOSPITAL_PROFILE_REQUEST",
   getbyHospitalProfileSuccess = "HOSPITAL_PROFILE_SUCCESS",
   getbyHospitalProfileError = "HOSPITAL_PROFILE_ERROR",
+
+  getRecentProfileRequest = "RECENT_PROFILE_REQUEST",
+  getRecentProfileSuccess = "RECENT_PROFILE_SUCCESS",
+  getRecentProfileError = "RECENT_PROFILE_ERROR",
 }
 
 export const getProfilesRequest = createAction<IProfileStateContext>(
@@ -111,3 +119,40 @@ export const getbyhospitalProfileSuccess = createAction<
   isSuccess: true,
   hospitalProfiles,
 }));
+
+export const getRecentProfileRequest = createAction<IProfileStateContext>(
+  ProfileActionEnum.getRecentProfileRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+
+export const getRecentProfileSuccess = createAction<
+  IProfileStateContext,
+  IProfileResponse[]
+>(ProfileActionEnum.getRecentProfileSuccess, (recentProfile) => ({
+  isPending: false,
+  isError: false,
+  isSuccess: true,
+  recentProfile,
+}));
+export const getRecentProfilesError = createAction<IProfileStateContext>(
+  ProfileActionEnum.getRecentProfileError,
+  () => ({ isPending: false, isError: true, isSuccess: false }),
+);
+
+export const getFaceProfileRequest = createAction<IProfileStateContext>(
+  ProfileActionEnum.getFaceProfileRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+export const getFaceProfileSuccess = createAction<
+  IProfileStateContext,
+  IProfileResponse
+>(ProfileActionEnum.getFaceProfileSuccess, (profile: IProfileResponse) => ({
+  isPending: true,
+  isError: false,
+  isSuccess: false,
+  faceProfile: profile,
+}));
+export const getFaceProfileError = createAction<IProfileStateContext>(
+  ProfileActionEnum.getFaceProfileError,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);

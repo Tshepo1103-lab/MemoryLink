@@ -64,6 +64,41 @@ export const profileReducer = handleActions<
       ...state,
       ...action.payload,
     }),
+
+    [ProfileActionEnum.getRecentProfileRequest]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+
+    [ProfileActionEnum.getRecentProfileSuccess]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [ProfileActionEnum.getRecentProfileError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+
+    [ProfileActionEnum.getFaceProfileRequest]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+
+    [ProfileActionEnum.getFaceProfileSuccess]: (state, action) => {
+      const profile = action.payload.faceProfile;
+      const faceProfiles = state.faceProfiles
+        ? [...state.faceProfiles, profile]
+        : [profile];
+      return {
+        ...state,
+        ...action.payload,
+        faceProfiles,
+      };
+    },
+    [ProfileActionEnum.getFaceProfileError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
   },
   INITIAL_STATE,
 );

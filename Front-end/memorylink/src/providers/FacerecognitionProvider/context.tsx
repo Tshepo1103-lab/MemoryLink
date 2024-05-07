@@ -40,7 +40,7 @@ export interface IRecognitionStateContext {
 }
 
 export interface IRecognitionActionContext {
-  recogniseProfiles?: (image: string) => void;
+  recogniseProfiles?: (image: FormData) => void;
 }
 
 export const RecognitionStateContext =
