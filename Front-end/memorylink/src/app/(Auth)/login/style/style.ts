@@ -4,7 +4,7 @@ export const useStyles = createStyles({
   main: css``,
   form: css`
     position: absolute;
-    top: 60%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;

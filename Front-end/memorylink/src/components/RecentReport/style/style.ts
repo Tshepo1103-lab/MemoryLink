@@ -25,11 +25,12 @@ export const useStyles = createStyles({
     color: #fff !important;
   `,
   card: css`
-    width: 100%;
+    width: 80%;
     height: 100%;
     display: flex;
     flex-direction: column;
     background-color: #003366;
+    margin: 0 auto;
   `,
   image: css`
     flex: 1;
@@ -37,5 +38,12 @@ export const useStyles = createStyles({
     height: 40vh;
     marginleft: 40px;
     width: 600px;
+  `,
+  paragraph: css`
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    margin-left: 30px;
   `,
 });

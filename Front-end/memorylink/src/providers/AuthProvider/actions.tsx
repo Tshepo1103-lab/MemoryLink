@@ -2,6 +2,7 @@ import { createAction } from "redux-actions";
 import {
   ILoginResponse,
   INITIAL_STATE,
+  IUser,
   IUserResponse,
   IUserStateContext,
 } from "./context";
@@ -15,6 +16,10 @@ export enum UserActionEnum {
   regiserUserRequest = "REGISTER_REQUEST",
   registerUserSuccess = "REGISTER_SUCCESS",
   registerUserError = "REGISTER_ERROR",
+
+  getUserRequest = "GET_USER_REQUEST",
+  getUserSuccess = "GET_USER_SUCCESS",
+  getrUserError = "GET_USER_ERROR",
 }
 
 export const loginUserAction = createAction<IUserStateContext>(
@@ -58,5 +63,24 @@ export const regiserUserResponse = createAction<
 }));
 export const registerErrorAction = createAction<IUserStateContext>(
   UserActionEnum.registerUserError,
+  () => ({ isPending: false, isError: true, isSuccess: false }),
+);
+
+export const getUserAction = createAction<IUserStateContext>(
+  UserActionEnum.getUserRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+
+export const getUserResponse = createAction<IUserStateContext, IUser>(
+  UserActionEnum.getUserSuccess,
+  (userDetails) => ({
+    isPending: false,
+    isError: false,
+    isSuccess: true,
+    userDetails,
+  }),
+);
+export const getErrorAction = createAction<IUserStateContext>(
+  UserActionEnum.getrUserError,
   () => ({ isPending: false, isError: true, isSuccess: false }),
 );

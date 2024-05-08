@@ -18,21 +18,25 @@ const Information = () => {
       title: "HOSPITALS",
       icon: <PlusSquareOutlined />,
       content: "Filter your search",
+      src: "/hospitals",
     },
     {
       title: "PROFILES",
       icon: <ProfileOutlined />,
       content: "Browse recent reports",
+      src: "/profiles",
     },
     {
       title: "AI SEARCH",
       icon: <OpenAIOutlined />,
       content: "Describe the person you are looking for",
+      src: "/profiles",
     },
     {
       title: "IMAGE SEARCH",
       icon: <FileImageOutlined />,
       content: "Upload an image",
+      src: "/profiles",
     },
   ];
 
@@ -49,7 +53,7 @@ const Information = () => {
             </div>
             <div className={styles.icon}>{card.icon}</div>
             <div style={{ marginBottom: 10 }}>{card.content}</div>
-            <Button type="primary" className={styles.view}>
+            <Button type="primary" className={styles.view} href={card.src}>
               View
             </Button>
           </Card>

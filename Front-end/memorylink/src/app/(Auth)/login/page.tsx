@@ -51,7 +51,7 @@ const Login = () => {
         <img
           src="/assets/images/Logo.png"
           alt="logo"
-          style={{ width: "500px" }}
+          style={{ width: "400px" }}
           className={styles.middle}
         />
         <Form

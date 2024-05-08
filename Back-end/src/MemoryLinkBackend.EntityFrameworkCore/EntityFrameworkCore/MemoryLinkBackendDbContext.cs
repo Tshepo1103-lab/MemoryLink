@@ -15,6 +15,7 @@ namespace MemoryLinkBackend.EntityFrameworkCore
             : base(options)
         {
         }
+        public DbSet<AdminRole> AdminRoles { get; set; }
         public DbSet<Hospital>Hospitals { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Profile> Profiles { get; set; }

@@ -33,6 +33,19 @@ export const userReducer = handleActions<IUserStateContext, IUserStateContext>(
       ...state,
       ...action.payload,
     }),
+
+    [UserActionEnum.getUserRequest]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [UserActionEnum.getUserSuccess]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [UserActionEnum.getrUserError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
   },
   INITIAL_STATE,
 );

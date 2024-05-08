@@ -183,10 +183,12 @@ const PatientDetailsPage = ({ params }: { params: { profileId: string } }) => {
             >
               <Table
                 style={{
-                  width: "100%",
+                  width: "fit-content",
+                  alignSelf: "center",
+                  margin: "auto !important",
                   height: "40vh",
                   marginLeft: "20px",
-                  display: "flex",
+                  display: "block",
                   marginTop: "10px",
                   marginBottom: "10px",
                 }}

@@ -6,8 +6,17 @@ export const INITIAL_STATE: IUserStateContext = {
   isError: false,
   UserLogin: undefined,
   UserRegister: undefined,
+  userDetails: undefined,
 };
 
+export interface IUser {
+  id: string;
+  userName: string;
+  name: string;
+  surname: string;
+  phoneNumber: string;
+  emailAddress: string;
+}
 export interface ILoginRequest {
   userNameOrEmailAddress?: string;
   password?: string;
@@ -17,7 +26,6 @@ export interface ILoginResponse {
   accessToken: string;
   encryptedAccessToken: string;
   expireInSeconds: number;
-  userId: number;
   role: string;
 }
 
@@ -50,12 +58,14 @@ export interface IUserStateContext {
   isError?: Boolean;
   UserLogin?: ILoginResponse;
   UserRegister?: IUserResponse;
+  userDetails?: IUser;
 }
 
 export interface IUserActionContext {
   login?: (payload: ILoginRequest) => void;
   logout?: () => void;
   register?: (payload: IUserRequest) => void;
+  getuserdetails?: () => void;
 }
 
 export const UserStateContext = createContext<IUserStateContext>(INITIAL_STATE);

@@ -1,75 +1,75 @@
-export const ageRange = {
-  under18: 1,
-  "18-24": 2,
-  "25-34": 3,
-  "35-44": 4,
-  "45-54": 5,
-  "55-64": 6,
-  over65: 7,
-  other: 10,
-};
+export const ageRange = [
+  { value: 1, label: " under18" },
+  { value: 2, label: "18-24" },
+  { value: 3, label: "25-34" },
+  { value: 4, label: "35-44" },
+  { value: 5, label: "45-54" },
+  { value: 6, label: "55-64" },
+  { value: 7, label: "over65" },
+  { value: 10, label: "other" },
+];
 
-export const build = {
-  slender: 1,
-  muscular: 2,
-  curvy: 3,
-  stocky: 4,
-  athletic: 5,
-  lanky: 6,
-  chubby: 7,
-  other: 8,
-};
+export const gender = [
+  { value: 1, label: "Female" },
+  { value: 2, label: "Male" },
+  { value: 3, label: "Other" },
+];
 
-export const eyeColor = {
-  brown: 1,
-  hazel: 2,
-  blue: 3,
-  green: 4,
-  gray: 5,
-  amber: 6,
-  heterochromia: 7,
-  black: 8,
-  red: 9,
-  other: 10,
-};
+export const build = [
+  { value: 1, label: "slender" },
+  { value: 2, label: "muscular" },
+  { value: 3, label: "curvy" },
+  { value: 4, label: "stocky" },
+  { value: 5, label: "athletic" },
+  { value: 6, label: "lanky" },
+  { value: 7, label: "chubby" },
+  { value: 8, label: "other" },
+];
 
-export const gender = {
-  female: 1,
-  male: 2,
-  other: 3,
-};
+export const eyeColor = [
+  { value: 1, label: "brown" },
+  { value: 2, label: "hazel" },
+  { value: 3, label: "blue" },
+  { value: 4, label: "green" },
+  { value: 5, label: "gray" },
+  { value: 6, label: "amber" },
+  { value: 7, label: "heterochromia" },
+  { value: 8, label: "black" },
+  { value: 9, label: "red" },
+  { value: 10, label: "other" },
+];
 
-export const hairColor = {
-  black: 1,
-  brown: 2,
-  blonde: 3,
-  red: 4,
-  gray: 5,
-  white: 6,
-  other: 10,
-};
+export const hairColor = [
+  { value: 1, label: "black" },
+  { value: 2, label: "brown" },
+  { value: 3, label: "blonde" },
+  { value: 4, label: "red" },
+  { value: 5, label: "gray" },
+  { value: 6, label: "white" },
+  { value: 10, label: "other" },
+];
 
-export const height = {
-  "lessThan 1.50m": 1,
-  "1.50-1.59m": 2,
-  "1.60-1.69m": 3,
-  "1.70-1.79m": 4,
-  "1.80-1.89m": 5,
-  "1.90m-Above": 6,
-  other: 10,
-};
+export const height = [
+  { value: 1, label: "lessThan 1.50m" },
+  { value: 2, label: "1.50-1.59m" },
+  { value: 3, label: "1.60-1.69m" },
+  { value: 4, label: "1.70-1.79m" },
+  { value: 5, label: "1.80-1.89m" },
+  { value: 6, label: "1.90m-Above" },
+  { value: 10, label: "other" },
+];
 
-export const skinTone = {
-  Fair: 1,
-  Light: 2,
-  Medium: 3,
-  Olive: 4,
-  Dark: 5,
-  Other: 10,
-};
+export const skinTone = [
+  { value: 1, label: "Fair" },
+  { value: 2, label: "Light" },
+  { value: 3, label: "Medium" },
+  { value: 4, label: "Olive" },
+  { value: 5, label: "Dark" },
+  { value: 10, label: "Other" },
+];
 
-export const type = {
-  Deceased: 1,
-  Patient: 2,
-  Other: 10,
-};
+export const type = [
+  { value: 1, label: "Deceased" },
+  { value: 2, label: "Patient" },
+  { value: 10, label: "Other" },
+];

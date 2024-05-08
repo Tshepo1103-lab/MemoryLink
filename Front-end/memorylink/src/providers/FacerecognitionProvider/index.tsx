@@ -32,14 +32,18 @@ export const RecognitionProvider = ({
     }
   }, [state]);
 
-  const recogniseProfiles = async (input: string) => {
+  const recogniseProfiles = async (input: FormData) => {
     dispatch(recognitionProfilesRequest());
     try {
-      console.log("Get here !!!!");
       const endpoint = "http://127.0.0.1:8000/facematch";
-      const response = await axios.post(endpoint, input);
+      const response = await axios.post(endpoint, input, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Accept: "application/json",
+        },
+      });
       if (response.data.success) {
-        dispatch(recognitionProfilesSuccess(response.data.result));
+        dispatch(recognitionProfilesSuccess(response.data));
       }
     } catch (error) {
       dispatch(recognitionProfilesError());

@@ -1,27 +1,27 @@
 "use client";
-
-import React from "react";
+import React, { useEffect } from "react";
 import { useStyles } from "./style/style";
 import recent from "./style/recent.module.css";
 import { Carousel, Card, Flex, Typography, Button } from "antd";
+import {
+  useProfileActions,
+  useProfileState,
+} from "@/providers/ProfileProvider";
+import { useRouter } from "next/navigation";
 
 const RecentReport = () => {
-  const data = [
-    {
-      hospital: "Steve Biko",
-      src: "/hospitals",
-      image: "assets/images/patient1.jpg",
-      content: "wertyuiosdfghj",
-    },
-    {
-      hospital: "Tshwane",
-      src: "/profiles",
-      image: "assets/images/patient2.jpg",
-      content: "wertyuiosdfghj",
-    },
-  ];
-
+  const { getRecent } = useProfileActions();
+  const status = useProfileState();
   const { styles } = useStyles();
+  const { push } = useRouter();
+
+  useEffect(() => {
+    if (getRecent) getRecent();
+  }, []);
+
+  const handleClick = (id: number) => {
+    push(`/profiles/${id}`);
+  };
 
   return (
     <div className={styles.main}>
@@ -30,39 +30,58 @@ const RecentReport = () => {
           <h1 className={styles.header}>LATEST REPORTED</h1>
           <br />
           <Carousel effect="fade" style={{ width: "100%", height: "50vh" }}>
-            {data.map((item, index) => (
+            {status?.recentProfile?.map((item, index) => (
               <div key={index} style={{ height: "100%" }}>
                 <Card className={styles.card}>
                   <Flex>
                     <div>
                       <img
                         alt="avatar"
-                        src={item.image}
+                        src={`data:image/png;base64,${item.image}`}
                         className={styles.image}
                       />
                     </div>
-                    <div style={{ flex: 1, marginLeft: 16 }}>
+                    <div style={{ flex: 1 }}>
                       <Typography.Title level={2} style={{ color: "#fff" }}>
-                        {item.hospital}
+                        {item.hospital.name}
                       </Typography.Title>
                       <div style={{ display: "flex", flexDirection: "row" }}>
                         <div style={{ flex: 1 }}>
-                          <p>{item.content}</p>
-                          <p>{item.content}</p>
-                          <p>{item.content}</p>
+                          <div>
+                            <p className={styles.paragraph}>
+                              Gender: {item.gender}
+                            </p>
+                            <p className={styles.paragraph}>
+                              Eye Color: {item.eyeColor}
+                            </p>
+                            <p className={styles.paragraph}>
+                              Location Found: {item.locationFound}
+                            </p>
+                          </div>
                         </div>
                         <div style={{ flex: 1 }}>
-                          <p>{item.content}</p>
-                          <p>{item.content}</p>
-                          <Button
-                            type="primary"
-                            href={item.src}
-                            target="_blank"
-                          >
-                            Send Lead
-                          </Button>
+                          <div>
+                            <p className={styles.paragraph}>
+                              Skin Tone: {item.skinTone}
+                            </p>
+                            <p className={styles.paragraph}>
+                              Hair Color: {item.hairColor}
+                            </p>
+                          </div>
                         </div>
                       </div>
+                      <Button
+                        style={{
+                          backgroundColor: "#fff",
+                          color: "#003366",
+                          width: "150px",
+                          marginTop: "100px",
+                        }}
+                        type="primary"
+                        onClick={() => handleClick(item.id)}
+                      >
+                        More details
+                      </Button>
                     </div>
                   </Flex>
                 </Card>

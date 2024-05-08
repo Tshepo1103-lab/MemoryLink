@@ -15,6 +15,10 @@ export enum ProfileActionEnum {
   getAProfileSuccess = "GET_PROFILE_SUCCESS",
   getAProfileError = "GET_PROFILE_ERROR",
 
+  getFaceProfileRequest = "GET_FACE_PROFILE_REQUEST",
+  getFaceProfileSuccess = "GET_FACE_PROFILE_SUCCESS",
+  getFaceProfileError = "GET_FACE_PROFILE_ERROR",
+
   createProfileRequest = "CREATE_PROFILE_REQUEST",
   createProfileSuccess = "CREATE_PROFILE_SUCCESS",
   createProfileError = "CREATE_PROFILE_ERROR",
@@ -22,6 +26,22 @@ export enum ProfileActionEnum {
   getbyHospitalProfileRequest = "HOSPITAL_PROFILE_REQUEST",
   getbyHospitalProfileSuccess = "HOSPITAL_PROFILE_SUCCESS",
   getbyHospitalProfileError = "HOSPITAL_PROFILE_ERROR",
+
+  getRecentProfileRequest = "RECENT_PROFILE_REQUEST",
+  getRecentProfileSuccess = "RECENT_PROFILE_SUCCESS",
+  getRecentProfileError = "RECENT_PROFILE_ERROR",
+
+  getAllProfileRequest = "GET_ALL_PROFILE_REQUEST",
+  getAllProfileSuccess = "GET_ALL_PROFILE_SUCCESS",
+  getAllProfileError = "GET_ALL_PROFILE_ERROR",
+
+  putProfileRequest = "PUT_PROFILE_REQUEST",
+  putProfileSuccess = "PUT_PROFILE_SUCCESS",
+  putProfileError = "PUT_PROFILE_ERROR",
+
+  countAllProfile = "COUNT_ALL_REQUEST",
+  countAliveProfile = "COUNT_ALIVE_REQUEST",
+  countDeceasedProfile = "COUNT_DECEASAED_REQUEST",
 }
 
 export const getProfilesRequest = createAction<IProfileStateContext>(
@@ -111,3 +131,101 @@ export const getbyhospitalProfileSuccess = createAction<
   isSuccess: true,
   hospitalProfiles,
 }));
+
+export const getRecentProfileRequest = createAction<IProfileStateContext>(
+  ProfileActionEnum.getRecentProfileRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+
+export const getRecentProfileSuccess = createAction<
+  IProfileStateContext,
+  IProfileResponse[]
+>(ProfileActionEnum.getRecentProfileSuccess, (recentProfile) => ({
+  isPending: false,
+  isError: false,
+  isSuccess: true,
+  recentProfile,
+}));
+export const getRecentProfilesError = createAction<IProfileStateContext>(
+  ProfileActionEnum.getRecentProfileError,
+  () => ({ isPending: false, isError: true, isSuccess: false }),
+);
+
+export const getFaceProfileRequest = createAction<IProfileStateContext>(
+  ProfileActionEnum.getFaceProfileRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+export const getFaceProfileSuccess = createAction<
+  IProfileStateContext,
+  IProfileResponse
+>(ProfileActionEnum.getFaceProfileSuccess, (profile: IProfileResponse) => ({
+  isPending: true,
+  isError: false,
+  isSuccess: false,
+  faceProfile: profile,
+}));
+export const getFaceProfileError = createAction<IProfileStateContext>(
+  ProfileActionEnum.getFaceProfileError,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+
+export const getAllProfileRequest = createAction<IProfileStateContext>(
+  ProfileActionEnum.getAllProfileRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+
+export const getAllProfileSuccess = createAction<
+  IProfileStateContext,
+  IProfileResponse[]
+>(ProfileActionEnum.getAProfileSuccess, (allProfiles) => ({
+  isPending: false,
+  isError: false,
+  isSuccess: true,
+  allProfiles,
+}));
+
+export const getAllProfileError = createAction<IProfileStateContext>(
+  ProfileActionEnum.getAllProfileError,
+  () => ({ isPending: false, isError: true, isSuccess: false }),
+);
+
+export const updateprofileRequest = createAction<IProfileStateContext>(
+  ProfileActionEnum.putProfileRequest,
+  () => ({ isPending: true, isError: false, isSuccess: false }),
+);
+export const updateprofileSuccess = createAction<IProfileStateContext>(
+  ProfileActionEnum.putProfileSuccess,
+  () => ({ isPending: false, isError: false, isSuccess: true }),
+);
+export const updateprofileError = createAction<IProfileStateContext>(
+  ProfileActionEnum.putProfileError,
+  () => ({ isPending: false, isError: true, isSuccess: false }),
+);
+
+export const countall = createAction<IProfileStateContext, string>(
+  ProfileActionEnum.countAllProfile,
+  (allProfileCount) => ({
+    isPending: false,
+    isError: false,
+    isSuccess: false,
+    allProfileCount,
+  }),
+);
+export const countallalive = createAction<IProfileStateContext, string>(
+  ProfileActionEnum.countAliveProfile,
+  (aliveCount) => ({
+    isPending: false,
+    isError: false,
+    isSuccess: true,
+    aliveCount,
+  }),
+);
+export const countalldeceased = createAction<IProfileStateContext, string>(
+  ProfileActionEnum.countDeceasedProfile,
+  (deceasedCount) => ({
+    isPending: false,
+    isError: false,
+    isSuccess: true,
+    deceasedCount,
+  }),
+);

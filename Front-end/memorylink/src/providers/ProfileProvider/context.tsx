@@ -8,23 +8,31 @@ export const INITIAL_STATE: IProfileStateContext = {
   aliveprofile: undefined,
   profile: undefined,
   hospitalProfiles: undefined,
+  faceProfiles: undefined,
+  allProfiles: undefined,
+  aliveCount: undefined,
+  allProfileCount: undefined,
+  deceasedCount: undefined,
 };
 
 export interface IProfileRequest {
-  gender: number;
-  ageRange: number;
-  height: number;
-  build: number;
-  eyeColor: number;
-  skinTone: number;
-  hairColor: number;
+  id?: string;
+  gender: string;
+  ageRange: string;
+  height: string;
+  build: string;
+  eyeColor: string;
+  skinTone: string;
+  hairColor: string;
   locationFound: string;
   distinguishingFeature: string;
   moreDetails: string;
-  type: number;
+  type: string;
   ward: string;
   hospitalId: string;
-  file: string;
+  file: any;
+  imageUrl: { file: any };
+  admissionDate: string;
 }
 
 export interface IProfileResponse {
@@ -58,14 +66,30 @@ export interface IProfileStateContext {
   aliveprofile?: IProfileResponse[];
   profile?: IProfileResponse;
   hospitalProfiles?: IProfileResponse[];
+  recentProfile?: IProfileResponse[];
+  faceProfiles?: IProfileResponse[];
+  faceProfile?: IProfileResponse;
+  allProfiles?: IProfileResponse[];
+  aliveCount?: string;
+  allProfileCount?: string;
+  deceasedCount?: string;
 }
 
 export interface IProfileActionContext {
   getalldeceasedProfiles?: () => void;
   getallAliveProfiles?: () => void;
   getprofile?: (id: string) => void;
+  getFaceProfile?: (id: string) => void;
   createprofile?: (payload: IProfileRequest) => void;
   getbyhospital?: (id: string) => void;
+  getRecent?: () => void;
+  embed?: (id: any) => void;
+  deleteProfile?: (id: string) => void;
+  getallprofiles?: () => void;
+  updateprofile?: (payload: IProfileRequest) => void;
+  countallprofiles?: () => void;
+  countalive?: () => void;
+  countdeceased?: () => void;
 }
 
 export const ProfileStateContext =

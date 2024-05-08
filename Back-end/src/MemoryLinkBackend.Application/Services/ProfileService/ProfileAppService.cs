@@ -153,6 +153,44 @@ namespace MemoryLinkBackend.Services.ProfileService
             return profileDto;
         }
 
+        [HttpGet]
+        public async Task<List<NewProfileDto>> GetRecent5ByCountAsync()
+        {
+            var profiles = await _repository.GetAllIncluding(b => b.Hospital, x => x.Image)
+                .OrderByDescending(b => b.CreationTime) 
+                .Take(5) 
+                .ToListAsync();
+            var profilesdto = ObjectMapper.Map<List<NewProfileDto>>(profiles);
+            foreach (var profile in profilesdto)
+            {
+                if (profile.image != null)
+                {
+                    profile.image = await _fileAppService.GetFile((Guid)profile.imageId);
+                }
+
+            }
+
+            return profilesdto; 
+
+
+        }
+        [HttpGet]
+        public async Task<int> GetAllProfilesCountAsync()
+        {
+            return await _repository.CountAsync();
+        }
+        [HttpGet]
+        public async Task<int> GetDeceasedProfilesCountAsync()
+        {
+            return await _repository.CountAsync(x => x.Type==Domain.enums.ReflistType.Deceased);
+        }
+
+        [HttpGet]
+        public async Task<int> GetAliveProfilesCountAsync()
+        {
+            return await _repository.CountAsync(x => x.Type == Domain.enums.ReflistType.Deceased);
+        }
+
 
     }
 }

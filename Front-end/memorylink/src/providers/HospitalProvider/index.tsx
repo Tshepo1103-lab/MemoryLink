@@ -22,6 +22,7 @@ import {
 } from "./context";
 import { hospitalReducer } from "./reducer";
 import { useUserState } from "../AuthProvider";
+import { message } from "antd";
 
 export const HospitalProvider = ({
   children,
@@ -62,6 +63,7 @@ export const HospitalProvider = ({
       const response = await instance.post(endpoint, payload);
       if (response.data.success) {
         dispatch(addhospitalSuccess());
+        message.success("Hospital added succesfully");
         getallhospital();
       }
     } catch (error) {
@@ -78,6 +80,7 @@ export const HospitalProvider = ({
       const response = await instance.delete(`${endpoint + id}`);
       if (response.data.success) {
         dispatch(deletehospitalSuccess());
+        message.success("Hospital deleted succesfully");
         getallhospital();
       }
     } catch (error) {
@@ -92,6 +95,7 @@ export const HospitalProvider = ({
       const response = await instance.put(endpoint, payload);
       if (response.data.success) {
         dispatch(updatehospitalSuccess());
+        message.success("Hospital updated succesfully");
         getallhospital();
       }
     } catch (error) {

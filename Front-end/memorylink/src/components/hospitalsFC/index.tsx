@@ -43,6 +43,7 @@ const ManageHospitalsTable = () => {
     {
       title: "Action",
       key: "action",
+      width: "1%",
       render: (_: any, record: any) => (
         <Space size="middle">
           <Button onClick={() => editHospital(record)}>

@@ -25,7 +25,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MemoryLinkBackend.Users
 {
-    [AbpAuthorize(PermissionNames.Pages_Users)]
+    
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
         private readonly IRepository<User, long> _repository;
@@ -71,6 +71,31 @@ namespace MemoryLinkBackend.Users
             if (input.RoleNames != null)
             {
                 CheckErrors(await _userManager.SetRolesAsync(user, input.RoleNames));
+            }
+
+            CurrentUnitOfWork.SaveChanges();
+
+            return MapToEntityDto(user);
+        }
+
+        [AbpAllowAnonymous]
+        public  async Task<UserDto> CreateAdmin(CreateUserDto input)
+        {
+            CheckCreatePermission();
+
+            var user = ObjectMapper.Map<User>(input);
+
+            user.TenantId = AbpSession.TenantId;
+            user.IsEmailConfirmed = true;
+
+            await _userManager.InitializeOptionsAsync(AbpSession.TenantId);
+
+            CheckErrors(await _userManager.CreateAsync(user, input.Password));
+
+            if (input.RoleNames != null)
+            {
+                CheckErrors(await _userManager.SetRolesAsync(user, input.RoleNames));
+
             }
 
             CurrentUnitOfWork.SaveChanges();

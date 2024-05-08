@@ -37,7 +37,7 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   const handleclick = () => {
-    push(`/admin`);
+    push(`/manageprofiles`);
   };
   return (
     <Layout>

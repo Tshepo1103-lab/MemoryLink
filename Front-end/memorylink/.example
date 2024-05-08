@@ -1,0 +1,4 @@
+# Rename this file to .env and fill in the actual values for your environment.
+process.env.NEXT_PUBLIC_PASS=API_KEY=your_api_key
+
+
