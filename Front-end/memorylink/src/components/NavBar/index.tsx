@@ -10,7 +10,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 import { useStyles } from "./style/style";
-import { useUserActions } from "../../providers/AuthProvider";
+import { useUserActions, useUserState } from "../../providers/AuthProvider";
 import { loginSuccessAction } from "@/providers/AuthProvider/actions";
 import {
   ILoginResponse,
@@ -21,7 +21,8 @@ import { Button, Drawer } from "antd";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { logout } = useUserActions();
+  const { logout, getuserdetails } = useUserActions();
+  const status = useUserState();
   const [state, dispatch] = useReducer(userReducer, INITIAL_STATE);
 
   useEffect(() => {
@@ -70,6 +71,10 @@ const Navbar = () => {
       //   localStorage.clear();
       // }
     }
+  }, [state]);
+
+  useEffect(() => {
+    if (getuserdetails) getuserdetails();
   }, [state]);
 
   const navLinks = [
@@ -131,9 +136,9 @@ const Navbar = () => {
           style={{ backgroundColor: "#003366" }}
         >
           <div className={styles.drawerItems}>
-            <h2>Tshepo</h2>
-            <h2>Mahlangu</h2>
-            <h2>Tshepo@gmail.com</h2>
+            <h2>{status.userDetails?.name}</h2>
+            <h2>{status.userDetails?.surname}</h2>
+            <h2>{status.userDetails?.emailAddress}</h2>
             <br />
           </div>
           <div>

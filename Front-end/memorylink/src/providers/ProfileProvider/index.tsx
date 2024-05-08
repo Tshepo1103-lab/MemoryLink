@@ -246,7 +246,7 @@ export const ProfileProvider = ({
       });
       if (response.data.success) {
         dispatch(createProfileSuccess());
-        // if (embed) embed(response.data.result.id);
+        if (embed) embed(response.data.result.id);
       }
     } catch (error) {
       dispatch(createProfileError());

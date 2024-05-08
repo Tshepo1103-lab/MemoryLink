@@ -13,6 +13,7 @@ import {
   useProfileState,
 } from "@/providers/ProfileProvider";
 import { useEffect } from "react";
+import { toNumber } from "lodash";
 
 const DashboardFC = () => {
   const state = useProfileState();
@@ -85,7 +86,10 @@ const DashboardFC = () => {
           </Space>
           <Progress
             type="circle"
-            percent={95}
+            percent={
+              (toNumber(state?.aliveCount) / toNumber(state.allProfileCount)) *
+              100
+            }
             width={80}
             strokeWidth={10}
             strokeColor={{
@@ -117,7 +121,11 @@ const DashboardFC = () => {
           </Space>
           <Progress
             type="circle"
-            percent={40}
+            percent={
+              (toNumber(state?.deceasedCount) /
+                toNumber(state.allProfileCount)) *
+              100
+            }
             width={80}
             strokeWidth={10}
             strokeColor={{

@@ -36,6 +36,10 @@ import {
 } from "@/utils/enums/reflist";
 import { IProfileRequest } from "@/providers/ProfileProvider/context";
 import moment from "moment";
+import {
+  useHospitalActions,
+  useHospitalState,
+} from "@/providers/HospitalProvider";
 
 const ManageProfilesTable = ({
   params,
@@ -45,13 +49,16 @@ const ManageProfilesTable = ({
   const status = useProfileState();
   const { createprofile, deleteProfile, getallprofiles, updateprofile } =
     useProfileActions();
+  const { getallhospital } = useHospitalActions();
+  const state = useHospitalState();
   const [dataSource, setDataSource] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [form] = Form.useForm();
 
   useEffect(() => {
-    if (getallprofiles) getallprofiles();
+    if (getallprofiles || getallhospital) getallprofiles();
+    getallhospital();
   }, []);
 
   const columns = [
@@ -346,7 +353,9 @@ const ManageProfilesTable = ({
               <Form.Item
                 name="skinTone"
                 label="Skin tone"
-                rules={[{ required: true, message: "Please enter the height" }]}
+                rules={[
+                  { required: true, message: "Please enter the skinTone" },
+                ]}
               >
                 <Select
                   options={skinTone.map((item) => ({
@@ -358,7 +367,7 @@ const ManageProfilesTable = ({
               <Form.Item
                 name="type"
                 label="Type"
-                rules={[{ required: true, message: "Please enter the height" }]}
+                rules={[{ required: true, message: "Please enter the type" }]}
               >
                 <Select
                   options={type.map((item) => ({
@@ -366,6 +375,15 @@ const ManageProfilesTable = ({
                     label: item.label,
                   }))}
                 />
+              </Form.Item>
+              <Form.Item
+                name="locationFound"
+                label="Location Found"
+                rules={[
+                  { required: true, message: "Please enter the location" },
+                ]}
+              >
+                <Input />
               </Form.Item>
               <Form.Item
                 name="ward"
@@ -379,7 +397,12 @@ const ManageProfilesTable = ({
                 label="Hospital"
                 rules={[{ required: true, message: "Please enter the height" }]}
               >
-                <Input />
+                <Select
+                  options={state?.hospitals?.map((item) => ({
+                    value: item.id,
+                    label: item.name,
+                  }))}
+                />
               </Form.Item>
               <Form.Item
                 name="distinguishingFeature"

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useReducer } from "react";
 import { getRole } from "../../utils/decoder/decoder";
 import {
+  getUserResponse,
   loginErrorAction,
   loginSuccessAction,
   loginUserAction,
@@ -16,6 +17,7 @@ import {
   ILoginRequest,
   ILoginResponse,
   INITIAL_STATE,
+  IUser,
   IUserActionContext,
   IUserRequest,
   IUserStateContext,
@@ -125,9 +127,34 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch(registerErrorAction());
     }
   };
+
+  const getuserdetails = async () => {
+    const token = localStorage.getItem("accessToken");
+    try {
+      const endpoint = "api/services/app/Session/GetCurrentLoginInformations";
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_PASS + endpoint}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      if (response.data.success) {
+        dispatch(getUserResponse(response.data.result.user));
+      }
+    } catch (error) {
+      message.error("User not logged");
+      throw error; // Re-throw the error to be handled by the caller
+    }
+  };
+
   return (
     <UserStateContext.Provider value={state}>
-      <UserActionContext.Provider value={{ login, logout, register }}>
+      <UserActionContext.Provider
+        value={{ login, logout, register, getuserdetails }}
+      >
         {children}
       </UserActionContext.Provider>
     </UserStateContext.Provider>
