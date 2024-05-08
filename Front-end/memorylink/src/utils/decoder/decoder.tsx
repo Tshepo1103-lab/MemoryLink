@@ -45,3 +45,20 @@ export const getRole = (loginObj: any): string => {
 
   return "client";
 };
+export const getId = (token: any): string => {
+  if (token) {
+    const decoded = decodeToken(token);
+    return `${decoded[AbpTokenProperies.nameidentifier]}`.toLocaleLowerCase();
+  }
+
+  return "1";
+};
+
+export const getrole = (token: any): string => {
+  if (token) {
+    const decoded = decodeToken(token);
+    return `${decoded[AbpTokenProperies.role]}`.toLocaleLowerCase();
+  }
+
+  return "";
+};

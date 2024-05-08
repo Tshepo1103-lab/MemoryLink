@@ -33,13 +33,15 @@ export const useStyles = createStyles({
     box-sizing: border-box;
   `,
   logoutButton: css`
-    color: #fff;
-    height: 64;
-    font-size:25px;
-    right:0;
-    align-items:center;
-    margin-right:100px;
-    position:absolute;
+    display: flex-row;
+    color: #009999;
+    font-size: 25px;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 50px;
+    &:hover {
+      color: #ffffff !important;
+    }
   `,
   ContainerButton: css`
     margin-bottom: 20px;

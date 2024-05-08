@@ -9,31 +9,33 @@ import { useUserActions } from "@/providers/AuthProvider";
 const { Option } = Select;
 
 type FieldType = {
-  name: string,
-  surname: string,
-  userName: string,
-  emailAddress: string,
-  roleNames?: string[],
-  password?:string,
-  isActive?:Boolean
+  name: string;
+  surname: string;
+  userName: string;
+  emailAddress: string;
+  roleNames?: string[];
+  password?: string;
+  isActive?: Boolean;
 };
-
 
 const Register = () => {
   const { styles } = useStyles();
 
-  const {register} =useUserActions();
+  const { register } = useUserActions();
 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-    console.log("Success:", values); 
-    const updatedValues={
-      ...values,isActive:true,roleNames:['User']
-    }
-    if(register)
-      register(updatedValues)
+    console.log("Success:", values);
+    const updatedValues = {
+      ...values,
+      isActive: true,
+      roleNames: ["User"],
+    };
+    if (register) register(updatedValues);
   };
-  
-  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+
+  const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (
+    errorInfo,
+  ) => {
     console.log("Failed:", errorInfo);
   };
 
@@ -77,27 +79,27 @@ const Register = () => {
             <Input placeholder="Surname" className={styles.input} />
           </Form.Item>
           <Form.Item<FieldType>
-             name="userName"
+            name="userName"
             rules={[{ required: true, message: "Please input your username!" }]}
           >
             <Input placeholder="Username" className={styles.input} />
           </Form.Item>
           <Form.Item
-                  name="emailAddress"
-                  rules={[
-                      { type: 'string', message: 'The input is not valid E-mail!' },
-                      { required: true, message: 'Please input your E-mail!' },
-                  ]}
-              >
-                  <Input placeholder="Email" className={styles.input}/>
-              </Form.Item>
+            name="emailAddress"
+            rules={[
+              { type: "string", message: "The input is not valid E-mail!" },
+              { required: true, message: "Please input your E-mail!" },
+            ]}
+          >
+            <Input placeholder="Email" className={styles.input} />
+          </Form.Item>
           <Form.Item<FieldType>
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password placeholder="Password" className={styles.input} />
           </Form.Item>
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit" className={styles.button}>
               Register
             </Button>

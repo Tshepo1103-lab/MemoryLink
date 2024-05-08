@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useStyles } from "./style/style";
-import AboutFC from "@/components/about/page";
+import AboutFC from "@/components/about";
 
 const About = () => {
   const { styles } = useStyles();

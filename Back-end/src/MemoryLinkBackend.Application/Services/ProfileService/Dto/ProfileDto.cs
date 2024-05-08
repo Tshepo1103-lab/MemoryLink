@@ -2,6 +2,7 @@
 using Abp.AutoMapper;
 using MemoryLinkBackend.Domain;
 using MemoryLinkBackend.Domain.enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,5 +51,22 @@ namespace MemoryLinkBackend.Services.ProfileService.Dto
         /// 
         /// </summary>
         public  string MoreDetails { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateOnly AdmissionDate { get; set; }
+        ///<summary>
+        ///
+        /// </summary>
+        public ReflistType Type { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Ward {  get; set; }
+
+        public Guid HospitalId { get; set; }
+        public string? image { get; set; }
+        public Guid? imageId { get; set; }
+        public IFormFile? File { get; set; }
     }
 }

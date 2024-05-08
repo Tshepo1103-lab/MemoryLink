@@ -3,6 +3,12 @@
 import { Inter } from "next/font/google"; // Correct the import path
 import "./globals.css";
 import { AuthProvider } from "@/providers/AuthProvider";
+import { HospitalProvider } from "@/providers/HospitalProvider";
+import { AdminProvider } from "@/providers/AdminProviders";
+import { ProfileProvider } from "@/providers/ProfileProvider";
+import { CommentProvider } from "@/providers/CommentProvider";
+import { AISearchProvider } from "@/providers/AIsearchProvider";
+import { RecognitionProvider } from "@/providers/FacerecognitionProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
@@ -24,7 +30,19 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <HospitalProvider>
+            <ProfileProvider>
+              <AdminProvider>
+                <CommentProvider>
+                  <AISearchProvider>
+                    <RecognitionProvider>{children}</RecognitionProvider>
+                  </AISearchProvider>
+                </CommentProvider>
+              </AdminProvider>
+            </ProfileProvider>
+          </HospitalProvider>
+        </AuthProvider>
       </body>
     </html>
   );

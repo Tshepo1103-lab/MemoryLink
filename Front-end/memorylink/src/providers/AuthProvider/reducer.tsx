@@ -17,23 +17,22 @@ export const userReducer = handleActions<IUserStateContext, IUserStateContext>(
       ...action.payload,
     }),
 
-    [UserActionEnum.logoutUserRequest]: (state, action)=> ({
+    [UserActionEnum.logoutUserRequest]: (state, action) => ({
       ...state,
       ...action.payload,
     }),
-    [UserActionEnum.regiserUserRequest]: (state, action) =>({
+    [UserActionEnum.regiserUserRequest]: (state, action) => ({
       ...state,
-       ...action.payload
+      ...action.payload,
     }),
     [UserActionEnum.registerUserSuccess]: (state, action) => ({
       ...state,
-       ...action.payload
+      ...action.payload,
     }),
     [UserActionEnum.registerUserError]: (state, action) => ({
-       ...state,
-        ...action.payload 
+      ...state,
+      ...action.payload,
     }),
-
   },
   INITIAL_STATE,
 );

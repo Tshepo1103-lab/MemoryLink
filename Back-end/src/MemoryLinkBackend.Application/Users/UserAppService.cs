@@ -28,6 +28,7 @@ namespace MemoryLinkBackend.Users
     [AbpAuthorize(PermissionNames.Pages_Users)]
     public class UserAppService : AsyncCrudAppService<User, UserDto, long, PagedUserResultRequestDto, CreateUserDto, UserDto>, IUserAppService
     {
+        private readonly IRepository<User, long> _repository;
         private readonly UserManager _userManager;
         private readonly RoleManager _roleManager;
         private readonly IRepository<Role> _roleRepository;
@@ -45,6 +46,7 @@ namespace MemoryLinkBackend.Users
             LogInManager logInManager)
             : base(repository)
         {
+            _repository = repository;
             _userManager = userManager;
             _roleManager = roleManager;
             _roleRepository = roleRepository;
@@ -56,7 +58,7 @@ namespace MemoryLinkBackend.Users
         public override async Task<UserDto> CreateAsync(CreateUserDto input)
         {
             CheckCreatePermission();
-
+     
             var user = ObjectMapper.Map<User>(input);
 
             user.TenantId = AbpSession.TenantId;
@@ -74,6 +76,12 @@ namespace MemoryLinkBackend.Users
             CurrentUnitOfWork.SaveChanges();
 
             return MapToEntityDto(user);
+        }
+        public async Task<List<UserDto>> GetAllAdminsAsync()
+        {
+            var query = _repository.GetAllIncluding(x => x.Roles).AsQueryable();
+            var users = query.Where(x => x.Roles.Select(role => role.RoleId).Contains(1));
+            return ObjectMapper.Map<List<UserDto>>(await users.ToListAsync());
         }
 
         public override async Task<UserDto> UpdateAsync(UserDto input)

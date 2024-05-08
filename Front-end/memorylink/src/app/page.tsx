@@ -1,30 +1,33 @@
 "use client";
 
 import WithRole from "@/hoc/withRole";
-import Hero from "@/components/Hero/page";
-import Information from "@/components/Information/page";
-import RecentReport from "@/components/RecentReport/page";
-import SuccessStories from "@/components/SuccessStories/page";
+import Hero from "@/components/Hero";
+import Information from "@/components/Information";
+import RecentReport from "@/components/RecentReport";
+import SuccessStories from "@/components/SuccessStories";
 import Loader from "@/components/loader";
-import { useUserState } from './../providers/AuthProvider'
+import { useUserState } from "./../providers/AuthProvider";
 import ClientLayout from "./(Client)/layout";
 import { useStyles } from "./styles";
 
 function Home() {
   const { styles } = useStyles();
-  const status=useUserState();
+  const status = useUserState();
 
   return (
     <main className={styles.main}>
-      {status.isPending?
-      <Loader/>:
-      <ClientLayout>
-        <Hero />
-        <Information />
-        <RecentReport />
-      </ClientLayout>}
+      {status.isPending ? (
+        <Loader />
+      ) : (
+        <ClientLayout>
+          <Hero />
+          <Information />
+          <RecentReport />
+          <SuccessStories />
+        </ClientLayout>
+      )}
     </main>
   );
 }
 
-export default WithRole(Home);
+export default Home;

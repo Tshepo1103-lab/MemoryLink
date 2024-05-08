@@ -13,6 +13,6 @@ namespace MemoryLinkBackend.Domain
         ///<summary>
         ///
         /// </summary>
-        public virtual Lead Lead { get; set; }
+        public virtual Comment Lead { get; set; }
     }
 }
