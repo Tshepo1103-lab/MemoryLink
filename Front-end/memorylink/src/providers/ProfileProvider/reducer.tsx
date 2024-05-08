@@ -7,6 +7,44 @@ export const profileReducer = handleActions<
   IProfileStateContext
 >(
   {
+    [ProfileActionEnum.countAliveProfile]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [ProfileActionEnum.countDeceasedProfile]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [ProfileActionEnum.countAllProfile]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+
+    [ProfileActionEnum.putProfileRequest]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [ProfileActionEnum.putProfileSuccess]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [ProfileActionEnum.putProfileError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+
+    [ProfileActionEnum.getAllProfileRequest]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [ProfileActionEnum.getAllProfileSuccess]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
+    [ProfileActionEnum.getAllProfileError]: (state, action) => ({
+      ...state,
+      ...action.payload,
+    }),
     [ProfileActionEnum.getProfileRequest]: (state, action) => ({
       ...state,
       ...action.payload,

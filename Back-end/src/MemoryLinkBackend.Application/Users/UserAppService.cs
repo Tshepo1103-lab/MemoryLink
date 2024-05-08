@@ -77,6 +77,31 @@ namespace MemoryLinkBackend.Users
 
             return MapToEntityDto(user);
         }
+
+        [AbpAllowAnonymous]
+        public  async Task<UserDto> CreateAdmin(CreateUserDto input)
+        {
+            CheckCreatePermission();
+
+            var user = ObjectMapper.Map<User>(input);
+
+            user.TenantId = AbpSession.TenantId;
+            user.IsEmailConfirmed = true;
+
+            await _userManager.InitializeOptionsAsync(AbpSession.TenantId);
+
+            CheckErrors(await _userManager.CreateAsync(user, input.Password));
+
+            if (input.RoleNames != null)
+            {
+                CheckErrors(await _userManager.SetRolesAsync(user, input.RoleNames));
+
+            }
+
+            CurrentUnitOfWork.SaveChanges();
+
+            return MapToEntityDto(user);
+        }
         public async Task<List<UserDto>> GetAllAdminsAsync()
         {
             var query = _repository.GetAllIncluding(x => x.Roles).AsQueryable();

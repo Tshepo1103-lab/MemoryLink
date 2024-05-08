@@ -1,3 +1,4 @@
+"use client";
 import { SearchOutlined, UploadOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -32,7 +33,6 @@ const props: UploadProps = {
   method: "POST",
   onChange(info) {
     if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
     }
     if (info.file.status === "done") {
       message.success(`${info.file.name} file uploaded successfully`);
@@ -52,8 +52,8 @@ const ProfilesFC = () => {
   const {
     getalldeceasedProfiles,
     getallAliveProfiles,
-    getprofile,
     getFaceProfile,
+    getRecent,
   } = useProfileActions();
   const status = useProfileState();
   const state = useSearchState();
@@ -64,6 +64,7 @@ const ProfilesFC = () => {
   useEffect(() => {
     if (getalldeceasedProfiles) getalldeceasedProfiles();
     getallAliveProfiles();
+    getRecent();
   }, []);
 
   useEffect(() => {
@@ -193,7 +194,7 @@ const ProfilesFC = () => {
           <Table
             columns={columns}
             dataSource={status.deceasedprofile}
-            pagination={{ pageSize: 6 }}
+            pagination={{ pageSize: 4 }}
           />
         </ConfigProvider>
       ),
@@ -230,8 +231,9 @@ const ProfilesFC = () => {
       message.error("Please select a file to upload.");
       return;
     }
-    formData.append("file", file as FileType);
 
+    formData.append("file", file as FileType);
+    message.loading("Search is taking place");
     axios
       .post("http://localhost:8000/facematch", formData, {
         headers: {
@@ -241,43 +243,47 @@ const ProfilesFC = () => {
       })
       .then((res) => {
         setFile(undefined);
-        message.success("Profile Picture uploaded successfuly.");
+        message.success("Results are back!");
         return res.data;
       })
       .then((data) => {
-        console.log("data", data);
         setMatchProfiles(data);
         if (data.length) {
-          console.log("hey!!!!!!!!!!");
         } else {
-          return;
+          message.info("No results found");
         }
       })
-      .catch(() => message.error("Profile picture upload unsuccessfull."));
+      .catch(() => message.error("Profile not found"));
   };
 
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <h1 className={styles.header}>Profile Records</h1>
       <p className={styles.paragraph}>
         Upload an image to search, or alternatively, try to describe as much as
         possible. This is an AI search, which works with similarities.
       </p>
-      <div className={styles.searchContainer}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          height: "73px",
+          paddingTop: "10px",
+        }}
+      >
         <Form
-          style={{ display: "flex", flexDirection: "row" }}
+          style={{ display: "flex", marginRight: "16px" }}
           onFinish={onFinish}
-          className={styles.searchBox}
         >
-          <Form.Item name="value">
+          <Form.Item name="value" style={{ marginBottom: 0 }}>
             <Input
               placeholder="Search here"
-              style={{ width: 500, height: 30 }}
+              style={{ height: 30, width: "500px" }}
             />
           </Form.Item>
-          <Form.Item>
+          <Form.Item style={{ marginBottom: 0 }}>
             {state.searchedProfiles ? (
-              <Button onClick={handleReset}>reset</Button>
+              <Button onClick={handleReset}>Reset</Button>
             ) : (
               <Button htmlType="submit">
                 <SearchOutlined />
@@ -285,32 +291,33 @@ const ProfilesFC = () => {
             )}
           </Form.Item>
         </Form>
+        <div style={{ display: "flex" }}>
+          <Upload {...picUploadProps} style={{ marginRight: "16px" }}>
+            <Button
+              icon={<UploadOutlined />}
+              style={{
+                width: "100px",
+                backgroundColor: "#003366",
+                color: "#fff",
+              }}
+            >
+              Upload
+            </Button>
+          </Upload>
+          <>
+            {status.faceProfiles ? (
+              <Button onClick={handleReset}>Reset</Button>
+            ) : (
+              <Button
+                onClick={handlePicUpload}
+                style={{ backgroundColor: "#003366", color: "#fff" }}
+              >
+                <SearchOutlined />
+              </Button>
+            )}
+          </>
+        </div>
       </div>
-      <div style={{ display: "inline-flex" }}>
-        <Upload {...picUploadProps}>
-          <Button
-            icon={<UploadOutlined />}
-            style={{
-              width: "100px",
-              alignItems: "center",
-              backgroundColor: "#003366",
-              color: "#fff ",
-            }}
-          />
-        </Upload>
-        <Button
-          onClick={handlePicUpload}
-          style={{
-            width: "100px",
-            alignItems: "center",
-            backgroundColor: "#003366",
-            color: "#fff ",
-          }}
-        >
-          Upload
-        </Button>
-      </div>
-      <br />
       {state.isPending ? (
         <Loader />
       ) : (
@@ -345,7 +352,7 @@ const ProfilesFC = () => {
               )}
               {status.faceProfiles && (
                 <>
-                  <p className={styles.answer}>Face Profiles</p>
+                  <p className={styles.answer}>Face Recognition Results</p>
                   <br />
                   <ConfigProvider
                     theme={{

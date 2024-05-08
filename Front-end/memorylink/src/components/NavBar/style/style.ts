@@ -55,4 +55,23 @@ export const useStyles = createStyles({
       color: #ffffff !important;
     }
   `,
+  drawerItems: css`
+    text-align: left;
+    color: #ffffff;
+    letter-spacing: 0.15em;
+  `,
+  logout: css`
+    position: absolute;
+    bottom: 0;
+    font-size: 20px;
+    padding-bottom: 20px;
+    padding-left: 150px;
+    color: #ffffff;
+    transition: color 0.3s ease;
+  `,
+  logoutHover: css`
+    &:hover {
+      color: #009999;
+    }
+  `,
 });

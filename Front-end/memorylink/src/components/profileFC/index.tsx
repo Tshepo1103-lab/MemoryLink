@@ -13,8 +13,7 @@ const ManageProfilesTable = ({ hospitalId }: { hospitalId: string }) => {
   const { getbyhospital } = useProfileActions();
   const [dataSource, setDataSource] = useState([]);
   useEffect(() => {
-    if (getbyhospital) console.log(hospitalId);
-    getbyhospital(hospitalId);
+    if (getbyhospital) getbyhospital(hospitalId);
   }, []);
 
   const [isModalVisible, setIsModalVisible] = useState(false);

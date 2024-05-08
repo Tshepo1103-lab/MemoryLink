@@ -3,12 +3,8 @@ import { createStyles, css } from "antd-style";
 export const useStyles = createStyles({
   searchBox: css`
     width: 50%;
-    margin-top: 2%;
-    position: fixed;
     height: 50px;
     z-index: 999;
-    left: 50%;
-    transform: translateX(-47%);
   `,
   searchContainer: css`
     transform: translate(4%, -70%);
@@ -33,10 +29,10 @@ export const useStyles = createStyles({
   recordsContainer: css`
     justify-content: center;
     transform: translateX(25%);
-    margin-top: 50px;
+    margin-top: 23px;
     border: 1px solid #003366;
     width: 70%;
-    height: 51vh;
+    height: 60vh;
     padding: 10px;
   `,
 });

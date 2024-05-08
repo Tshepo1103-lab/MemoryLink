@@ -1,19 +1,28 @@
 "use client";
 
-import React from "react";
-import { useStyles } from "./styles/styles";
 import {
   UserAddOutlined,
   UserDeleteOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Card, Space, Statistic, Typography, Progress } from "antd";
+import { Card, Progress, Space, Statistic, Typography } from "antd";
 
-import Map from "@/components/stats/geoChart";
 import LineGraphComponent from "@/components/stats/lineChart";
+import {
+  useProfileActions,
+  useProfileState,
+} from "@/providers/ProfileProvider";
+import { useEffect } from "react";
 
 const DashboardFC = () => {
-  const { styles } = useStyles();
+  const state = useProfileState();
+  const { countallprofiles, countdeceased, countalive } = useProfileActions();
+
+  useEffect(() => {
+    if (countallprofiles && countdeceased && countalive) countallprofiles();
+    countalive();
+    countdeceased();
+  }, []);
 
   return (
     <Space size={20} direction="vertical">
@@ -23,7 +32,7 @@ const DashboardFC = () => {
       >
         Summary
       </Typography.Title>
-      <Space direction="horizontal" style={{ marginLeft: "20%" }}>
+      <Space direction="horizontal" style={{ width: "90%", margin: "0 auto" }}>
         <Card
           style={{
             background:
@@ -40,11 +49,11 @@ const DashboardFC = () => {
                 padding: 8,
               }}
             />
-            <Statistic title="All profiles" value={5245} />
+            <Statistic title="All profiles" value={state?.allProfileCount} />
           </Space>
           <Progress
             type="circle"
-            percent={75}
+            percent={100}
             width={80}
             strokeWidth={10}
             strokeColor={{
@@ -72,7 +81,7 @@ const DashboardFC = () => {
                 padding: 8,
               }}
             />
-            <Statistic title="Alive" value={5245} />
+            <Statistic title="Alive" value={state?.aliveCount} />
           </Space>
           <Progress
             type="circle"
@@ -104,7 +113,7 @@ const DashboardFC = () => {
                 padding: 8,
               }}
             />
-            <Statistic title="Deceased" value={5245} />
+            <Statistic title="Deceased" value={state?.deceasedCount} />
           </Space>
           <Progress
             type="circle"
@@ -128,13 +137,6 @@ const DashboardFC = () => {
 
           <div style={{ textAlign: "center", marginBottom: "20px" }}>
             Reported Incidents monthly
-          </div>
-        </Card>
-        <Card style={{ background: "transparent" }}>
-          <Map />
-
-          <div style={{ textAlign: "center", marginBottom: "20px" }}>
-            Areas with most Incidents
           </div>
         </Card>
       </Space>

@@ -23,6 +23,7 @@ import {
   UserStateContext,
 } from "./context";
 import { userReducer } from "./reducer";
+import { error } from "console";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(userReducer, INITIAL_STATE);
@@ -36,27 +37,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           "encryptedAccessToken",
         );
         const expireInSeconds_str = localStorage.getItem("expireInSeconds");
-        const userId_str = localStorage.getItem("userId");
         const role = localStorage.getItem("role"); // Retrieve role from local storage
         let expireInSeconds =
           expireInSeconds_str === null
             ? 0
             : Number.parseInt(expireInSeconds_str);
-        let userId = userId_str === null ? 0 : Number.parseInt(userId_str);
 
-        if (
-          accessToken &&
-          encryptedAccessToken &&
-          expireInSeconds &&
-          userId &&
-          role
-        ) {
+        if (accessToken && encryptedAccessToken && expireInSeconds && role) {
           const payload: ILoginResponse = {
             accessToken,
             encryptedAccessToken,
-            userId,
             expireInSeconds,
-            role: role, // Assign role to payload
+            role: role,
           };
           dispatch(loginSuccessAction(payload));
         }
@@ -70,21 +62,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const accessToken = state.UserLogin?.accessToken;
     const encryptedAccessToken = state.UserLogin?.encryptedAccessToken;
     const expireInSeconds = state.UserLogin?.expireInSeconds;
-    const userId = state.UserLogin?.userId;
     const role = state.UserLogin?.role;
 
     if (typeof window !== "undefined") {
-      if (
-        accessToken &&
-        encryptedAccessToken &&
-        expireInSeconds &&
-        userId &&
-        role
-      ) {
+      if (accessToken && encryptedAccessToken && expireInSeconds && role) {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("encryptedAccessToken", encryptedAccessToken);
         localStorage.setItem("expireInSeconds", expireInSeconds + "");
-        localStorage.setItem("userId", userId + "");
         localStorage.setItem("role", role + "");
       } else {
         localStorage.clear();
@@ -95,7 +79,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const login = async (payload: ILoginRequest) => {
     dispatch(loginUserAction());
     try {
-      const endpoint = "https://localhost:44311/api/TokenAuth/Authenticate";
+      const endpoint = `${process.env.NEXT_PUBLIC_PASS}api/TokenAuth/Authenticate`;
       const response = await axios.post(endpoint, payload);
 
       if (response.data.success) {
@@ -104,7 +88,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           accessToken: response.data.result.accessToken,
           encryptedAccessToken: response.data.result.encryptedAccessToken,
           expireInSeconds: response.data.result.expireInSeconds,
-          userId: response.data.result.userId,
           role: getRole(response.data.result),
         };
         dispatch(loginSuccessAction(payload));
@@ -116,12 +99,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         message.success("Login successful");
       }
     } catch (error) {
+      message.error("Invalid user name or password");
       dispatch(loginErrorAction());
     }
   };
 
   const logout = () => {
     dispatch(logoutUserAction());
+    push("/login");
   };
 
   const register = async (payload: IUserRequest) => {
@@ -136,6 +121,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       }
     } catch (error) {
       console.error(error);
+      message.error("Username already taken");
       dispatch(registerErrorAction());
     }
   };

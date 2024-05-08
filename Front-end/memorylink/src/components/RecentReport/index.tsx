@@ -48,23 +48,23 @@ const RecentReport = () => {
                       <div style={{ display: "flex", flexDirection: "row" }}>
                         <div style={{ flex: 1 }}>
                           <div>
-                            <p style={{ color: "#fff" }}>
+                            <p className={styles.paragraph}>
                               Gender: {item.gender}
                             </p>
-                            <p style={{ color: "#fff" }}>
+                            <p className={styles.paragraph}>
                               Eye Color: {item.eyeColor}
                             </p>
-                            <p style={{ color: "#fff" }}>
+                            <p className={styles.paragraph}>
                               Location Found: {item.locationFound}
                             </p>
                           </div>
                         </div>
                         <div style={{ flex: 1 }}>
                           <div>
-                            <p style={{ color: "#fff" }}>
+                            <p className={styles.paragraph}>
                               Skin Tone: {item.skinTone}
                             </p>
-                            <p style={{ color: "#fff" }}>
+                            <p className={styles.paragraph}>
                               Hair Color: {item.hairColor}
                             </p>
                           </div>

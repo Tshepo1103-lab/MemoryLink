@@ -35,6 +35,7 @@ import {
   type,
 } from "@/utils/enums/reflist";
 import { IProfileRequest } from "@/providers/ProfileProvider/context";
+import moment from "moment";
 
 const ManageProfilesTable = ({
   params,
@@ -42,20 +43,16 @@ const ManageProfilesTable = ({
   params: { manageprofiles: string };
 }) => {
   const status = useProfileState();
-  const { getbyhospital, getallAliveProfiles, createprofile, deleteProfile } =
+  const { createprofile, deleteProfile, getallprofiles, updateprofile } =
     useProfileActions();
   const [dataSource, setDataSource] = useState([]);
-
-  useEffect(() => {
-    if (params.manageprofiles == "admin") {
-      if (getallAliveProfiles) getallAliveProfiles();
-    } else if (getbyhospital) getbyhospital(params.manageprofiles);
-  }, []);
-
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedProfile, setSelectedProfile] = useState(null);
-
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (getallprofiles) getallprofiles();
+  }, []);
 
   const columns = [
     {
@@ -136,48 +133,82 @@ const ManageProfilesTable = ({
   };
 
   const editProfile = (profile: any) => {
-    form.setFieldsValue(profile);
+    // Map profile keys to form field names
+    const mappedProfile = {
+      id: profile.id,
+      gender: profile.gender,
+      age: profile.ageRange,
+      build: profile.build,
+      eyeColor: profile.eyeColor,
+      admissionDate: profile.admissionDate
+        ? moment(profile.admissionDate, "DD-MM-YYYY")
+        : null, // Parse admissionDate as moment object
+      moreDetails: profile.moreDetails,
+      height: profile.height,
+      skinTone: profile.skinTone,
+      type: profile.type,
+      ward: profile.ward,
+      hospitalId: profile.hospitalId,
+      distinguishingFeature: profile.distinguishingFeature,
+      imageUrl: { fileList: [{ uid: "-1", url: profile.imageUrl }] },
+    };
+
+    form.setFieldsValue(mappedProfile);
     setSelectedProfile(profile);
     setIsModalVisible(true);
   };
 
   const handledeleteProfile = (key: any) => {
-    setDataSource(status?.aliveprofile.filter((profile) => profile.id !== key));
+    setDataSource(status?.allProfiles.filter((profile) => profile.id !== key));
     if (deleteProfile) deleteProfile(key);
   };
 
   const handleOk = () => {
     form.validateFields().then((values: IProfileRequest) => {
-      const formData = new FormData();
-      const formattedDate = dayjs(values.admissionDate).format("DD-MM-YYYY");
+      // Convert admissionDate to the expected format (System.DateOnly)
+      const formattedDate = moment(values.admissionDate).format("YYYY-MM-DD");
 
       const updatedValues: IProfileRequest = {
         ...values,
         admissionDate: formattedDate,
         file: values?.imageUrl?.file?.originFileObj,
       };
+
       if (selectedProfile) {
-        // Update existing profile
+        // Update the profile locally
+        const updatedProfile = {
+          ...selectedProfile,
+          ...updatedValues,
+        };
+
+        // Call the updateprofile action to update the profile in the backend
+        if (updateprofile) {
+          updateprofile(updatedProfile);
+        }
+
+        // Update the data source in the state
         setDataSource(
           dataSource.map((profile) =>
-            profile.key === selectedProfile.key
-              ? { ...profile, ...values }
-              : profile,
+            profile.id === selectedProfile.id ? updatedProfile : profile,
           ),
         );
       } else {
+        // If it's a new profile, create it
         if (createprofile) {
           createprofile(updatedValues);
         }
+
+        // Update the data source in the state
         setDataSource([
           ...dataSource,
-          { ...values, key: Date.now().toString() },
+          { ...updatedValues, key: Date.now().toString() },
         ]);
       }
+
+      // Close the modal
       setIsModalVisible(false);
     });
   };
-
   const handleCancel = () => {
     setIsModalVisible(false);
   };
@@ -200,11 +231,7 @@ const ManageProfilesTable = ({
         }}
       >
         <Table
-          dataSource={
-            params.manageprofiles == "admin"
-              ? status.aliveprofile
-              : status?.hospitalProfiles
-          }
+          dataSource={status.allProfiles}
           columns={columns}
           pagination={{ pageSize: 5 }}
         />

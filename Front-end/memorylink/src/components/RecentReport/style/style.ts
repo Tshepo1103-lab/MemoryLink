@@ -39,4 +39,11 @@ export const useStyles = createStyles({
     marginleft: 40px;
     width: 600px;
   `,
+  paragraph: css`
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    text-align: left;
+    margin-left: 30px;
+  `,
 });

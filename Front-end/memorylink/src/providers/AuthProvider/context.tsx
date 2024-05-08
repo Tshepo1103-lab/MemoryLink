@@ -17,7 +17,6 @@ export interface ILoginResponse {
   accessToken: string;
   encryptedAccessToken: string;
   expireInSeconds: number;
-  userId: number;
   role: string;
 }
 

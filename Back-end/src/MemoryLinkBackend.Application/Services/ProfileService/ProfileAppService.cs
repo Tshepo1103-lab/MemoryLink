@@ -174,6 +174,22 @@ namespace MemoryLinkBackend.Services.ProfileService
 
 
         }
+        [HttpGet]
+        public async Task<int> GetAllProfilesCountAsync()
+        {
+            return await _repository.CountAsync();
+        }
+        [HttpGet]
+        public async Task<int> GetDeceasedProfilesCountAsync()
+        {
+            return await _repository.CountAsync(x => x.Type==Domain.enums.ReflistType.Deceased);
+        }
+
+        [HttpGet]
+        public async Task<int> GetAliveProfilesCountAsync()
+        {
+            return await _repository.CountAsync(x => x.Type == Domain.enums.ReflistType.Deceased);
+        }
 
 
     }

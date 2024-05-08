@@ -9,9 +9,14 @@ export const INITIAL_STATE: IProfileStateContext = {
   profile: undefined,
   hospitalProfiles: undefined,
   faceProfiles: undefined,
+  allProfiles: undefined,
+  aliveCount: undefined,
+  allProfileCount: undefined,
+  deceasedCount: undefined,
 };
 
 export interface IProfileRequest {
+  id?: string;
   gender: string;
   ageRange: string;
   height: string;
@@ -64,6 +69,10 @@ export interface IProfileStateContext {
   recentProfile?: IProfileResponse[];
   faceProfiles?: IProfileResponse[];
   faceProfile?: IProfileResponse;
+  allProfiles?: IProfileResponse[];
+  aliveCount?: string;
+  allProfileCount?: string;
+  deceasedCount?: string;
 }
 
 export interface IProfileActionContext {
@@ -76,6 +85,11 @@ export interface IProfileActionContext {
   getRecent?: () => void;
   embed?: (id: any) => void;
   deleteProfile?: (id: string) => void;
+  getallprofiles?: () => void;
+  updateprofile?: (payload: IProfileRequest) => void;
+  countallprofiles?: () => void;
+  countalive?: () => void;
+  countdeceased?: () => void;
 }
 
 export const ProfileStateContext =

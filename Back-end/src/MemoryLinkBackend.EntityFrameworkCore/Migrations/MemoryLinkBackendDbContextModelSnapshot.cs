@@ -1579,6 +1579,48 @@ namespace MemoryLinkBackend.Migrations
                     b.ToTable("AbpUsers");
                 });
 
+            modelBuilder.Entity("MemoryLinkBackend.Domain.AdminRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CreatorUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("DeleterUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("HospitalId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("LastModifierUserId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HospitalId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AdminRoles");
+                });
+
             modelBuilder.Entity("MemoryLinkBackend.Domain.Comment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2137,6 +2179,21 @@ namespace MemoryLinkBackend.Migrations
                     b.Navigation("DeleterUser");
 
                     b.Navigation("LastModifierUser");
+                });
+
+            modelBuilder.Entity("MemoryLinkBackend.Domain.AdminRole", b =>
+                {
+                    b.HasOne("MemoryLinkBackend.Domain.Hospital", "Hospital")
+                        .WithMany()
+                        .HasForeignKey("HospitalId");
+
+                    b.HasOne("MemoryLinkBackend.Authorization.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Hospital");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MemoryLinkBackend.Domain.Comment", b =>

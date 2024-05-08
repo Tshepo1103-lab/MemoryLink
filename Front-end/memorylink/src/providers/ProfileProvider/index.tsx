@@ -1,10 +1,16 @@
 import { getAxiosInstace } from "@/utils/axiosInstance/axiosInstance";
 import { useContext, useMemo, useReducer } from "react";
 import {
+  countall,
+  countallalive,
+  countalldeceased,
   createProfileError,
   createProfileRequest,
   createProfileSuccess,
   getAliveProfilesSuccess,
+  getAllProfileError,
+  getAllProfileRequest,
+  getAllProfileSuccess,
   getDeceasedProfilesSuccess,
   getFaceProfileError,
   getFaceProfileRequest,
@@ -20,6 +26,9 @@ import {
   getbyhospitalProfileRequest,
   getbyhospitalProfileSuccess,
   getbyhospitalProfilesError,
+  updateprofileError,
+  updateprofileRequest,
+  updateprofileSuccess,
 } from "./actions";
 import {
   INITIAL_STATE,
@@ -145,8 +154,65 @@ export const ProfileProvider = ({
       const endpoint = "http://localhost:3002/llm/embed?profileId=";
       const response = await axios.get(`${endpoint + id}`);
       if (response.data.success) {
-        console.log("done embedding");
+        message.success("Embedded the data");
       }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getallprofiles = async () => {
+    dispatch(getAllProfileRequest());
+    try {
+      const endpoint = "api/services/app/Profile/GetAllProfile";
+      const response = await instance.get(endpoint);
+      if (response.data.success) {
+        dispatch(getAllProfileSuccess(response.data.result));
+      }
+    } catch (error) {
+      dispatch(getAllProfileError());
+    }
+  };
+
+  const updateprofile = async (payload: IProfileRequest) => {
+    dispatch(updateprofileRequest());
+    try {
+      const endpoint = "api/services/app/Profile/Update";
+      const response = await instance.put(endpoint, payload);
+      if (response.data.success) {
+        dispatch(updateprofileSuccess());
+        message.success("updated");
+      }
+    } catch (error) {
+      dispatch(updateprofileError());
+    }
+  };
+
+  const countallprofiles = async () => {
+    try {
+      const endpoint = "api/services/app/Profile/GetAllProfilesCount";
+      const response = await instance.get(endpoint);
+      dispatch(countall(response.data.result));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const countdeceased = async () => {
+    try {
+      const endpoint = "api/services/app/Profile/GetDeceasedProfilesCount";
+      const response = await instance.get(endpoint);
+      dispatch(countalldeceased(response.data.result));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const countalive = async () => {
+    try {
+      const endpoint = "api/services/app/Profile/GetAliveProfilesCount";
+      const response = await instance.get(endpoint);
+      dispatch(countallalive(response.data.result));
     } catch (error) {
       console.error(error);
     }
@@ -179,7 +245,8 @@ export const ProfileProvider = ({
         },
       });
       if (response.data.success) {
-        if (embed) embed(response.data.result.id);
+        dispatch(createProfileSuccess());
+        // if (embed) embed(response.data.result.id);
       }
     } catch (error) {
       dispatch(createProfileError());
@@ -198,6 +265,11 @@ export const ProfileProvider = ({
           getRecent,
           deleteProfile,
           getFaceProfile,
+          getallprofiles,
+          updateprofile,
+          countallprofiles,
+          countdeceased,
+          countalive,
         }}
       >
         {children}
