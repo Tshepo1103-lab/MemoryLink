@@ -50,4 +50,6 @@
 
   <h2>Entity-relationship diagram:</h2>
   <a href="https://app.diagrams.net/#G1QJJlGPkH-wo4-EK_LSyREIH7J6YEsX7x#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D">View ER Diagram</a>
-    <a href="[https://app.diagrams.net/#G1QJJlGPkH-wo4-EK_LSyREIH7J6YEsX7x#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D](https://docs.google.com/document/d/1dM3I9bMhN9hiVuPJTiazKK1Oi8SfABNqLZOKTH2ap7Q/edit)">Setup File</a>
+
+   <h2>Setup File:</h2>
+<a href="https://app.diagrams.net/#G1QJJlGPkH-wo4-EK_LSyREIH7J6YEsX7x#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D(https://docs.google.com/document/d/1dM3I9bMhN9hiVuPJTiazKK1Oi8SfABNqLZOKTH2ap7Q/edit)">View Setup File</a>
